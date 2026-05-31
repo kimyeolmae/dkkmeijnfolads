@@ -4,126 +4,107 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>우마무스메 미래시</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans KR',sans-serif;background:#fafaf8;color:#1a1a1a;min-height:100vh}
-a{color:inherit;text-decoration:none}
-
-/* Header */
 .header{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;position:sticky;top:0;z-index:50}
-.header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:18px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:8px}
-.logo-emoji{font-size:22px}
-
-/* Container */
-.container{max-width:900px;margin:0 auto;padding:28px 24px}
-
-/* Tabs */
-.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid #e8e6df}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.container{max-width:960px;margin:0 auto;padding:24px}
+.tabs{display:flex;margin-bottom:24px;border-bottom:1.5px solid #e8e6df}
 .tab{font-size:14px;font-weight:500;padding:10px 20px;cursor:pointer;color:#888;background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:'Noto Sans KR',sans-serif;transition:color 0.15s,border-color 0.15s}
 .tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a}
 .tab:hover{color:#444}
 .section{display:none}.section.active{display:block}
-
-/* Pickup */
-.pickup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:16px}
+.data-info{font-size:12px;color:#aaa;margin-bottom:18px;padding:10px 14px;background:#fff;border:1px solid #e8e6df;border-radius:8px}
+.pickup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:16px}
 .pickup-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;overflow:hidden;transition:box-shadow 0.15s}
 .pickup-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.07)}
-.pickup-img{width:100%;height:160px;background:#f3f1ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#aaa;font-size:13px;cursor:pointer;transition:background 0.15s;position:relative;overflow:hidden}
-.pickup-img img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
-.pickup-img:hover{background:#eae8e1}
-.pickup-body{padding:14px 16px}
-.status-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.status-active{background:#e6f5ec;color:#1a7a45}
-.status-upcoming{background:#fef4e4;color:#8a5c10}
-.status-ended{background:#f0efea;color:#666}
-.pickup-name{font-size:15px;font-weight:700;margin-bottom:4px}
-.pickup-period{font-size:12px;color:#888;margin-bottom:8px;display:flex;align-items:center;gap:4px}
-.pickup-desc{font-size:13px;color:#555;line-height:1.65}
-.card-delete{margin-top:10px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;padding:0;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;gap:3px}
-.card-delete:hover{color:#e55}
-
-/* Jewel */
-.jewel-section{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
-.jewel-section-title{font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:6px}
-.jewel-events{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px}
-.jewel-event-card{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px 12px;text-align:center;position:relative}
-.jewel-event-num{font-size:18px;font-weight:700;color:#1a1a1a}
-.jewel-event-label{font-size:11px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jewel-event-period{font-size:10px;color:#bbb;margin-top:3px}
-.jewel-event-delete{position:absolute;top:6px;right:6px;background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:0;line-height:1}
-.jewel-event-delete:hover{color:#e55}
-.jewel-total-row{display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;border-radius:8px;padding:14px 20px;color:#fff}
+.pickup-card.gacha-yes{border-color:#f4c0d1}
+.pickup-img{width:100%;height:150px;background:#f3f1ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#bbb;font-size:12px}
+.pickup-body{padding:12px 14px}
+.status-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.s-active{background:#e6f5ec;color:#1a7a45}
+.s-upcoming{background:#fef4e4;color:#8a5c10}
+.s-ended{background:#f0efea;color:#888}
+.pickup-name{font-size:14px;font-weight:700;margin-bottom:3px;line-height:1.4}
+.pickup-period{font-size:11px;color:#999;margin-bottom:4px}
+.pickup-kind{font-size:11px;color:#666}
+.gacha-tag{display:inline-block;font-size:10px;background:#fff5f8;color:#993556;border:1px solid #f4c0d1;padding:2px 7px;border-radius:10px;font-weight:500;margin-bottom:4px}
+.jewel-total-bar{background:#1a1a1a;border-radius:10px;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:16px}
 .jewel-total-label{font-size:13px;opacity:0.7}
 .jewel-total-right{text-align:right}
-.jewel-total-num{font-size:26px;font-weight:700}
-.jewel-gacha{font-size:12px;opacity:0.6;margin-top:2px}
-.empty-msg{text-align:center;padding:24px;color:#bbb;font-size:14px}
-
-/* PVP */
-.pvp-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
-.pvp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.jewel-total-num{font-size:28px;font-weight:700}
+.jewel-gacha-eq{font-size:12px;opacity:0.6;margin-top:2px}
+.jewel-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.jewel-cat-card{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:14px;text-align:center}
+.jewel-cat-num{font-size:20px;font-weight:700}
+.jewel-cat-label{font-size:11px;color:#888;margin-top:3px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filter-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#555;transition:all 0.12s}
+.filter-btn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.jewel-list-section{background:#fff;border:1px solid #e8e6df;border-radius:12px;overflow:hidden;margin-bottom:16px}
+.jewel-list-header{padding:12px 16px;background:#fafaf8;border-bottom:1px solid #e8e6df;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.jewel-list-body{max-height:340px;overflow-y:auto}
+.jewel-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid #f0efea;gap:12px}
+.jewel-row:last-child{border-bottom:none}
+.jewel-row-date{font-size:11px;color:#999;min-width:76px}
+.jewel-row-name{font-size:13px;flex:1;line-height:1.4}
+.jewel-row-cat{font-size:10px;color:#888;background:#f3f1ea;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.jewel-row-amount{font-size:14px;font-weight:700;min-width:60px;text-align:right}
+.pvp-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:18px;margin-bottom:14px}
+.pvp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
 .pvp-name{font-size:16px;font-weight:700}
 .pvp-period{font-size:12px;color:#888;margin-top:3px}
 .pvp-badge{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;white-space:nowrap}
 .pvp-live{background:#e6f5ec;color:#1a7a45}
 .pvp-upcoming{background:#fef4e4;color:#8a5c10}
-.pvp-ended{background:#f0efea;color:#666}
-.section-label{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
-.tier-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.pvp-ended{background:#f0efea;color:#888}
+.section-label{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:0.07em;margin:12px 0 7px}
+.tier-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .tier-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px}
 .tier-s{background:#fff0ed;color:#c03a1d;border:1px solid #f5c4b3}
 .tier-a{background:#fff8ed;color:#8a5c10;border:1px solid #fad9a0}
+.tier-b{background:#f0f7ff;color:#1a5c99;border:1px solid #b5d4f4}
 .support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .support-slot{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px;text-align:center}
 .support-slot.rental{border-color:#f4c0d1;background:#fff5f8}
 .support-slot-num{font-size:10px;color:#bbb;margin-bottom:4px}
-.support-slot-name{font-size:13px;font-weight:500;color:#1a1a1a;line-height:1.3}
+.support-slot-name{font-size:12px;font-weight:500;color:#1a1a1a;line-height:1.3}
 .rental-tag{display:inline-block;font-size:9px;background:#f4c0d1;color:#993556;padding:1px 5px;border-radius:3px;font-weight:700;margin-bottom:4px}
-
-/* Add button */
-.add-btn{width:100%;padding:12px;border:1.5px dashed #d0cec7;border-radius:10px;background:none;color:#aaa;font-size:14px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background 0.15s,color 0.15s}
+.add-btn{width:100%;padding:12px;border:1.5px dashed #d0cec7;border-radius:10px;background:none;color:#aaa;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all 0.15s;margin-top:4px}
 .add-btn:hover{background:#fff;color:#555;border-color:#aaa}
-
-/* Modal */
+.empty-msg{text-align:center;padding:28px;color:#bbb;font-size:14px}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:17px;font-weight:700;margin-bottom:20px}
-.form-group{margin-bottom:14px}
-.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:5px;display:block}
-.form-row{display:flex;gap:10px}
-.form-row>div{flex:1}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:18px}
+.form-group{margin-bottom:12px}
+.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:4px;display:block}
+.form-row{display:flex;gap:10px}.form-row>div{flex:1}
 input[type=text],input[type=number],input[type=date],textarea,select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none;transition:border-color 0.15s}
 input:focus,textarea:focus{border-color:#888}
-textarea{resize:vertical;min-height:72px;line-height:1.5}
-.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+textarea{resize:vertical;min-height:68px;line-height:1.5}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 .btn-primary{padding:10px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
 .btn-primary:hover{background:#333}
 .btn-cancel{padding:10px 20px;background:none;border:1px solid #ddd;border-radius:8px;font-size:14px;color:#666;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
 .btn-cancel:hover{background:#f5f5f5}
 .support-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.rental-input{border-color:#f4c0d1 !important}
-.rental-input:focus{border-color:#d4537e !important}
-
-/* Image upload */
-.img-upload-area{width:100%;height:140px;background:#f7f6f2;border:1.5px dashed #d0cec7;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#bbb;font-size:13px;cursor:pointer;position:relative;overflow:hidden}
-.img-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rental-input{border-color:#f4c0d1!important}
+.img-upload-area{width:100%;height:120px;background:#f7f6f2;border:1.5px dashed #d0cec7;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#bbb;font-size:12px;cursor:pointer;position:relative;overflow:hidden}
 .img-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .img-upload-area:hover{background:#f0ede7}
-.img-upload-icon{font-size:28px}
-
-/* Footer */
-.footer{text-align:center;padding:32px 24px;color:#bbb;font-size:12px;margin-top:20px}
+.footer{text-align:center;padding:28px 24px;color:#ccc;font-size:12px}
 </style>
 </head>
 <body>
 
 <header class="header">
   <div class="header-inner">
-    <div class="logo"><span class="logo-emoji">🏇</span> 우마무스메 미래시</div>
+    <div class="logo">🏇 우마무스메 미래시</div>
     <div style="font-size:12px;color:#aaa">픽업 · 쥬얼 · PVP</div>
   </div>
 </header>
@@ -135,31 +116,36 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
     <button class="tab" onclick="showTab('pvp',this)">⚔️ PVP 이벤트</button>
   </div>
 
-  <!-- 픽업 섹션 -->
+  <!-- 픽업 탭 -->
   <div id="tab-pickup" class="section active">
+    <div class="data-info">📊 엑셀 데이터 기준 · 2026.05.31 업데이트 · 픽업 27개</div>
     <div class="pickup-grid" id="pickup-grid"></div>
-    <div id="pickup-empty" class="empty-msg">아직 픽업 정보가 없습니다. 추가해 보세요!</div>
-    <button class="add-btn" onclick="openModal('modal-pickup')">+ 픽업 이벤트 추가</button>
+    <button class="add-btn" onclick="openModal('modal-pickup')">+ 픽업 직접 추가</button>
   </div>
 
-  <!-- 쥬얼 섹션 -->
+  <!-- 쥬얼 탭 -->
   <div id="tab-jewel" class="section">
-    <div class="jewel-section">
-      <div class="jewel-section-title">💎 이벤트별 쥬얼 수급</div>
-      <div class="jewel-events" id="jewel-events"></div>
-      <div id="jewel-empty" class="empty-msg" style="margin-bottom:12px">이벤트를 추가하면 자동으로 합산됩니다.</div>
-      <div class="jewel-total-row">
-        <div class="jewel-total-label">총 예상 쥬얼</div>
-        <div class="jewel-total-right">
-          <div class="jewel-total-num" id="jewel-total">0</div>
-          <div class="jewel-gacha" id="jewel-gacha">= 0회 뽑기 (150쥬얼/회)</div>
-        </div>
+    <div class="data-info">📊 엑셀 데이터 기준 · 오늘 이후 수급 예정 쥬얼 표시</div>
+    <div class="jewel-total-bar">
+      <div class="jewel-total-label">총 예상 쥬얼 (오늘 이후)</div>
+      <div class="jewel-total-right">
+        <div class="jewel-total-num" id="jewel-total">0</div>
+        <div class="jewel-gacha-eq" id="jewel-gacha">= 0회 뽑기</div>
       </div>
     </div>
-    <button class="add-btn" onclick="openModal('modal-jewel')">+ 이벤트 쥬얼 추가</button>
+    <div class="jewel-summary" id="jewel-summary"></div>
+    <div class="filter-row" id="jewel-filters"></div>
+    <div class="jewel-list-section">
+      <div class="jewel-list-header">
+        <span>항목 목록</span>
+        <span id="jewel-count" style="font-size:12px;color:#aaa;font-weight:400"></span>
+      </div>
+      <div class="jewel-list-body" id="jewel-list"></div>
+    </div>
+    <button class="add-btn" onclick="openModal('modal-jewel')">+ 쥬얼 직접 추가</button>
   </div>
 
-  <!-- PVP 섹션 -->
+  <!-- PVP 탭 -->
   <div id="tab-pvp" class="section">
     <div id="pvp-list"></div>
     <div id="pvp-empty" class="empty-msg">PVP 이벤트를 추가해 보세요!</div>
@@ -170,20 +156,19 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
 <!-- 픽업 모달 -->
 <div class="modal-overlay" id="modal-pickup">
   <div class="modal">
-    <div class="modal-title">🎯 픽업 이벤트 추가</div>
+    <div class="modal-title">🎯 픽업 추가</div>
     <div class="form-group">
-      <label class="form-label">이미지 업로드</label>
-      <div class="img-upload-area" id="pickup-img-area">
-        <div class="img-upload-icon">📷</div>
-        <span>클릭하여 이미지 선택</span>
-        <input type="file" accept="image/*" onchange="previewImg(this,'pickup-img-area','pickup-img-data')">
-        <img id="pickup-img-area-img" style="display:none">
+      <label class="form-label">이미지</label>
+      <div class="img-upload-area" id="p-img-area">
+        <div style="font-size:24px">📷</div><span>클릭하여 이미지 선택</span>
+        <input type="file" accept="image/*" onchange="previewImg(this)">
+        <img id="p-img-area-img" style="display:none">
       </div>
-      <input type="hidden" id="pickup-img-data">
+      <input type="hidden" id="p-img-data">
     </div>
-    <div class="form-group">
-      <label class="form-label">캐릭터 이름 *</label>
-      <input type="text" id="p-name" placeholder="예: 스페셜 위크">
+    <div class="form-group"><label class="form-label">캐릭터 이름 *</label><input type="text" id="p-name" placeholder="예: 스페셜 위크"></div>
+    <div class="form-group"><label class="form-label">종류</label>
+      <select id="p-kind"><option>말딸</option><option>서폿</option><option>말딸+서폿</option></select>
     </div>
     <div class="form-group">
       <div class="form-row">
@@ -191,10 +176,10 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
         <div><label class="form-label">종료일 *</label><input type="date" id="p-end"></div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">설명</label>
-      <textarea id="p-desc" placeholder="캐릭터 특징, 픽업 이유, 추천 여부 등"></textarea>
+    <div class="form-group"><label class="form-label">가챠 예정</label>
+      <select id="p-gacha"><option value="0">아니오</option><option value="1">예</option></select>
     </div>
+    <div class="form-group"><label class="form-label">설명</label><textarea id="p-desc" placeholder="특징, 추천 이유 등"></textarea></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-pickup')">취소</button>
       <button class="btn-primary" onclick="addPickup()">추가하기</button>
@@ -205,24 +190,16 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
 <!-- 쥬얼 모달 -->
 <div class="modal-overlay" id="modal-jewel">
   <div class="modal">
-    <div class="modal-title">💎 이벤트 쥬얼 추가</div>
-    <div class="form-group">
-      <label class="form-label">이벤트명 *</label>
-      <input type="text" id="j-name" placeholder="예: 로그인 보너스, 메인 스토리">
+    <div class="modal-title">💎 쥬얼 추가</div>
+    <div class="form-group"><label class="form-label">이름 *</label><input type="text" id="j-name" placeholder="예: 로그인 보너스"></div>
+    <div class="form-group"><label class="form-label">쥬얼 수량 *</label><input type="number" id="j-amount" placeholder="예: 3000" min="0"></div>
+    <div class="form-group"><label class="form-label">카테고리</label>
+      <select id="j-cat"><option>기타</option><option>이벤트</option><option>챔미</option><option>말오스</option><option>시나리오, 로그인</option><option>레전드 레이스</option></select>
     </div>
-    <div class="form-group">
-      <label class="form-label">쥬얼 수량 *</label>
-      <input type="number" id="j-amount" placeholder="예: 3000" min="0">
-    </div>
-    <div class="form-group">
-      <div class="form-row">
-        <div><label class="form-label">시작일</label><input type="date" id="j-start"></div>
-        <div><label class="form-label">종료일</label><input type="date" id="j-end"></div>
-      </div>
-    </div>
+    <div class="form-group"><label class="form-label">날짜</label><input type="date" id="j-date"></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-jewel')">취소</button>
-      <button class="btn-primary" onclick="addJewel()">추가하기</button>
+      <button class="btn-primary" onclick="addJewelManual()">추가하기</button>
     </div>
   </div>
 </div>
@@ -231,33 +208,24 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
 <div class="modal-overlay" id="modal-pvp">
   <div class="modal">
     <div class="modal-title">⚔️ PVP 이벤트 추가</div>
-    <div class="form-group">
-      <label class="form-label">이벤트명 *</label>
-      <input type="text" id="v-name" placeholder="예: 챔피언스 미팅 봄">
-    </div>
+    <div class="form-group"><label class="form-label">이벤트명 *</label><input type="text" id="v-name" placeholder="예: 챔피언스 미팅 봄"></div>
     <div class="form-group">
       <div class="form-row">
         <div><label class="form-label">시작일 *</label><input type="date" id="v-start"></div>
         <div><label class="form-label">종료일 *</label><input type="date" id="v-end"></div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">S티어 캐릭터 (쉼표로 구분)</label>
-      <input type="text" id="v-tier-s" placeholder="예: 골드십, 에어샤카르">
-    </div>
-    <div class="form-group">
-      <label class="form-label">A티어 캐릭터 (쉼표로 구분)</label>
-      <input type="text" id="v-tier-a" placeholder="예: 나이스네이처, 비와하야히데">
-    </div>
-    <div class="form-group">
-      <label class="form-label">서포터 편성</label>
+    <div class="form-group"><label class="form-label">S티어 (쉼표 구분)</label><input type="text" id="v-tier-s" placeholder="예: 골드십, 에어샤카르"></div>
+    <div class="form-group"><label class="form-label">A티어 (쉼표 구분)</label><input type="text" id="v-tier-a" placeholder="예: 나이스네이처"></div>
+    <div class="form-group"><label class="form-label">B티어 (쉼표 구분)</label><input type="text" id="v-tier-b"></div>
+    <div class="form-group"><label class="form-label">서포터 편성 (슬롯1~5 + 렌탈)</label>
       <div class="support-inputs">
         <input type="text" placeholder="슬롯 1" id="s1">
         <input type="text" placeholder="슬롯 2" id="s2">
         <input type="text" placeholder="슬롯 3" id="s3">
         <input type="text" placeholder="슬롯 4" id="s4">
         <input type="text" placeholder="슬롯 5" id="s5">
-        <input type="text" placeholder="🔗 렌탈 (슬롯 6)" id="s6" class="rental-input">
+        <input type="text" placeholder="🔗 렌탈 (슬롯6)" id="s6" class="rental-input">
       </div>
     </div>
     <div class="modal-actions">
@@ -267,17 +235,26 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
   </div>
 </div>
 
-<footer class="footer">우마무스메 미래시 관리 사이트 · 데이터는 브라우저에 저장됩니다</footer>
+<footer class="footer">우마무스메 미래시 관리 사이트 · 엑셀 내장 데이터 (2026.05.31 기준)</footer>
 
 <script>
-// 로컬스토리지 기반 영구 저장
-let pickups = JSON.parse(localStorage.getItem('uma_pickups')||'[]');
-let jewels  = JSON.parse(localStorage.getItem('uma_jewels')||'[]');
-let pvps    = JSON.parse(localStorage.getItem('uma_pvps')||'[]');
-function save(){
-  localStorage.setItem('uma_pickups',JSON.stringify(pickups));
-  localStorage.setItem('uma_jewels',JSON.stringify(jewels));
-  localStorage.setItem('uma_pvps',JSON.stringify(pvps));
+// ── 엑셀에서 추출한 고정 데이터 ──────────────
+const EXCEL_PICKUPS = [{"name": "(26.06.15)오르페브르+삼틀딱,스피드AA", "kind": "말딸+서폿", "gacha": true, "start": "2026-06-15", "end": "2026-07-10", "desc": ""}, {"name": "(26.06.30)그란 알레그리아+스태브라이트", "kind": "말딸", "gacha": false, "start": "2026-06-30", "end": "2026-07-10", "desc": ""}, {"name": "(26.07.10)노 리즌+셀렉트 가챠", "kind": "서폿", "gacha": false, "start": "2026-07-10", "end": "2026-07-20", "desc": ""}, {"name": "(26.07.20)댄댄시치,댄김렛+파워보드카,스피드드림저니", "kind": "서폿", "gacha": false, "start": "2026-07-20", "end": "2026-07-30", "desc": ""}, {"name": "(26.07.30)트윙클 레전드 시리우스+능택트", "kind": "서폿", "gacha": false, "start": "2026-07-30", "end": "2026-08-10", "desc": ""}, {"name": "(26.08.19)마칭리키,마칭팔코+근성트레센드,파워부에나", "kind": "말딸", "gacha": false, "start": "2026-08-19", "end": "2026-08-31", "desc": ""}, {"name": "(26.08.31)베르시나+근성스즈카", "kind": "말딸", "gacha": false, "start": "2026-08-31", "end": "2026-09-09", "desc": ""}, {"name": "(26.09.09)러브즈 온리 유+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-09-09", "end": "2026-09-18", "desc": ""}, {"name": "(26.09.18)웨딩모누,세자리오+스피드 라크,지능 데어링하트", "kind": "서폿", "gacha": false, "start": "2026-09-18", "end": "2026-10-02", "desc": ""}, {"name": "(26.10.02)크로노제네시스+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-10-02", "end": "2026-10-30", "desc": ""}, {"name": "(26.10.16)무인도 골드시티+파마모+터커 브라인", "kind": "서폿", "gacha": true, "start": "2026-10-16", "end": "2026-11-10", "desc": ""}, {"name": "(26.11.19)수크라,수봇치+능사과,스태두라", "kind": "서폿", "gacha": false, "start": "2026-11-19", "end": "2026-12-03", "desc": ""}, {"name": "(26.12.03)수비블+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-12-03", "end": "2026-12-13", "desc": ""}, {"name": "(26.12.13)스틸인러브+쓰굴비,근배겨", "kind": "말딸+서폿", "gacha": true, "start": "2026-12-13", "end": "2027-01-08", "desc": ""}, {"name": "(26.12.18)합창단케이에스,합창단미라코+스피드 칼스톤,지능 듀랜달", "kind": "서폿", "gacha": false, "start": "2026-12-18", "end": "2026-12-29", "desc": ""}, {"name": "(27.01.18)할보노,할마블+근성 후지,스피드 에이신v2", "kind": "서폿", "gacha": false, "start": "2027-01-18", "end": "2027-01-29", "desc": ""}, {"name": "(27.02.06)단츠,복개(복각)+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-02-06", "end": "2027-02-17", "desc": ""}, {"name": "(27.02.17)온천 트래센드+스피드테이오,키요코(친구카드)", "kind": "서폿", "gacha": true, "start": "2027-02-17", "end": "2027-03-10", "desc": ""}, {"name": "(27.03.01)온천 어큐트+파워 부르봉", "kind": "서폿", "gacha": false, "start": "2027-03-01", "end": "2027-03-10", "desc": ""}, {"name": "(27.03.10)부에나 비스타+셀렉트 가챠", "kind": "서폿", "gacha": false, "start": "2027-03-10", "end": "2027-03-19", "desc": ""}, {"name": "(27.03.19)클페스타,클저니+스태고루시,스태페노메노", "kind": "서폿", "gacha": false, "start": "2027-03-19", "end": "2027-04-01", "desc": ""}, {"name": "(27.04.01)신데구리+스태 이나리 원", "kind": "말딸", "gacha": false, "start": "2027-04-01", "end": "2027-04-16", "desc": ""}, {"name": "(27.04.11)스테이 골드+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-04-11", "end": "2027-04-29", "desc": ""}, {"name": "(27.04.16)신년이쿠노,신년로렐+스피드 동탄,파워 파인", "kind": "서폿", "gacha": false, "start": "2027-04-16", "end": "2027-04-29", "desc": ""}, {"name": "(27.05.21)발렌타이키,발렌사오어+스피드후쿠,파워유니", "kind": "말딸", "gacha": false, "start": "2027-05-21", "end": "2027-06-05", "desc": ""}, {"name": "(27.06.05)로이스 앤 로이스+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-06-05", "end": "2027-06-15", "desc": ""}, {"name": "(27.06.15)아몬드아이+지능 포에버영", "kind": "말딸+서폿", "gacha": true, "start": "2027-06-15", "end": "", "desc": ""}];
+const EXCEL_JEWELS  = [{"name": "「리얼 탈출 게임×말 딸 프리티 더비 『다음으로 일어나는 불행으로부터의 탈출』 공연 기념 캠페인」", "amount": 500, "date": "2026-07-09", "category": "기타 잡"}, {"name": "『BoC’z we\\n』이벤트", "amount": 500, "date": "2026-07-21", "category": "기타 잡"}, {"name": "「2300만 다운로드 돌파!」", "amount": 1500, "date": "2026-11-10", "category": "기타 잡"}, {"name": "【도전】우마튜브 채널 구독자 수 1억 명 목표로 해봤어!", "amount": 300, "date": "2026-12-13", "category": "기타 잡"}, {"name": "극장판 「좀비랜드 사가」콜라보 기념 로그인 보너스", "amount": 500, "date": "2027-02-12", "category": "기타 잡"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2026-06-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2026-06-06", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2026-06-07", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2026-06-08", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2026-06-09", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2026-06-10", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2026-06-11", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2026-06-12", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2026-06-13", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2026-06-14", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 기념 미션", "amount": 500, "date": "2026-06-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2026-06-16", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2026-06-17", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2026-06-18", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2026-06-19", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2026-06-20", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2026-06-21", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2026-06-22", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2026-06-23", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2026-06-24", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 01", "amount": 150, "date": "2026-06-30", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 02", "amount": 150, "date": "2026-07-01", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 03", "amount": 150, "date": "2026-07-02", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 04", "amount": 150, "date": "2026-07-03", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 05", "amount": 150, "date": "2026-07-04", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 06", "amount": 150, "date": "2026-07-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 07", "amount": 150, "date": "2026-07-06", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 08", "amount": 150, "date": "2026-07-07", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 09", "amount": 150, "date": "2026-07-08", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 10", "amount": 150, "date": "2026-07-09", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 11", "amount": 150, "date": "2026-07-10", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 12", "amount": 150, "date": "2026-07-11", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 13", "amount": 150, "date": "2026-07-12", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 14", "amount": 150, "date": "2026-07-13", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 15", "amount": 150, "date": "2026-07-14", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 기념 미션", "amount": 500, "date": "2026-06-30", "category": "시나리오, 로그인"}, {"name": "「무인도에 어서오세요 공개 기념」 로그인 보너스", "amount": 1500, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "「무인도에 어서오세요」 미션", "amount": 500, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "무인도에 어서오세요 시나리오 평가점 보상", "amount": 300, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2026-12-03", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2026-12-04", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2026-12-05", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2026-12-06", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2026-12-07", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2026-12-08", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2026-12-09", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2026-12-10", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2026-12-11", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2026-12-12", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 기념 미션", "amount": 500, "date": "2026-12-03", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2026-12-14", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2026-12-15", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2026-12-16", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2026-12-17", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2026-12-18", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2026-12-19", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2026-12-20", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2026-12-21", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2026-12-22", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제3탄」 - 기념 미션", "amount": 500, "date": "2026-12-29", "category": "시나리오, 로그인"}, {"name": "「극락♪ 유코마 온천향」 로그인 보너스", "amount": 1500, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "「극락♪ 유코마 온천향」 미션", "amount": 500, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "극락♪ 유코마 온천향 시나리오 평가점 보상", "amount": 300, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 01", "amount": 150, "date": "2027-04-16", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 02", "amount": 150, "date": "2027-04-17", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 03", "amount": 150, "date": "2027-04-18", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 04", "amount": 150, "date": "2027-04-19", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 05", "amount": 150, "date": "2027-04-20", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 06", "amount": 150, "date": "2027-04-21", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 01", "amount": 1500, "date": "2027-04-22", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 02", "amount": 300, "date": "2027-04-23", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 03", "amount": 300, "date": "2027-04-24", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 04", "amount": 300, "date": "2027-04-25", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 05", "amount": 300, "date": "2027-04-26", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 06", "amount": 300, "date": "2027-04-27", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 07", "amount": 300, "date": "2027-04-28", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 08", "amount": 300, "date": "2027-04-29", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 09", "amount": 300, "date": "2027-04-30", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 10", "amount": 300, "date": "2027-05-01", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2027-06-05", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2027-06-06", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2027-06-07", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2027-06-08", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2027-06-09", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2027-06-10", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2027-06-11", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2027-06-12", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2027-06-13", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2027-06-14", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2027-06-16", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2027-06-17", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2027-06-18", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2027-06-19", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2027-06-20", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2027-06-21", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2027-06-22", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2027-06-23", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2027-06-24", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 01", "amount": 150, "date": "2027-06-30", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 02", "amount": 150, "date": "2027-07-01", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 03", "amount": 150, "date": "2027-07-02", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 04", "amount": 150, "date": "2027-07-03", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 05", "amount": 150, "date": "2027-07-04", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 06", "amount": 150, "date": "2027-07-05", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 07", "amount": 150, "date": "2027-07-06", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 08", "amount": 150, "date": "2027-07-07", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 09", "amount": 150, "date": "2027-07-08", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 10", "amount": 150, "date": "2027-07-09", "category": "시나리오, 로그인"}, {"name": "스토리 이벤트 「Phantasmagoria ～환도～」", "amount": 2910, "date": "2026-07-20", "category": "이벤트"}, {"name": "스토리 이벤트 「주조하는, 드리미 나이트 퍼레이드」", "amount": 2910, "date": "2026-08-19", "category": "이벤트"}, {"name": "스토리 이벤트 「청수무월의 라방드・드・메르」", "amount": 2910, "date": "2026-09-18", "category": "이벤트"}, {"name": "스토리 이벤트 「서머 데이즈 『그대』 그래피티」", "amount": 2910, "date": "2026-11-19", "category": "이벤트"}, {"name": "스토리 이벤트 「이야기・마음・울려라」", "amount": 2910, "date": "2026-12-18", "category": "이벤트"}, {"name": "스토리 이벤트 「Act 0 : 각광, 닿아라 트래피즈!」", "amount": 2910, "date": "2027-01-18", "category": "이벤트"}, {"name": "스토리 이벤트 「실록!! 황금성야 24시」", "amount": 2910, "date": "2027-03-19", "category": "이벤트"}, {"name": "스토리 이벤트 「푸른 여정, 초봄 가까우니.」", "amount": 2910, "date": "2027-04-16", "category": "이벤트"}, {"name": "스토리 이벤트 「전해라 마이 하트! 밸런타인 한계 배틀」", "amount": 2910, "date": "2027-05-21", "category": "이벤트"}, {"name": "챔피언스 미팅 MILE", "amount": 1800, "date": "2026-07-19", "category": "챔미"}, {"name": "챔피언스 미팅 LONG", "amount": 1800, "date": "2026-08-17", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2026-10-15", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2026-11-18", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2027-01-16", "category": "챔미"}, {"name": "챔피언스 미팅 SPRINT", "amount": 1800, "date": "2027-02-16", "category": "챔미"}, {"name": "챔피언스 미팅 MILE", "amount": 1800, "date": "2027-04-16", "category": "챔미"}, {"name": "챔피언스 미팅 LONG", "amount": 1800, "date": "2027-05-18", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2027-07-16", "category": "챔미"}, {"name": "제10회 리그 오브 히어로즈", "amount": 3250, "date": "2026-06-13", "category": "말오스"}, {"name": "제11회 리그 오브 히어로즈", "amount": 3250, "date": "2026-09-18", "category": "말오스"}, {"name": "제12회 리그 오브 히어로즈", "amount": 3250, "date": "2026-12-10", "category": "말오스"}, {"name": "제13회 리그 오브 히어로즈", "amount": 3250, "date": "2027-03-18", "category": "말오스"}, {"name": "제14회 리그 오브 히어로즈", "amount": 3250, "date": "2027-06-12", "category": "말오스"}, {"name": "제38회 레전드 레이스: 오사카 컵", "amount": 500, "date": "2026-06-03", "category": "레전드 레이스"}, {"name": "제39회 레전드 레이스 : 벚꽃상", "amount": 500, "date": "2026-06-29", "category": "레전드 레이스"}, {"name": "제40회 레전드 레이스 : 사츠키 상", "amount": 500, "date": "2026-07-30", "category": "레전드 레이스"}, {"name": "제41회 레전드 레이스:천황상(봄)", "amount": 500, "date": "2026-08-31", "category": "레전드 레이스"}, {"name": "제42회 레전드 레이스:일본더비", "amount": 500, "date": "2026-10-02", "category": "레전드 레이스"}, {"name": "제43회 레전드 레이스:타카라즈카 기념", "amount": 500, "date": "2026-10-30", "category": "레전드 레이스"}, {"name": "제44회 레전드 레이스:스트린터스 S", "amount": 500, "date": "2026-12-01", "category": "레전드 레이스"}, {"name": "제45회 레전드 레이스:추화상", "amount": 500, "date": "2026-12-29", "category": "레전드 레이스"}, {"name": "제46회 레전드 레이스:국화상", "amount": 500, "date": "2027-01-31", "category": "레전드 레이스"}, {"name": "제47회 레전드 레이스:재팬컵", "amount": 500, "date": "2027-03-01", "category": "레전드 레이스"}, {"name": "제48회 레전드 레이스:아리마 기념", "amount": 500, "date": "2027-04-01", "category": "레전드 레이스"}, {"name": "제49회 레전드 레이스:아사히배 FS", "amount": 500, "date": "2027-05-01", "category": "레전드 레이스"}, {"name": "제50회 레전드 레이스:페브러리 S", "amount": 500, "date": "2027-06-04", "category": "레전드 레이스"}, {"name": "제51회 레전드 레이스:텐노상(봄)", "amount": 500, "date": "2027-06-30", "category": "레전드 레이스"}, {"name": "「노려라! 최강팀 08」", "amount": 1900, "date": "2026-08-06", "category": "노려라! 최강팀"}, {"name": "「아그네스타키온의 인자 연구 11」", "amount": 1200, "date": "2026-06-30", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 12」", "amount": 1200, "date": "2026-08-31", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 13」", "amount": 1200, "date": "2026-10-30", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 14」", "amount": 1200, "date": "2026-12-29", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 15」", "amount": 1200, "date": "2027-01-29", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 16」", "amount": 1200, "date": "2027-03-01", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 17」", "amount": 1200, "date": "2027-04-01", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 18」", "amount": 1200, "date": "2027-04-29", "category": "타키온 인자연구"}];
+
+// ── localStorage: 직접 추가분만 저장 ─────────
+let extraPickups = JSON.parse(localStorage.getItem('uma_extra_pickups')||'[]');
+let extraJewels  = JSON.parse(localStorage.getItem('uma_extra_jewels')||'[]');
+let pvps         = JSON.parse(localStorage.getItem('uma_pvps')||'[]');
+
+let pickups = [...EXCEL_PICKUPS, ...extraPickups];
+let jewels  = [...EXCEL_JEWELS,  ...extraJewels];
+let activeFilter = 'all';
+
+function saveExtra(){
+  localStorage.setItem('uma_extra_pickups', JSON.stringify(extraPickups));
+  localStorage.setItem('uma_extra_jewels',  JSON.stringify(extraJewels));
+  localStorage.setItem('uma_pvps',          JSON.stringify(pvps));
 }
 
 function showTab(t,btn){
@@ -290,112 +267,135 @@ function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 
-function getStatus(start,end){
-  const now=new Date(),s=new Date(start),e=new Date(end);
-  if(now<s)return'upcoming';if(now>e)return'ended';return'active';
-}
+function getStatus(s,e){const n=new Date(),a=new Date(s),b=new Date(e);if(n<a)return'upcoming';if(n>b)return'ended';return'active'}
 function statusText(s){return{active:'진행 중',upcoming:'예정',ended:'종료'}[s]}
-function daysLeft(end){return Math.max(0,Math.ceil((new Date(end)-new Date())/86400000))}
+function daysLeft(e){return Math.max(0,Math.ceil((new Date(e)-new Date())/86400000))}
 
-function previewImg(input,areaId,dataId){
+function previewImg(input){
   const file=input.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=e=>{
-    const area=document.getElementById(areaId);
+    const area=document.getElementById('p-img-area');
     area.querySelector('span').style.display='none';
-    area.querySelector('.img-upload-icon').style.display='none';
-    const img=area.querySelector('img');
-    img.src=e.target.result;img.style.display='block';
-    document.getElementById(dataId).value=e.target.result;
-  };
-  reader.readAsDataURL(file);
+    area.querySelector('div').style.display='none';
+    const img=area.querySelector('img');img.src=e.target.result;img.style.display='block';
+    document.getElementById('p-img-data').value=e.target.result;
+  };reader.readAsDataURL(file);
 }
 
-// 픽업
+// ── 픽업 ──────────────────────────────────────
 function addPickup(){
   const name=document.getElementById('p-name').value.trim();
   const start=document.getElementById('p-start').value;
   const end=document.getElementById('p-end').value;
-  const desc=document.getElementById('p-desc').value.trim();
-  const img=document.getElementById('pickup-img-data').value;
-  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
-  pickups.push({name,start,end,desc,img});save();
-  renderPickups();closeModal('modal-pickup');
-  ['p-name','p-start','p-end','p-desc','pickup-img-data'].forEach(id=>document.getElementById(id).value='');
-  const area=document.getElementById('pickup-img-area');
-  area.querySelector('span').style.display='';area.querySelector('.img-upload-icon').style.display='';
-  area.querySelector('img').style.display='none';area.querySelector('img').src='';
+  if(!name||!start||!end){alert('이름과 기간을 입력해 주세요');return}
+  extraPickups.push({name,kind:document.getElementById('p-kind').value,
+    gacha:document.getElementById('p-gacha').value==='1',
+    start,end,desc:document.getElementById('p-desc').value.trim(),
+    img:document.getElementById('p-img-data').value});
+  pickups=[...EXCEL_PICKUPS,...extraPickups];
+  saveExtra();renderPickups();closeModal('modal-pickup');
+  ['p-name','p-start','p-end','p-desc','p-img-data'].forEach(id=>document.getElementById(id).value='');
+  const a=document.getElementById('p-img-area');
+  a.querySelector('span').style.display='';a.querySelector('div').style.display='';
+  a.querySelector('img').style.display='none';a.querySelector('img').src='';
 }
-function removePickup(i){pickups.splice(i,1);save();renderPickups()}
+
+function removePickup(i,isExtra){
+  if(isExtra){extraPickups.splice(i,1);pickups=[...EXCEL_PICKUPS,...extraPickups];saveExtra();}
+  else{EXCEL_PICKUPS.splice(i,1);pickups=[...EXCEL_PICKUPS,...extraPickups];}
+  renderPickups();
+}
+
 function renderPickups(){
   const g=document.getElementById('pickup-grid');
-  const empty=document.getElementById('pickup-empty');
-  if(pickups.length===0){g.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  g.innerHTML=pickups.map((p,i)=>{
+  const sorted=pickups.map((p,i)=>{
+    const isExtra=i>=EXCEL_PICKUPS.length;
+    return{...p,_i:isExtra?i-EXCEL_PICKUPS.length:i,_extra:isExtra};
+  }).sort((a,b)=>a.start.localeCompare(b.start));
+  g.innerHTML=sorted.map(p=>{
     const st=getStatus(p.start,p.end);
+    const sc={active:'s-active',upcoming:'s-upcoming',ended:'s-ended'}[st];
     const dl=daysLeft(p.end);
-    const statusClass={'active':'status-active','upcoming':'status-upcoming','ended':'status-ended'}[st];
-    const badge=`<span class="status-badge ${statusClass}">${statusText(st)}${st==='active'?' · D-'+dl:''}</span>`;
-    const imgArea=p.img
-      ?`<div class="pickup-img"><img src="${p.img}" alt="${p.name}"></div>`
-      :`<div class="pickup-img"><span style="font-size:28px">📷</span><span>이미지 없음</span></div>`;
-    return`<div class="pickup-card">
-      ${imgArea}
+    const imgH=p.img
+      ?`<div class="pickup-img"><img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover"></div>`
+      :'<div class="pickup-img"><span style="font-size:26px">📷</span><span>이미지 없음</span></div>';
+    return`<div class="pickup-card${p.gacha?' gacha-yes':''}">
+      ${imgH}
       <div class="pickup-body">
-        ${badge}
+        <span class="status-badge ${sc}">${statusText(st)}${st==='active'?' · D-'+dl:''}</span>
+        ${p.gacha?'<div><span class="gacha-tag">🎯 뽑을 예정</span></div>':''}
         <div class="pickup-name">${p.name}</div>
         <div class="pickup-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}</div>
-        <div class="pickup-desc">${p.desc||'설명 없음'}</div>
-        <button class="card-delete" onclick="removePickup(${i})">✕ 삭제</button>
+        <div class="pickup-kind">${p.kind||''}</div>
+        ${p.desc?`<div style="font-size:12px;color:#666;margin-top:5px;line-height:1.5">${p.desc}</div>`:''}
+        <button onclick="removePickup(${p._i},${p._extra})" style="font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;margin-top:8px;font-family:'Noto Sans KR',sans-serif">✕ 삭제</button>
       </div>
-    </div>`}).join('');
+    </div>`;
+  }).join('');
 }
 
-// 쥬얼
-function addJewel(){
+// ── 쥬얼 ──────────────────────────────────────
+function addJewelManual(){
   const name=document.getElementById('j-name').value.trim();
   const amount=parseInt(document.getElementById('j-amount').value)||0;
-  const start=document.getElementById('j-start').value;
-  const end=document.getElementById('j-end').value;
-  if(!name||!amount){alert('이름과 수량은 필수입니다');return}
-  jewels.push({name,amount,start,end});save();
-  renderJewels();closeModal('modal-jewel');
-  ['j-name','j-amount','j-start','j-end'].forEach(id=>document.getElementById(id).value='');
-}
-function removeJewel(i){jewels.splice(i,1);save();renderJewels()}
-function renderJewels(){
-  const el=document.getElementById('jewel-events');
-  const empty=document.getElementById('jewel-empty');
-  const total=jewels.reduce((a,j)=>a+j.amount,0);
-  document.getElementById('jewel-total').textContent=total.toLocaleString();
-  document.getElementById('jewel-gacha').textContent=`= ${Math.floor(total/150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
-  if(jewels.length===0){el.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  el.innerHTML=jewels.map((j,i)=>{
-    const periodStr=j.start&&j.end?`${j.start.replace(/-/g,'.')}~${j.end.replace(/-/g,'.')}`:''
-    return`<div class="jewel-event-card">
-      <button class="jewel-event-delete" onclick="removeJewel(${i})">✕</button>
-      <div class="jewel-event-num">${j.amount.toLocaleString()}</div>
-      <div class="jewel-event-label">${j.name}</div>
-      ${periodStr?`<div class="jewel-event-period">${periodStr}</div>`:''}
-    </div>`}).join('');
+  const date=document.getElementById('j-date').value||new Date().toISOString().split('T')[0];
+  if(!name||!amount){alert('이름과 수량을 입력해 주세요');return}
+  extraJewels.push({name,amount,date,category:document.getElementById('j-cat').value});
+  jewels=[...EXCEL_JEWELS,...extraJewels];
+  saveExtra();renderJewels();closeModal('modal-jewel');
+  ['j-name','j-amount','j-date'].forEach(id=>document.getElementById(id).value='');
 }
 
-// PVP
+function setFilter(cat){activeFilter=cat;renderJewels()}
+
+function renderJewels(){
+  const today=new Date().toISOString().split('T')[0];
+  const future=jewels.filter(j=>j.date>=today);
+  const filtered=activeFilter==='all'?future:future.filter(j=>j.category===activeFilter);
+  const total=future.reduce((a,j)=>a+j.amount,0);
+  document.getElementById('jewel-total').textContent=total.toLocaleString();
+  document.getElementById('jewel-gacha').textContent=`= ${Math.floor(total/150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
+  const cats={};
+  future.forEach(j=>{cats[j.category]=(cats[j.category]||0)+j.amount});
+  document.getElementById('jewel-summary').innerHTML=
+    Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+      `<div class="jewel-cat-card"><div class="jewel-cat-num">${v.toLocaleString()}</div><div class="jewel-cat-label">${k}</div></div>`
+    ).join('');
+  document.getElementById('jewel-filters').innerHTML=
+    ['all',...Object.keys(cats)].map(c=>
+      `<button class="filter-btn${activeFilter===c?' active':''}" onclick="setFilter('${c}')">${c==='all'?'전체':c}</button>`
+    ).join('');
+  const sorted=filtered.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  document.getElementById('jewel-count').textContent=sorted.length+'개';
+  document.getElementById('jewel-list').innerHTML=sorted.map(j=>
+    `<div class="jewel-row">
+      <span class="jewel-row-date">${j.date.replace(/-/g,'.')}</span>
+      <span class="jewel-row-name">${j.name}</span>
+      <span class="jewel-row-cat">${j.category||'기타'}</span>
+      <span class="jewel-row-amount">+${j.amount.toLocaleString()}</span>
+    </div>`
+  ).join('');
+}
+
+// ── PVP ───────────────────────────────────────
 function addPvp(){
   const name=document.getElementById('v-name').value.trim();
   const start=document.getElementById('v-start').value;
   const end=document.getElementById('v-end').value;
-  const tierS=document.getElementById('v-tier-s').value.trim();
-  const tierA=document.getElementById('v-tier-a').value.trim();
-  const supports=['s1','s2','s3','s4','s5','s6'].map(id=>document.getElementById(id).value.trim());
-  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
-  pvps.push({name,start,end,tierS,tierA,supports});save();
-  renderPvps();closeModal('modal-pvp');
-  ['v-name','v-start','v-end','v-tier-s','v-tier-a','s1','s2','s3','s4','s5','s6'].forEach(id=>document.getElementById(id).value='');
+  if(!name||!start||!end){alert('이름과 기간을 입력해 주세요');return}
+  pvps.push({name,start,end,
+    tierS:document.getElementById('v-tier-s').value.trim(),
+    tierA:document.getElementById('v-tier-a').value.trim(),
+    tierB:document.getElementById('v-tier-b').value.trim(),
+    supports:['s1','s2','s3','s4','s5','s6'].map(id=>document.getElementById(id).value.trim())
+  });
+  saveExtra();renderPvps();closeModal('modal-pvp');
+  ['v-name','v-start','v-end','v-tier-s','v-tier-a','v-tier-b','s1','s2','s3','s4','s5','s6'].forEach(id=>document.getElementById(id).value='');
 }
-function removePvp(i){pvps.splice(i,1);save();renderPvps()}
+
+function removePvp(i){pvps.splice(i,1);saveExtra();renderPvps()}
+
 function renderPvps(){
   const el=document.getElementById('pvp-list');
   const empty=document.getElementById('pvp-empty');
@@ -403,33 +403,32 @@ function renderPvps(){
   empty.style.display='none';
   el.innerHTML=pvps.map((p,i)=>{
     const st=getStatus(p.start,p.end);
+    const bc={active:'pvp-live',upcoming:'pvp-upcoming',ended:'pvp-ended'}[st];
     const dl=daysLeft(p.end);
-    const badgeClass={'active':'pvp-live','upcoming':'pvp-upcoming','ended':'pvp-ended'}[st];
-    const sPills=(p.tierS||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-s">S ${c.trim()}</span>`).join('');
-    const aPills=(p.tierA||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-a">A ${c.trim()}</span>`).join('');
-    const slotCards=p.supports.map((s,idx)=>{
-      const isRental=idx===5;
-      return`<div class="support-slot${isRental?' rental':''}">
-        ${isRental?'<div class="rental-tag">렌탈</div>':''}
+    const pills=(arr,cls,prefix)=>(arr||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill ${cls}">${prefix} ${c.trim()}</span>`).join('');
+    const slots=p.supports.map((s,idx)=>{
+      const r=idx===5;
+      return`<div class="support-slot${r?' rental':''}">
+        ${r?'<div class="rental-tag">렌탈</div>':''}
         <div class="support-slot-num">슬롯 ${idx+1}</div>
         <div class="support-slot-name">${s||'—'}</div>
-      </div>`}).join('');
+      </div>`;
+    }).join('');
+    const tierHTML=pills(p.tierS,'tier-s','S')+pills(p.tierA,'tier-a','A')+pills(p.tierB,'tier-b','B');
     return`<div class="pvp-card">
       <div class="pvp-header">
-        <div>
-          <div class="pvp-name">${p.name}</div>
-          <div class="pvp-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}${st==='active'?' · D-'+dl:''}</div>
-        </div>
-        <span class="pvp-badge ${badgeClass}">${statusText(st)}</span>
+        <div><div class="pvp-name">${p.name}</div>
+        <div class="pvp-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}${st==='active'?' · D-'+dl:''}</div></div>
+        <span class="pvp-badge ${bc}">${statusText(st)}</span>
       </div>
-      ${sPills||aPills?`<div class="section-label">티어 픽</div><div class="tier-row">${sPills}${aPills}</div>`:''}
+      ${tierHTML?`<div class="section-label">티어 픽</div><div class="tier-row">${tierHTML}</div>`:''}
       <div class="section-label">서포터 편성</div>
-      <div class="support-grid">${slotCards}</div>
-      <button class="card-delete" onclick="removePvp(${i})" style="margin-top:12px">✕ 삭제</button>
-    </div>`}).join('');
+      <div class="support-grid">${slots}</div>
+      <button onclick="removePvp(${i})" style="font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;margin-top:10px;font-family:'Noto Sans KR',sans-serif">✕ 삭제</button>
+    </div>`;
+  }).join('');
 }
 
-// 초기 렌더
 renderPickups();renderJewels();renderPvps();
 </script>
 </body>
