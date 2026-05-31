@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우마무스메 미래시</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#fafaf8;color:#1a1a1a;min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;position:sticky;top:0;z-index:50}
+.header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:18px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:8px}
+.logo-emoji{font-size:22px}
+
+/* Container */
+.container{max-width:900px;margin:0 auto;padding:28px 24px}
+
+/* Tabs */
+.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid #e8e6df}
+.tab{font-size:14px;font-weight:500;padding:10px 20px;cursor:pointer;color:#888;background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:'Noto Sans KR',sans-serif;transition:color 0.15s,border-color 0.15s}
+.tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a}
+.tab:hover{color:#444}
+.section{display:none}.section.active{display:block}
+
+/* Pickup */
+.pickup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:16px}
+.pickup-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;overflow:hidden;transition:box-shadow 0.15s}
+.pickup-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.07)}
+.pickup-img{width:100%;height:160px;background:#f3f1ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#aaa;font-size:13px;cursor:pointer;transition:background 0.15s;position:relative;overflow:hidden}
+.pickup-img img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.pickup-img:hover{background:#eae8e1}
+.pickup-body{padding:14px 16px}
+.status-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.status-active{background:#e6f5ec;color:#1a7a45}
+.status-upcoming{background:#fef4e4;color:#8a5c10}
+.status-ended{background:#f0efea;color:#666}
+.pickup-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.pickup-period{font-size:12px;color:#888;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.pickup-desc{font-size:13px;color:#555;line-height:1.65}
+.card-delete{margin-top:10px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;padding:0;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;gap:3px}
+.card-delete:hover{color:#e55}
+
+/* Jewel */
+.jewel-section{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
+.jewel-section-title{font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:6px}
+.jewel-events{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px}
+.jewel-event-card{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px 12px;text-align:center;position:relative}
+.jewel-event-num{font-size:18px;font-weight:700;color:#1a1a1a}
+.jewel-event-label{font-size:11px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jewel-event-period{font-size:10px;color:#bbb;margin-top:3px}
+.jewel-event-delete{position:absolute;top:6px;right:6px;background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:0;line-height:1}
+.jewel-event-delete:hover{color:#e55}
+.jewel-total-row{display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;border-radius:8px;padding:14px 20px;color:#fff}
+.jewel-total-label{font-size:13px;opacity:0.7}
+.jewel-total-right{text-align:right}
+.jewel-total-num{font-size:26px;font-weight:700}
+.jewel-gacha{font-size:12px;opacity:0.6;margin-top:2px}
+.empty-msg{text-align:center;padding:24px;color:#bbb;font-size:14px}
+
+/* PVP */
+.pvp-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
+.pvp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.pvp-name{font-size:16px;font-weight:700}
+.pvp-period{font-size:12px;color:#888;margin-top:3px}
+.pvp-badge{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.pvp-live{background:#e6f5ec;color:#1a7a45}
+.pvp-upcoming{background:#fef4e4;color:#8a5c10}
+.pvp-ended{background:#f0efea;color:#666}
+.section-label{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.tier-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tier-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px}
+.tier-s{background:#fff0ed;color:#c03a1d;border:1px solid #f5c4b3}
+.tier-a{background:#fff8ed;color:#8a5c10;border:1px solid #fad9a0}
+.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.support-slot{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px;text-align:center}
+.support-slot.rental{border-color:#f4c0d1;background:#fff5f8}
+.support-slot-num{font-size:10px;color:#bbb;margin-bottom:4px}
+.support-slot-name{font-size:13px;font-weight:500;color:#1a1a1a;line-height:1.3}
+.rental-tag{display:inline-block;font-size:9px;background:#f4c0d1;color:#993556;padding:1px 5px;border-radius:3px;font-weight:700;margin-bottom:4px}
+
+/* Add button */
+.add-btn{width:100%;padding:12px;border:1.5px dashed #d0cec7;border-radius:10px;background:none;color:#aaa;font-size:14px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background 0.15s,color 0.15s}
+.add-btn:hover{background:#fff;color:#555;border-color:#aaa}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:20px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:5px;display:block}
+.form-row{display:flex;gap:10px}
+.form-row>div{flex:1}
+input[type=text],input[type=number],input[type=date],textarea,select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none;transition:border-color 0.15s}
+input:focus,textarea:focus{border-color:#888}
+textarea{resize:vertical;min-height:72px;line-height:1.5}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.btn-primary{padding:10px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
+.btn-primary:hover{background:#333}
+.btn-cancel{padding:10px 20px;background:none;border:1px solid #ddd;border-radius:8px;font-size:14px;color:#666;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
+.btn-cancel:hover{background:#f5f5f5}
+.support-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rental-input{border-color:#f4c0d1 !important}
+.rental-input:focus{border-color:#d4537e !important}
+
+/* Image upload */
+.img-upload-area{width:100%;height:140px;background:#f7f6f2;border:1.5px dashed #d0cec7;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#bbb;font-size:13px;cursor:pointer;position:relative;overflow:hidden}
+.img-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.img-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-area:hover{background:#f0ede7}
+.img-upload-icon{font-size:28px}
+
+/* Footer */
+.footer{text-align:center;padding:32px 24px;color:#bbb;font-size:12px;margin-top:20px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span class="logo-emoji">🏇</span> 우마무스메 미래시</div>
+    <div style="font-size:12px;color:#aaa">픽업 · 쥬얼 · PVP</div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('pickup',this)">🎯 픽업 이벤트</button>
+    <button class="tab" onclick="showTab('jewel',this)">💎 쥬얼 계산</button>
+    <button class="tab" onclick="showTab('pvp',this)">⚔️ PVP 이벤트</button>
+  </div>
+
+  <!-- 픽업 섹션 -->
+  <div id="tab-pickup" class="section active">
+    <div class="pickup-grid" id="pickup-grid"></div>
+    <div id="pickup-empty" class="empty-msg">아직 픽업 정보가 없습니다. 추가해 보세요!</div>
+    <button class="add-btn" onclick="openModal('modal-pickup')">+ 픽업 이벤트 추가</button>
+  </div>
+
+  <!-- 쥬얼 섹션 -->
+  <div id="tab-jewel" class="section">
+    <div class="jewel-section">
+      <div class="jewel-section-title">💎 이벤트별 쥬얼 수급</div>
+      <div class="jewel-events" id="jewel-events"></div>
+      <div id="jewel-empty" class="empty-msg" style="margin-bottom:12px">이벤트를 추가하면 자동으로 합산됩니다.</div>
+      <div class="jewel-total-row">
+        <div class="jewel-total-label">총 예상 쥬얼</div>
+        <div class="jewel-total-right">
+          <div class="jewel-total-num" id="jewel-total">0</div>
+          <div class="jewel-gacha" id="jewel-gacha">= 0회 뽑기 (150쥬얼/회)</div>
+        </div>
+      </div>
+    </div>
+    <button class="add-btn" onclick="openModal('modal-jewel')">+ 이벤트 쥬얼 추가</button>
+  </div>
+
+  <!-- PVP 섹션 -->
+  <div id="tab-pvp" class="section">
+    <div id="pvp-list"></div>
+    <div id="pvp-empty" class="empty-msg">PVP 이벤트를 추가해 보세요!</div>
+    <button class="add-btn" onclick="openModal('modal-pvp')">+ PVP 이벤트 추가</button>
+  </div>
+</main>
+
+<!-- 픽업 모달 -->
+<div class="modal-overlay" id="modal-pickup">
+  <div class="modal">
+    <div class="modal-title">🎯 픽업 이벤트 추가</div>
+    <div class="form-group">
+      <label class="form-label">이미지 업로드</label>
+      <div class="img-upload-area" id="pickup-img-area">
+        <div class="img-upload-icon">📷</div>
+        <span>클릭하여 이미지 선택</span>
+        <input type="file" accept="image/*" onchange="previewImg(this,'pickup-img-area','pickup-img-data')">
+        <img id="pickup-img-area-img" style="display:none">
+      </div>
+      <input type="hidden" id="pickup-img-data">
+    </div>
+    <div class="form-group">
+      <label class="form-label">캐릭터 이름 *</label>
+      <input type="text" id="p-name" placeholder="예: 스페셜 위크">
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div><label class="form-label">시작일 *</label><input type="date" id="p-start"></div>
+        <div><label class="form-label">종료일 *</label><input type="date" id="p-end"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">설명</label>
+      <textarea id="p-desc" placeholder="캐릭터 특징, 픽업 이유, 추천 여부 등"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-pickup')">취소</button>
+      <button class="btn-primary" onclick="addPickup()">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 쥬얼 모달 -->
+<div class="modal-overlay" id="modal-jewel">
+  <div class="modal">
+    <div class="modal-title">💎 이벤트 쥬얼 추가</div>
+    <div class="form-group">
+      <label class="form-label">이벤트명 *</label>
+      <input type="text" id="j-name" placeholder="예: 로그인 보너스, 메인 스토리">
+    </div>
+    <div class="form-group">
+      <label class="form-label">쥬얼 수량 *</label>
+      <input type="number" id="j-amount" placeholder="예: 3000" min="0">
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div><label class="form-label">시작일</label><input type="date" id="j-start"></div>
+        <div><label class="form-label">종료일</label><input type="date" id="j-end"></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-jewel')">취소</button>
+      <button class="btn-primary" onclick="addJewel()">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- PVP 모달 -->
+<div class="modal-overlay" id="modal-pvp">
+  <div class="modal">
+    <div class="modal-title">⚔️ PVP 이벤트 추가</div>
+    <div class="form-group">
+      <label class="form-label">이벤트명 *</label>
+      <input type="text" id="v-name" placeholder="예: 챔피언스 미팅 봄">
+    </div>
+    <div class="form-group">
+      <div class="form-row">
+        <div><label class="form-label">시작일 *</label><input type="date" id="v-start"></div>
+        <div><label class="form-label">종료일 *</label><input type="date" id="v-end"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">S티어 캐릭터 (쉼표로 구분)</label>
+      <input type="text" id="v-tier-s" placeholder="예: 골드십, 에어샤카르">
+    </div>
+    <div class="form-group">
+      <label class="form-label">A티어 캐릭터 (쉼표로 구분)</label>
+      <input type="text" id="v-tier-a" placeholder="예: 나이스네이처, 비와하야히데">
+    </div>
+    <div class="form-group">
+      <label class="form-label">서포터 편성</label>
+      <div class="support-inputs">
+        <input type="text" placeholder="슬롯 1" id="s1">
+        <input type="text" placeholder="슬롯 2" id="s2">
+        <input type="text" placeholder="슬롯 3" id="s3">
+        <input type="text" placeholder="슬롯 4" id="s4">
+        <input type="text" placeholder="슬롯 5" id="s5">
+        <input type="text" placeholder="🔗 렌탈 (슬롯 6)" id="s6" class="rental-input">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-pvp')">취소</button>
+      <button class="btn-primary" onclick="addPvp()">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">우마무스메 미래시 관리 사이트 · 데이터는 브라우저에 저장됩니다</footer>
+
+<script>
+// 로컬스토리지 기반 영구 저장
+let pickups = JSON.parse(localStorage.getItem('uma_pickups')||'[]');
+let jewels  = JSON.parse(localStorage.getItem('uma_jewels')||'[]');
+let pvps    = JSON.parse(localStorage.getItem('uma_pvps')||'[]');
+function save(){
+  localStorage.setItem('uma_pickups',JSON.stringify(pickups));
+  localStorage.setItem('uma_jewels',JSON.stringify(jewels));
+  localStorage.setItem('uma_pvps',JSON.stringify(pvps));
+}
+
+function showTab(t,btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+
+function getStatus(start,end){
+  const now=new Date(),s=new Date(start),e=new Date(end);
+  if(now<s)return'upcoming';if(now>e)return'ended';return'active';
+}
+function statusText(s){return{active:'진행 중',upcoming:'예정',ended:'종료'}[s]}
+function daysLeft(end){return Math.max(0,Math.ceil((new Date(end)-new Date())/86400000))}
+
+function previewImg(input,areaId,dataId){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const area=document.getElementById(areaId);
+    area.querySelector('span').style.display='none';
+    area.querySelector('.img-upload-icon').style.display='none';
+    const img=area.querySelector('img');
+    img.src=e.target.result;img.style.display='block';
+    document.getElementById(dataId).value=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// 픽업
+function addPickup(){
+  const name=document.getElementById('p-name').value.trim();
+  const start=document.getElementById('p-start').value;
+  const end=document.getElementById('p-end').value;
+  const desc=document.getElementById('p-desc').value.trim();
+  const img=document.getElementById('pickup-img-data').value;
+  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
+  pickups.push({name,start,end,desc,img});save();
+  renderPickups();closeModal('modal-pickup');
+  ['p-name','p-start','p-end','p-desc','pickup-img-data'].forEach(id=>document.getElementById(id).value='');
+  const area=document.getElementById('pickup-img-area');
+  area.querySelector('span').style.display='';area.querySelector('.img-upload-icon').style.display='';
+  area.querySelector('img').style.display='none';area.querySelector('img').src='';
+}
+function removePickup(i){pickups.splice(i,1);save();renderPickups()}
+function renderPickups(){
+  const g=document.getElementById('pickup-grid');
+  const empty=document.getElementById('pickup-empty');
+  if(pickups.length===0){g.innerHTML='';empty.style.display='block';return}
+  empty.style.display='none';
+  g.innerHTML=pickups.map((p,i)=>{
+    const st=getStatus(p.start,p.end);
+    const dl=daysLeft(p.end);
+    const statusClass={'active':'status-active','upcoming':'status-upcoming','ended':'status-ended'}[st];
+    const badge=`<span class="status-badge ${statusClass}">${statusText(st)}${st==='active'?' · D-'+dl:''}</span>`;
+    const imgArea=p.img
+      ?`<div class="pickup-img"><img src="${p.img}" alt="${p.name}"></div>`
+      :`<div class="pickup-img"><span style="font-size:28px">📷</span><span>이미지 없음</span></div>`;
+    return`<div class="pickup-card">
+      ${imgArea}
+      <div class="pickup-body">
+        ${badge}
+        <div class="pickup-name">${p.name}</div>
+        <div class="pickup-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}</div>
+        <div class="pickup-desc">${p.desc||'설명 없음'}</div>
+        <button class="card-delete" onclick="removePickup(${i})">✕ 삭제</button>
+      </div>
+    </div>`}).join('');
+}
+
+// 쥬얼
+function addJewel(){
+  const name=document.getElementById('j-name').value.trim();
+  const amount=parseInt(document.getElementById('j-amount').value)||0;
+  const start=document.getElementById('j-start').value;
+  const end=document.getElementById('j-end').value;
+  if(!name||!amount){alert('이름과 수량은 필수입니다');return}
+  jewels.push({name,amount,start,end});save();
+  renderJewels();closeModal('modal-jewel');
+  ['j-name','j-amount','j-start','j-end'].forEach(id=>document.getElementById(id).value='');
+}
+function removeJewel(i){jewels.splice(i,1);save();renderJewels()}
+function renderJewels(){
+  const el=document.getElementById('jewel-events');
+  const empty=document.getElementById('jewel-empty');
+  const total=jewels.reduce((a,j)=>a+j.amount,0);
+  document.getElementById('jewel-total').textContent=total.toLocaleString();
+  document.getElementById('jewel-gacha').textContent=`= ${Math.floor(total/150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
+  if(jewels.length===0){el.innerHTML='';empty.style.display='block';return}
+  empty.style.display='none';
+  el.innerHTML=jewels.map((j,i)=>{
+    const periodStr=j.start&&j.end?`${j.start.replace(/-/g,'.')}~${j.end.replace(/-/g,'.')}`:''
+    return`<div class="jewel-event-card">
+      <button class="jewel-event-delete" onclick="removeJewel(${i})">✕</button>
+      <div class="jewel-event-num">${j.amount.toLocaleString()}</div>
+      <div class="jewel-event-label">${j.name}</div>
+      ${periodStr?`<div class="jewel-event-period">${periodStr}</div>`:''}
+    </div>`}).join('');
+}
+
+// PVP
+function addPvp(){
+  const name=document.getElementById('v-name').value.trim();
+  const start=document.getElementById('v-start').value;
+  const end=document.getElementById('v-end').value;
+  const tierS=document.getElementById('v-tier-s').value.trim();
+  const tierA=document.getElementById('v-tier-a').value.trim();
+  const supports=['s1','s2','s3','s4','s5','s6'].map(id=>document.getElementById(id).value.trim());
+  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
+  pvps.push({name,start,end,tierS,tierA,supports});save();
+  renderPvps();closeModal('modal-pvp');
+  ['v-name','v-start','v-end','v-tier-s','v-tier-a','s1','s2','s3','s4','s5','s6'].forEach(id=>document.getElementById(id).value='');
+}
+function removePvp(i){pvps.splice(i,1);save();renderPvps()}
+function renderPvps(){
+  const el=document.getElementById('pvp-list');
+  const empty=document.getElementById('pvp-empty');
+  if(pvps.length===0){el.innerHTML='';empty.style.display='block';return}
+  empty.style.display='none';
+  el.innerHTML=pvps.map((p,i)=>{
+    const st=getStatus(p.start,p.end);
+    const dl=daysLeft(p.end);
+    const badgeClass={'active':'pvp-live','upcoming':'pvp-upcoming','ended':'pvp-ended'}[st];
+    const sPills=(p.tierS||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-s">S ${c.trim()}</span>`).join('');
+    const aPills=(p.tierA||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-a">A ${c.trim()}</span>`).join('');
+    const slotCards=p.supports.map((s,idx)=>{
+      const isRental=idx===5;
+      return`<div class="support-slot${isRental?' rental':''}">
+        ${isRental?'<div class="rental-tag">렌탈</div>':''}
+        <div class="support-slot-num">슬롯 ${idx+1}</div>
+        <div class="support-slot-name">${s||'—'}</div>
+      </div>`}).join('');
+    return`<div class="pvp-card">
+      <div class="pvp-header">
+        <div>
+          <div class="pvp-name">${p.name}</div>
+          <div class="pvp-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}${st==='active'?' · D-'+dl:''}</div>
+        </div>
+        <span class="pvp-badge ${badgeClass}">${statusText(st)}</span>
+      </div>
+      ${sPills||aPills?`<div class="section-label">티어 픽</div><div class="tier-row">${sPills}${aPills}</div>`:''}
+      <div class="section-label">서포터 편성</div>
+      <div class="support-grid">${slotCards}</div>
+      <button class="card-delete" onclick="removePvp(${i})" style="margin-top:12px">✕ 삭제</button>
+    </div>`}).join('');
+}
+
+// 초기 렌더
+renderPickups();renderJewels();renderPvps();
+</script>
+</body>
+</html>
