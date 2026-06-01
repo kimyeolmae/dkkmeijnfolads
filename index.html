@@ -4,197 +4,441 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>우마무스메 미래시</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans KR',sans-serif;background:#fafaf8;color:#1a1a1a;min-height:100vh}
-a{color:inherit;text-decoration:none}
-
-/* Header */
 .header{background:#fff;border-bottom:1px solid #e8e6df;padding:0 24px;position:sticky;top:0;z-index:50}
-.header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-size:18px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:8px}
-.logo-emoji{font-size:22px}
-
-/* Container */
-.container{max-width:900px;margin:0 auto;padding:28px 24px}
-
-/* Tabs */
-.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1.5px solid #e8e6df}
-.tab{font-size:14px;font-weight:500;padding:10px 20px;cursor:pointer;color:#888;background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:'Noto Sans KR',sans-serif;transition:color 0.15s,border-color 0.15s}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:18px;font-weight:700}
+.container{max-width:960px;margin:0 auto;padding:24px}
+.tabs{display:flex;margin-bottom:24px;border-bottom:1.5px solid #e8e6df}
+.tab{font-size:14px;font-weight:500;padding:10px 20px;cursor:pointer;color:#888;background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:'Noto Sans KR',sans-serif;transition:color .15s,border-color .15s}
 .tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a}
 .tab:hover{color:#444}
 .section{display:none}.section.active{display:block}
-
-/* Pickup */
-.pickup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:16px}
-.pickup-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;overflow:hidden;transition:box-shadow 0.15s}
-.pickup-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.07)}
-.pickup-img{width:100%;height:160px;background:#f3f1ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#aaa;font-size:13px;cursor:pointer;transition:background 0.15s;position:relative;overflow:hidden}
-.pickup-img img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
-.pickup-img:hover{background:#eae8e1}
-.pickup-body{padding:14px 16px}
-.status-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-.status-active{background:#e6f5ec;color:#1a7a45}
-.status-upcoming{background:#fef4e4;color:#8a5c10}
-.status-ended{background:#f0efea;color:#666}
-.pickup-name{font-size:15px;font-weight:700;margin-bottom:4px}
-.pickup-period{font-size:12px;color:#888;margin-bottom:8px;display:flex;align-items:center;gap:4px}
-.pickup-desc{font-size:13px;color:#555;line-height:1.65}
-.card-delete{margin-top:10px;font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;padding:0;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;gap:3px}
-.card-delete:hover{color:#e55}
-
-/* Jewel */
-.jewel-section{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
-.jewel-section-title{font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:6px}
-.jewel-events{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px}
-.jewel-event-card{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px 12px;text-align:center;position:relative}
-.jewel-event-num{font-size:18px;font-weight:700;color:#1a1a1a}
-.jewel-event-label{font-size:11px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jewel-event-period{font-size:10px;color:#bbb;margin-top:3px}
-.jewel-event-delete{position:absolute;top:6px;right:6px;background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:0;line-height:1}
-.jewel-event-delete:hover{color:#e55}
-.jewel-total-row{display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;border-radius:8px;padding:14px 20px;color:#fff}
-.jewel-total-label{font-size:13px;opacity:0.7}
+.data-info{font-size:12px;color:#aaa;margin-bottom:18px;padding:10px 14px;background:#fff;border:1px solid #e8e6df;border-radius:8px}
+/* pickup */
+.pickup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:16px}
+.pickup-card{background:#fff;border:2px solid #e8e6df;border-radius:12px;overflow:hidden;cursor:pointer;transition:box-shadow .15s,border-color .15s;position:relative}
+.pickup-card:hover{box-shadow:0 2px 14px rgba(0,0,0,.09)}
+.pickup-card.selected{border-color:#1a1a1a}
+.selected-badge{position:absolute;top:10px;right:10px;background:#1a1a1a;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;z-index:2}
+.pickup-img{width:100%;height:140px;background:#f3f1ea;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#bbb;font-size:12px}
+.pickup-img img{width:100%;height:100%;object-fit:cover}
+.pickup-body{padding:12px 14px}
+.status-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:6px}
+.s-active{background:#e6f5ec;color:#1a7a45}
+.s-upcoming{background:#fef4e4;color:#8a5c10}
+.s-ended{background:#f0efea;color:#888}
+.pickup-name{font-size:13px;font-weight:700;margin-bottom:3px;line-height:1.4}
+.pickup-period{font-size:11px;color:#999;margin-bottom:4px}
+.pickup-kind-tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;background:#f3f1ea;color:#666;margin-bottom:6px}
+.pickup-hint{font-size:11px;margin-top:4px}
+.pickup-img-upload{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid #ebebeb}
+.img-upload-btn{font-size:11px;padding:5px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#555;white-space:nowrap;transition:all .12s}
+.img-upload-btn:hover{border-color:#888;color:#1a1a1a}
+.img-upload-btn.has-img{border-color:#1a7a45;color:#1a7a45;background:#f0faf4}
+.pickup-panel{display:none;border-top:1px solid #f0efea;padding:14px;background:#fafaf8}
+.pickup-panel.open{display:block}
+.panel-title{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.panel-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.panel-label{font-size:12px;color:#555;min-width:76px;flex-shrink:0}
+.panel-input{flex:1;min-width:80px;padding:7px 10px;border:1px solid #ddd;border-radius:7px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none}
+.panel-input:focus{border-color:#888}
+.toggle-group{display:flex;gap:5px;flex-wrap:wrap}
+.toggle-btn{font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#666;transition:all .12s;white-space:nowrap}
+.toggle-btn.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.toggle-btn.pink.on{background:#d4537e;border-color:#d4537e;color:#fff}
+.panel-summary{margin-top:10px;padding:10px 12px;background:#fff;border:1px solid #e8e6df;border-radius:8px;font-size:12px;color:#555;line-height:1.9}
+.panel-summary b{color:#1a1a1a;font-weight:700}
+.plan-bar{background:#1a1a1a;border-radius:10px;padding:14px 20px;display:none;justify-content:space-around;align-items:center;color:#fff;margin-bottom:20px;gap:8px;flex-wrap:wrap}
+.plan-bar.show{display:flex}
+.plan-bar-item{text-align:center;padding:0 8px}
+.plan-bar-title{font-size:11px;opacity:.6;margin-bottom:2px}
+.plan-bar-num{font-size:20px;font-weight:700}
+.plan-bar-unit{font-size:11px;opacity:.55}
+/* 쥬얼 계산기 */
+.calc-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:18px;margin-bottom:14px}
+.calc-section-title{font-size:14px;font-weight:700;margin-bottom:14px}
+.calc-row{display:flex;gap:12px;flex-wrap:wrap}
+.calc-col{flex:1;min-width:180px}
+.calc-label{font-size:12px;font-weight:500;color:#666;margin-bottom:5px;display:block}
+.calc-input{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none}
+.calc-input:focus{border-color:#888}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.pkg-item{background:#fafaf8;border:1.5px solid #e8e6df;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.pkg-item:hover{border-color:#aaa}
+.pkg-item.on{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+.pkg-item.on .pkg-desc{color:rgba(255,255,255,.6)}
+.pkg-icon{font-size:22px;margin-bottom:6px}
+.pkg-name{font-size:12px;font-weight:700;margin-bottom:3px}
+.pkg-desc{font-size:11px;color:#888;margin-bottom:8px}
+.pkg-status{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#f0efea;color:#888;font-weight:500}
+.pkg-item.on .pkg-status{background:rgba(255,255,255,.15);color:#fff}
+.calc-result-card{background:#fff;border:1.5px solid #1a1a1a;border-radius:12px;padding:20px;margin-bottom:14px}
+.result-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.result-period{font-size:12px;color:#888;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:16px}
+.result-item{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px;text-align:center}
+.result-item-num{font-size:16px;font-weight:700}
+.result-item-label{font-size:11px;color:#888;margin-top:2px;line-height:1.4}
+.result-total-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e8e6df;padding-top:14px}
+.result-total-label{font-size:13px;font-weight:700}
+.result-total-sub{font-size:12px;color:#888;margin-top:2px}
+.result-total-num{font-size:30px;font-weight:700}
+.divider{height:1px;background:#e8e6df;margin:20px 0}
+/* 쥬얼 목록 */
+.jewel-total-bar{background:#1a1a1a;border-radius:10px;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:16px}
+.jewel-total-label{font-size:13px;opacity:.7}
 .jewel-total-right{text-align:right}
-.jewel-total-num{font-size:26px;font-weight:700}
-.jewel-gacha{font-size:12px;opacity:0.6;margin-top:2px}
-.empty-msg{text-align:center;padding:24px;color:#bbb;font-size:14px}
-
-/* PVP */
-.pvp-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:20px;margin-bottom:16px}
-.pvp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.jewel-total-num{font-size:28px;font-weight:700}
+.jewel-gacha-eq{font-size:12px;opacity:.6;margin-top:2px}
+.jewel-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.jewel-cat-card{background:#fff;border:1px solid #e8e6df;border-radius:10px;padding:14px;text-align:center}
+.jewel-cat-num{font-size:20px;font-weight:700}
+.jewel-cat-label{font-size:11px;color:#888;margin-top:3px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filter-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#555;transition:all .12s}
+.filter-btn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.jewel-list-section{background:#fff;border:1px solid #e8e6df;border-radius:12px;overflow:hidden;margin-bottom:16px}
+.jewel-list-header{padding:12px 16px;background:#fafaf8;border-bottom:1px solid #e8e6df;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.jewel-list-body{max-height:340px;overflow-y:auto}
+.jewel-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid #f0efea;gap:12px}
+.jewel-row:last-child{border-bottom:none}
+.jewel-row-date{font-size:11px;color:#999;min-width:76px}
+.jewel-row-name{font-size:13px;flex:1;line-height:1.4}
+.jewel-row-cat{font-size:10px;color:#888;background:#f3f1ea;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.jewel-row-amount{font-size:14px;font-weight:700;min-width:60px;text-align:right}
+/* pvp 모달 입력 */
+.pvp-char-row{background:#fafaf8;border:1px solid #e8e6df;border-radius:10px;padding:12px;position:relative;margin-bottom:8px}
+.pvp-char-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.pvp-char-name-input{flex:1;min-width:100px;padding:7px 10px;border:1px solid #ddd;border-radius:7px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none}
+.pvp-char-name-input:focus{border-color:#888}
+.pvp-tier-select,.pvp-role-select{padding:6px 8px;border:1px solid #ddd;border-radius:7px;font-size:12px;font-family:'Noto Sans KR',sans-serif;background:#fff;outline:none;cursor:pointer}
+.pvp-char-del{background:none;border:none;color:#ccc;font-size:16px;cursor:pointer;padding:0;line-height:1;margin-left:auto;flex-shrink:0}
+.pvp-char-del:hover{color:#e55}
+.pvp-support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pvp-support-input{padding:7px 8px;border:1px solid #ddd;border-radius:7px;font-size:12px;font-family:'Noto Sans KR',sans-serif;background:#fff;outline:none;width:100%}
+.pvp-support-input:focus{border-color:#888}
+.pvp-support-input.rental{border-color:#f4c0d1}
+.pvp-support-label{font-size:10px;color:#bbb;margin-bottom:3px}
+.pvp-char-img-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pvp-char-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;border:1px solid #e8e6df;background:#f3f1ea;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.pvp-char-thumb img{width:100%;height:100%;object-fit:cover}
+.pvp-char-img-btn{font-size:11px;padding:4px 10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#555}
+.pvp-char-img-btn:hover{border-color:#888}
+/* pvp 카드 렌더 */
+.pvp-card{background:#fff;border:1px solid #e8e6df;border-radius:12px;padding:18px;margin-bottom:14px}
+.pvp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
 .pvp-name{font-size:16px;font-weight:700}
 .pvp-period{font-size:12px;color:#888;margin-top:3px}
 .pvp-badge{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;white-space:nowrap}
 .pvp-live{background:#e6f5ec;color:#1a7a45}
 .pvp-upcoming{background:#fef4e4;color:#8a5c10}
-.pvp-ended{background:#f0efea;color:#666}
-.section-label{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
-.tier-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.tier-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px}
-.tier-s{background:#fff0ed;color:#c03a1d;border:1px solid #f5c4b3}
-.tier-a{background:#fff8ed;color:#8a5c10;border:1px solid #fad9a0}
+.pvp-ended{background:#f0efea;color:#888}
+.sec-label{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin:12px 0 7px}
+/* 티어리스트 */
+.tierlist-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.tierlist-row{display:flex;align-items:stretch;border-bottom:1px solid #f0efea}
+.tierlist-row:last-child{border-bottom:none}
+.tierlist-label{width:44px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;border-radius:6px 0 0 6px}
+.tl-s{background:#ff7f7f;color:#fff}
+.tl-a{background:#ffbf7f;color:#fff}
+.tl-b{background:#ffdf7f;color:#1a1a1a}
+.tierlist-chars{display:flex;flex-wrap:wrap;gap:6px;padding:8px;align-items:center;flex:1;min-height:56px}
+.tl-char{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border-radius:8px;padding:5px;transition:background .12s;position:relative}
+.tl-char:hover{background:#f3f1ea}
+.tl-char.active{background:#e8e6df;outline:2px solid #1a1a1a;outline-offset:-1px}
+.tl-char-img{width:52px;height:52px;border-radius:8px;object-fit:cover;background:#f3f1ea;display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden}
+.tl-char-img img{width:100%;height:100%;object-fit:cover}
+.tl-char-name{font-size:10px;color:#444;font-weight:500;max-width:56px;text-align:center;line-height:1.2;word-break:keep-all}
+.tl-char-role{font-size:9px;color:#888}
+/* 서포터 패널 */
+.pvp-support-panel{display:none;margin-top:10px;padding:12px;background:#fafaf8;border-radius:8px;border:1px solid #e8e6df}
+.pvp-support-panel.open{display:block}
 .support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.support-slot{background:#fafaf8;border:1px solid #e8e6df;border-radius:8px;padding:10px;text-align:center}
+.support-slot{background:#fff;border:1px solid #e8e6df;border-radius:8px;padding:10px;text-align:center}
 .support-slot.rental{border-color:#f4c0d1;background:#fff5f8}
 .support-slot-num{font-size:10px;color:#bbb;margin-bottom:4px}
-.support-slot-name{font-size:13px;font-weight:500;color:#1a1a1a;line-height:1.3}
+.support-slot-name{font-size:12px;font-weight:500;line-height:1.3}
 .rental-tag{display:inline-block;font-size:9px;background:#f4c0d1;color:#993556;padding:1px 5px;border-radius:3px;font-weight:700;margin-bottom:4px}
-
-/* Add button */
-.add-btn{width:100%;padding:12px;border:1.5px dashed #d0cec7;border-radius:10px;background:none;color:#aaa;font-size:14px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background 0.15s,color 0.15s}
+/* 공통 */
+.add-btn{width:100%;padding:12px;border:1.5px dashed #d0cec7;border-radius:10px;background:none;color:#aaa;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .15s;margin-top:4px}
 .add-btn:hover{background:#fff;color:#555;border-color:#aaa}
-
-/* Modal */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:20px}
+.empty-msg{text-align:center;padding:28px;color:#bbb;font-size:14px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
-.modal-title{font-size:17px;font-weight:700;margin-bottom:20px}
-.form-group{margin-bottom:14px}
-.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:5px;display:block}
-.form-row{display:flex;gap:10px}
-.form-row>div{flex:1}
-input[type=text],input[type=number],input[type=date],textarea,select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none;transition:border-color 0.15s}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:18px}
+.form-group{margin-bottom:12px}
+.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:4px;display:block}
+.form-row{display:flex;gap:10px}.form-row>div{flex:1}
+input[type=text],input[type=number],input[type=date],textarea,select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:'Noto Sans KR',sans-serif;color:#1a1a1a;background:#fff;outline:none;transition:border-color .15s}
 input:focus,textarea:focus{border-color:#888}
-textarea{resize:vertical;min-height:72px;line-height:1.5}
-.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+textarea{resize:vertical;min-height:68px;line-height:1.5}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 .btn-primary{padding:10px 20px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
 .btn-primary:hover{background:#333}
 .btn-cancel{padding:10px 20px;background:none;border:1px solid #ddd;border-radius:8px;font-size:14px;color:#666;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
-.btn-cancel:hover{background:#f5f5f5}
 .support-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.rental-input{border-color:#f4c0d1 !important}
-.rental-input:focus{border-color:#d4537e !important}
-
-/* Image upload */
-.img-upload-area{width:100%;height:140px;background:#f7f6f2;border:1.5px dashed #d0cec7;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#bbb;font-size:13px;cursor:pointer;position:relative;overflow:hidden}
-.img-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rental-input{border-color:#f4c0d1!important}
+.img-upload-area{width:100%;height:110px;background:#f7f6f2;border:1.5px dashed #d0cec7;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#bbb;font-size:12px;cursor:pointer;position:relative;overflow:hidden}
 .img-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-upload-area:hover{background:#f0ede7}
-.img-upload-icon{font-size:28px}
+.img-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.footer{text-align:center;padding:28px 24px;color:#ccc;font-size:12px}
 
-/* Footer */
-.footer{text-align:center;padding:32px 24px;color:#bbb;font-size:12px;margin-top:20px}
+/* 도감 공통 */
+.dex-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.dex-search{flex:1;min-width:160px;padding:9px 14px;border:1px solid #e8e6df;border-radius:10px;font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;background:#fff}
+.dex-search:focus{border-color:#888}
+.dex-count{font-size:12px;color:#aaa;white-space:nowrap}
+.dex-type-filters{display:flex;gap:5px;flex-wrap:wrap}
+.dex-type-btn{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:#555;transition:all .12s}
+.dex-type-btn.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-bottom:16px}
+/* gametora 스타일 카드 */
+.dex-card{position:relative;cursor:pointer;text-align:center;transition:transform .12s}
+.dex-card:hover{transform:translateY(-2px)}
+.dex-card-inner{border-radius:12px;overflow:hidden;border:2px solid #e8e6df;background:#f3f1ea;aspect-ratio:1;position:relative}
+.dex-card.has-data .dex-card-inner{border-color:#1a7a45}
+.dex-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.dex-card-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;background:#f0eee8}
+/* 등급 뱃지 (좌상단) */
+.dex-rarity-badge{position:absolute;top:5px;left:5px;font-size:10px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);padding:1px 5px;border-radius:5px;line-height:1.4}
+/* 타입 아이콘 (우상단) */
+.dex-type-icon{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:1.5px solid rgba(255,255,255,.6)}
+.ti-speed{background:#3b82f6}
+.ti-stamina{background:#22c55e}
+.ti-power{background:#f97316}
+.ti-guts{background:#ef4444}
+.ti-wit{background:#a855f7}
+.ti-friend{background:#eab308}
+.ti-group{background:#94a3b8}
+.dex-card-name{font-size:11px;font-weight:500;color:#1a1a1a;margin-top:6px;line-height:1.3;word-break:keep-all;padding:0 2px}
+/* 스킬 행 */
+.skill-row{display:flex;gap:6px;margin-bottom:6px;align-items:flex-start}
+.skill-name-input{flex:1;min-width:60px;padding:6px 8px;border:1px solid #ddd;border-radius:7px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none}
+.skill-name-input:focus{border-color:#888}
+.skill-desc-input{flex:2;padding:6px 8px;border:1px solid #ddd;border-radius:7px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;resize:vertical;min-height:32px}
+.skill-desc-input:focus{border-color:#888}
+.skill-del-btn{background:none;border:none;color:#ccc;font-size:14px;cursor:pointer;padding:4px;flex-shrink:0}
+.skill-del-btn:hover{color:#e55}
+/* 적성 */
+.apt-S{color:#e53e3e;font-weight:700}.apt-A{color:#dd6b20;font-weight:700}.apt-B{color:#d69e2e;font-weight:700}
+.apt-C{color:#38a169;font-weight:700}.apt-D{color:#3182ce;font-weight:700}
+.apt-E{color:#718096}.apt-F{color:#a0aec0}.apt-G{color:#cbd5e0}
+.apt-table{display:grid;grid-template-columns:1fr 1fr;gap:3px 16px;font-size:12px;margin-bottom:8px}
+.apt-row-item{display:flex;justify-content:space-between}
+/* 서포터 타입 뱃지 */
+.stype-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.stype-speed{background:#dbeafe;color:#1d4ed8}
+.stype-stamina{background:#dcfce7;color:#166534}
+.stype-power{background:#ffedd5;color:#c2410c}
+.stype-guts{background:#fee2e2;color:#b91c1c}
+.stype-wit{background:#f3e8ff;color:#7e22ce}
+.stype-friend{background:#fef9c3;color:#854d0e}
+.stype-group{background:#f1f5f9;color:#475569}
+/* 상세 모달 이미지 */
+.detail-img-wrap{position:relative;width:80px;height:80px;flex-shrink:0}
+.detail-img-wrap img{width:100%;height:100%;object-fit:cover;border-radius:10px;border:1px solid #e8e6df}
+.detail-img-type{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid #fff}
 </style>
 </head>
-<body>
 
+<body>
 <header class="header">
   <div class="header-inner">
-    <div class="logo"><span class="logo-emoji">🏇</span> 우마무스메 미래시</div>
-    <div style="font-size:12px;color:#aaa">픽업 · 쥬얼 · PVP</div>
+    <div class="logo">🏇 우마무스메 미래시</div>
+    <div style="font-size:12px;color:#aaa">픽업 · 쥬얼 · PVP · 도감</div>
   </div>
 </header>
-
 <main class="container">
   <div class="tabs">
-    <button class="tab active" onclick="showTab('pickup',this)">🎯 픽업 이벤트</button>
-    <button class="tab" onclick="showTab('jewel',this)">💎 쥬얼 계산</button>
-    <button class="tab" onclick="showTab('pvp',this)">⚔️ PVP 이벤트</button>
+    <button class="tab active" onclick="showTab('pickup',this)">🎯 픽업</button>
+    <button class="tab" onclick="showTab('jewel',this)">💎 쥬얼</button>
+    <button class="tab" onclick="showTab('pvp',this)">⚔️ PVP</button>
+    <button class="tab" onclick="showTab('uma',this)">🐴 우마무스메</button>
+    <button class="tab" onclick="showTab('support',this)">🃏 서포터 카드</button>
   </div>
 
-  <!-- 픽업 섹션 -->
+  <!-- 픽업 탭 -->
   <div id="tab-pickup" class="section active">
+    <div class="data-info">📊 2026.05.31 기준 · 카드를 클릭하면 뽑기 계획을 설정할 수 있어요</div>
+    <div class="plan-bar" id="plan-bar">
+      <div class="plan-bar-item"><div class="plan-bar-title">선택한 픽업</div><div class="plan-bar-num" id="plan-count">0</div><div class="plan-bar-unit">개</div></div>
+      <div class="plan-bar-item"><div class="plan-bar-title">사용 예정 쥬얼</div><div class="plan-bar-num" id="plan-jewel">0</div><div class="plan-bar-unit">쥬얼</div></div>
+      <div class="plan-bar-item"><div class="plan-bar-title">무료연 합계</div><div class="plan-bar-num" id="plan-free">0</div><div class="plan-bar-unit">연</div></div>
+      <div class="plan-bar-item"><div class="plan-bar-title">총 뽑기 횟수</div><div class="plan-bar-num" id="plan-pulls">0</div><div class="plan-bar-unit">회</div></div>
+    </div>
     <div class="pickup-grid" id="pickup-grid"></div>
-    <div id="pickup-empty" class="empty-msg">아직 픽업 정보가 없습니다. 추가해 보세요!</div>
-    <button class="add-btn" onclick="openModal('modal-pickup')">+ 픽업 이벤트 추가</button>
+    <button class="add-btn" onclick="openModal('modal-pickup')">+ 픽업 직접 추가</button>
   </div>
 
-  <!-- 쥬얼 섹션 -->
+  <!-- 쥬얼 탭 -->
   <div id="tab-jewel" class="section">
-    <div class="jewel-section">
-      <div class="jewel-section-title">💎 이벤트별 쥬얼 수급</div>
-      <div class="jewel-events" id="jewel-events"></div>
-      <div id="jewel-empty" class="empty-msg" style="margin-bottom:12px">이벤트를 추가하면 자동으로 합산됩니다.</div>
-      <div class="jewel-total-row">
-        <div class="jewel-total-label">총 예상 쥬얼</div>
-        <div class="jewel-total-right">
-          <div class="jewel-total-num" id="jewel-total">0</div>
-          <div class="jewel-gacha" id="jewel-gacha">= 0회 뽑기 (150쥬얼/회)</div>
+    <div class="data-info">📊 기간과 세팅을 설정하면 예상 쥬얼을 자동 계산합니다</div>
+
+    <div class="calc-card">
+      <div class="calc-section-title">📅 계산 기간</div>
+      <div class="calc-row">
+        <div class="calc-col"><label class="calc-label">시작일</label><input type="date" id="calc-start" class="calc-input" oninput="calcJewels()"></div>
+        <div class="calc-col"><label class="calc-label">종료일 (목표 픽업일)</label><input type="date" id="calc-end" class="calc-input" oninput="calcJewels()"></div>
+      </div>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-section-title">🏟️ PVP 등급 설정</div>
+      <div class="calc-row">
+        <div class="calc-col">
+          <label class="calc-label">서클 등급 (월별 보상)</label>
+          <select class="calc-input" id="circle-rank" onchange="calcJewels()">
+            <option value="0">미참여</option>
+            <option value="3000">SS — 3,000</option>
+            <option value="2400">S+ — 2,400</option>
+            <option value="2100">S — 2,100</option>
+            <option value="1800" selected>A+ — 1,800</option>
+            <option value="1500">A — 1,500</option>
+            <option value="1200">B+ — 1,200</option>
+            <option value="900">B — 900</option>
+            <option value="600">C+ — 600</option>
+            <option value="300">C — 300</option>
+            <option value="150">D+ — 150</option>
+          </select>
+        </div>
+        <div class="calc-col">
+          <label class="calc-label">팀레 등급 (주별 보상)</label>
+          <select class="calc-input" id="teamre-rank" onchange="calcJewels()">
+            <option value="0">미참여</option>
+            <option value="250">CLASS 6 — 250</option>
+            <option value="150" selected>CLASS 5 — 150</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-row" style="margin-top:12px">
+        <div class="calc-col">
+          <label class="calc-label">챔피언스 미팅 등수</label>
+          <select class="calc-input" id="chammi-rank" onchange="calcJewels()">
+            <option value="0">미참여</option>
+            <option value="3000">그레이드 A결 1위 — 3,000</option>
+            <option value="2400">그레이드 A결 2위 — 2,400</option>
+            <option value="1800" selected>그레이드 A결 3위 — 1,800</option>
+            <option value="1800">그레이드 B결 1위 — 1,800</option>
+            <option value="1500">그레이드 B결 2위 — 1,500</option>
+            <option value="1200">그레이드 B결 3위 — 1,200</option>
+            <option value="1500">오픈 A결 1위 — 1,500</option>
+            <option value="1350">오픈 A결 2위 — 1,350</option>
+            <option value="1200">오픈 A결 3위 — 1,200</option>
+            <option value="1200">오픈 B결 1위 — 1,200</option>
+            <option value="1050">오픈 B결 2위 — 1,050</option>
+            <option value="900">오픈 B결 3위 — 900</option>
+          </select>
+        </div>
+        <div class="calc-col">
+          <label class="calc-label">말오스 등급 (리그 오브 히어로즈)</label>
+          <select class="calc-input" id="malos-rank" onchange="calcJewels()">
+            <option value="0">미참여</option>
+            <option value="3750">플레티넘 4 — 3,750</option>
+            <option value="3250" selected>플레티넘 3 — 3,250</option>
+            <option value="2750">플레티넘 2 — 2,750</option>
+            <option value="2250">플레티넘 1 — 2,250</option>
+          </select>
         </div>
       </div>
     </div>
-    <button class="add-btn" onclick="openModal('modal-jewel')">+ 이벤트 쥬얼 추가</button>
+
+    <div class="calc-card">
+      <div class="calc-section-title">🛒 패키지 구매 여부 (클릭으로 토글)</div>
+      <div class="pkg-grid">
+        <div class="pkg-item" id="pkg-daily" onclick="togglePkg('daily')">
+          <div class="pkg-icon">💎</div>
+          <div class="pkg-name">데일리 쥬얼팩</div>
+          <div class="pkg-desc">매일 50쥬얼</div>
+          <div class="pkg-status">미구매</div>
+        </div>
+        <div class="pkg-item" id="pkg-pass" onclick="togglePkg('pass')">
+          <div class="pkg-icon">🎫</div>
+          <div class="pkg-name">트레이닝 패스</div>
+          <div class="pkg-desc">월 1,850쥬얼</div>
+          <div class="pkg-status">미구매</div>
+        </div>
+        <div class="pkg-item" id="pkg-select" onclick="togglePkg('select')">
+          <div class="pkg-icon">🎁</div>
+          <div class="pkg-name">선택권 패키지</div>
+          <div class="pkg-desc">기간 내 전체 구매</div>
+          <div class="pkg-status">미구매</div>
+        </div>
+        <div class="pkg-item" id="pkg-black" onclick="togglePkg('black')">
+          <div class="pkg-icon">⚫</div>
+          <div class="pkg-name">흑우팩</div>
+          <div class="pkg-desc">기간 내 전체 구매</div>
+          <div class="pkg-status">미구매</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-result-card" id="calc-result" style="display:none">
+      <div class="result-title">💰 예상 쥬얼 계산 결과</div>
+      <div class="result-period" id="result-period"></div>
+      <div class="result-grid" id="result-grid"></div>
+      <div class="result-total-row">
+        <div>
+          <div class="result-total-label">총 예상 쥬얼</div>
+          <div class="result-total-sub" id="result-pulls"></div>
+        </div>
+        <div class="result-total-num" id="result-total">0</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="data-info" style="margin-bottom:12px">📋 엑셀 내장 전체 쥬얼 목록 (오늘 이후)</div>
+    <div class="jewel-total-bar">
+      <div class="jewel-total-label">총 예상 쥬얼</div>
+      <div class="jewel-total-right">
+        <div class="jewel-total-num" id="jewel-total">0</div>
+        <div class="jewel-gacha-eq" id="jewel-gacha">= 0회 뽑기</div>
+      </div>
+    </div>
+    <div class="jewel-summary" id="jewel-summary"></div>
+    <div class="filter-row" id="jewel-filters"></div>
+    <div class="jewel-list-section">
+      <div class="jewel-list-header"><span>항목 목록</span><span id="jewel-count" style="font-size:12px;color:#aaa;font-weight:400"></span></div>
+      <div class="jewel-list-body" id="jewel-list"></div>
+    </div>
+    <button class="add-btn" onclick="openModal('modal-jewel')">+ 쥬얼 직접 추가</button>
   </div>
 
-  <!-- PVP 섹션 -->
+  <!-- PVP 탭 -->
   <div id="tab-pvp" class="section">
     <div id="pvp-list"></div>
     <div id="pvp-empty" class="empty-msg">PVP 이벤트를 추가해 보세요!</div>
-    <button class="add-btn" onclick="openModal('modal-pvp')">+ PVP 이벤트 추가</button>
+    <button class="add-btn" onclick="openPvpModal()">+ PVP 이벤트 추가</button>
   </div>
 </main>
 
 <!-- 픽업 모달 -->
 <div class="modal-overlay" id="modal-pickup">
   <div class="modal">
-    <div class="modal-title">🎯 픽업 이벤트 추가</div>
+    <div class="modal-title">🎯 픽업 추가</div>
     <div class="form-group">
-      <label class="form-label">이미지 업로드</label>
-      <div class="img-upload-area" id="pickup-img-area">
-        <div class="img-upload-icon">📷</div>
-        <span>클릭하여 이미지 선택</span>
-        <input type="file" accept="image/*" onchange="previewImg(this,'pickup-img-area','pickup-img-data')">
-        <img id="pickup-img-area-img" style="display:none">
+      <label class="form-label">이미지</label>
+      <div class="img-upload-area" id="p-img-area">
+        <div style="font-size:22px">📷</div>
+        <input type="file" accept="image/*" onchange="previewImg(this)">
+        <img id="p-img-area-img" style="display:none">
       </div>
-      <input type="hidden" id="pickup-img-data">
+      <input type="hidden" id="p-img-data">
     </div>
-    <div class="form-group">
-      <label class="form-label">캐릭터 이름 *</label>
-      <input type="text" id="p-name" placeholder="예: 스페셜 위크">
-    </div>
+    <div class="form-group"><label class="form-label">캐릭터 이름 *</label><input type="text" id="p-name"></div>
+    <div class="form-group"><label class="form-label">종류</label>
+      <select id="p-kind"><option>말딸</option><option>서폿</option><option>말딸+서폿</option></select></div>
     <div class="form-group">
       <div class="form-row">
         <div><label class="form-label">시작일 *</label><input type="date" id="p-start"></div>
         <div><label class="form-label">종료일 *</label><input type="date" id="p-end"></div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">설명</label>
-      <textarea id="p-desc" placeholder="캐릭터 특징, 픽업 이유, 추천 여부 등"></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">설명</label><textarea id="p-desc"></textarea></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-pickup')">취소</button>
       <button class="btn-primary" onclick="addPickup()">추가하기</button>
@@ -205,232 +449,953 @@ textarea{resize:vertical;min-height:72px;line-height:1.5}
 <!-- 쥬얼 모달 -->
 <div class="modal-overlay" id="modal-jewel">
   <div class="modal">
-    <div class="modal-title">💎 이벤트 쥬얼 추가</div>
-    <div class="form-group">
-      <label class="form-label">이벤트명 *</label>
-      <input type="text" id="j-name" placeholder="예: 로그인 보너스, 메인 스토리">
-    </div>
-    <div class="form-group">
-      <label class="form-label">쥬얼 수량 *</label>
-      <input type="number" id="j-amount" placeholder="예: 3000" min="0">
-    </div>
-    <div class="form-group">
-      <div class="form-row">
-        <div><label class="form-label">시작일</label><input type="date" id="j-start"></div>
-        <div><label class="form-label">종료일</label><input type="date" id="j-end"></div>
-      </div>
-    </div>
+    <div class="modal-title">💎 쥬얼 추가</div>
+    <div class="form-group"><label class="form-label">이름 *</label><input type="text" id="j-name"></div>
+    <div class="form-group"><label class="form-label">쥬얼 수량 *</label><input type="number" id="j-amount" min="0"></div>
+    <div class="form-group"><label class="form-label">카테고리</label>
+      <select id="j-cat"><option>기타</option><option>이벤트</option><option>챔미</option><option>말오스</option><option>시나리오, 로그인</option><option>레전드 레이스</option></select></div>
+    <div class="form-group"><label class="form-label">날짜</label><input type="date" id="j-date"></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-jewel')">취소</button>
-      <button class="btn-primary" onclick="addJewel()">추가하기</button>
+      <button class="btn-primary" onclick="addJewelManual()">추가하기</button>
     </div>
   </div>
 </div>
 
 <!-- PVP 모달 -->
 <div class="modal-overlay" id="modal-pvp">
-  <div class="modal">
-    <div class="modal-title">⚔️ PVP 이벤트 추가</div>
-    <div class="form-group">
-      <label class="form-label">이벤트명 *</label>
-      <input type="text" id="v-name" placeholder="예: 챔피언스 미팅 봄">
-    </div>
+  <div class="modal" style="max-width:520px">
+    <div class="modal-title" id="pvp-modal-title">⚔️ PVP 이벤트 추가</div>
+    <div class="form-group"><label class="form-label">이벤트명 *</label><input type="text" id="v-name"></div>
     <div class="form-group">
       <div class="form-row">
         <div><label class="form-label">시작일 *</label><input type="date" id="v-start"></div>
         <div><label class="form-label">종료일 *</label><input type="date" id="v-end"></div>
       </div>
     </div>
+    <div class="form-group"><label class="form-label">설명</label><textarea id="v-desc" style="min-height:56px"></textarea></div>
     <div class="form-group">
-      <label class="form-label">S티어 캐릭터 (쉼표로 구분)</label>
-      <input type="text" id="v-tier-s" placeholder="예: 골드십, 에어샤카르">
-    </div>
-    <div class="form-group">
-      <label class="form-label">A티어 캐릭터 (쉼표로 구분)</label>
-      <input type="text" id="v-tier-a" placeholder="예: 나이스네이처, 비와하야히데">
-    </div>
-    <div class="form-group">
-      <label class="form-label">서포터 편성</label>
-      <div class="support-inputs">
-        <input type="text" placeholder="슬롯 1" id="s1">
-        <input type="text" placeholder="슬롯 2" id="s2">
-        <input type="text" placeholder="슬롯 3" id="s3">
-        <input type="text" placeholder="슬롯 4" id="s4">
-        <input type="text" placeholder="슬롯 5" id="s5">
-        <input type="text" placeholder="🔗 렌탈 (슬롯 6)" id="s6" class="rental-input">
-      </div>
+      <label class="form-label">티어픽 캐릭터</label>
+      <div id="pvp-char-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+      <button type="button" onclick="addPvpChar()" style="width:100%;padding:8px;border:1.5px dashed #d0cec7;border-radius:8px;background:none;color:#aaa;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif">+ 캐릭터 추가</button>
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal('modal-pvp')">취소</button>
-      <button class="btn-primary" onclick="addPvp()">추가하기</button>
+      <button class="btn-cancel" onclick="closePvpModal()">취소</button>
+      <button class="btn-primary" id="pvp-modal-btn" onclick="savePvp()">추가하기</button>
     </div>
   </div>
 </div>
 
-<footer class="footer">우마무스메 미래시 관리 사이트 · 데이터는 브라우저에 저장됩니다</footer>
+  <!-- 우마무스메 도감 탭 -->
+  <div id="tab-uma" class="section">
+    <div class="dex-toolbar">
+      <input type="text" id="uma-search" class="dex-search" oninput="filterUma(this.value)">
+      <span id="uma-count" class="dex-count"></span>
+      <button onclick="openAddUmaModal()" style="padding:8px 14px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;white-space:nowrap">+ 추가</button>
+    </div>
+    <div id="uma-grid" class="dex-grid"></div>
+    <div id="uma-empty" class="empty-msg">우마무스메를 추가해 보세요!</div>
+  </div>
 
-<script>
-// 로컬스토리지 기반 영구 저장
-let pickups = JSON.parse(localStorage.getItem('uma_pickups')||'[]');
-let jewels  = JSON.parse(localStorage.getItem('uma_jewels')||'[]');
-let pvps    = JSON.parse(localStorage.getItem('uma_pvps')||'[]');
-function save(){
-  localStorage.setItem('uma_pickups',JSON.stringify(pickups));
-  localStorage.setItem('uma_jewels',JSON.stringify(jewels));
-  localStorage.setItem('uma_pvps',JSON.stringify(pvps));
-}
+  <!-- 서포터 카드 도감 탭 -->
+  <div id="tab-support" class="section">
+    <div class="dex-toolbar">
+      <input type="text" id="sup-search" class="dex-search" oninput="filterSupport(this.value)">
+      <div class="dex-type-filters" id="sup-type-filters"></div>
+      <span id="sup-count" class="dex-count"></span>
+      <button onclick="openAddSupModal()" style="padding:8px 14px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;white-space:nowrap">+ 추가</button>
+    </div>
+    <div id="sup-grid" class="dex-grid"></div>
+    <div id="sup-empty" class="empty-msg">서포터 카드를 추가해 보세요!</div>
+  </div>
 
-function showTab(t,btn){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-'+t).classList.add('active');
-}
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
-
-function getStatus(start,end){
-  const now=new Date(),s=new Date(start),e=new Date(end);
-  if(now<s)return'upcoming';if(now>e)return'ended';return'active';
-}
-function statusText(s){return{active:'진행 중',upcoming:'예정',ended:'종료'}[s]}
-function daysLeft(end){return Math.max(0,Math.ceil((new Date(end)-new Date())/86400000))}
-
-function previewImg(input,areaId,dataId){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const area=document.getElementById(areaId);
-    area.querySelector('span').style.display='none';
-    area.querySelector('.img-upload-icon').style.display='none';
-    const img=area.querySelector('img');
-    img.src=e.target.result;img.style.display='block';
-    document.getElementById(dataId).value=e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-// 픽업
-function addPickup(){
-  const name=document.getElementById('p-name').value.trim();
-  const start=document.getElementById('p-start').value;
-  const end=document.getElementById('p-end').value;
-  const desc=document.getElementById('p-desc').value.trim();
-  const img=document.getElementById('pickup-img-data').value;
-  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
-  pickups.push({name,start,end,desc,img});save();
-  renderPickups();closeModal('modal-pickup');
-  ['p-name','p-start','p-end','p-desc','pickup-img-data'].forEach(id=>document.getElementById(id).value='');
-  const area=document.getElementById('pickup-img-area');
-  area.querySelector('span').style.display='';area.querySelector('.img-upload-icon').style.display='';
-  area.querySelector('img').style.display='none';area.querySelector('img').src='';
-}
-function removePickup(i){pickups.splice(i,1);save();renderPickups()}
-function renderPickups(){
-  const g=document.getElementById('pickup-grid');
-  const empty=document.getElementById('pickup-empty');
-  if(pickups.length===0){g.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  g.innerHTML=pickups.map((p,i)=>{
-    const st=getStatus(p.start,p.end);
-    const dl=daysLeft(p.end);
-    const statusClass={'active':'status-active','upcoming':'status-upcoming','ended':'status-ended'}[st];
-    const badge=`<span class="status-badge ${statusClass}">${statusText(st)}${st==='active'?' · D-'+dl:''}</span>`;
-    const imgArea=p.img
-      ?`<div class="pickup-img"><img src="${p.img}" alt="${p.name}"></div>`
-      :`<div class="pickup-img"><span style="font-size:28px">📷</span><span>이미지 없음</span></div>`;
-    return`<div class="pickup-card">
-      ${imgArea}
-      <div class="pickup-body">
-        ${badge}
-        <div class="pickup-name">${p.name}</div>
-        <div class="pickup-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}</div>
-        <div class="pickup-desc">${p.desc||'설명 없음'}</div>
-        <button class="card-delete" onclick="removePickup(${i})">✕ 삭제</button>
+  <!-- 우마 추가/상세 모달 -->
+  <div class="modal-overlay" id="modal-uma-detail">
+    <div class="modal" style="max-width:520px">
+      <div class="modal-title" id="umd-modal-title">우마무스메 추가</div>
+      <div style="display:flex;gap:14px;margin-bottom:16px;align-items:flex-start">
+        <div class="detail-img-wrap" style="width:90px;height:90px">
+          <img id="umd-img" src="" style="width:100%;height:100%;object-fit:cover;border-radius:10px;border:1px solid #e8e6df;background:#f3f1ea;cursor:pointer" onclick="uploadDexImg('umd-img','umd-img-data')" onerror="this.style.background='#f3f1ea'" title="클릭하여 이미지 업로드">
+          <input type="hidden" id="umd-img-data">
+          <div id="umd-img-placeholder" style="width:90px;height:90px;background:#f3f1ea;border-radius:10px;border:1px solid #e8e6df;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:11px;color:#bbb" onclick="uploadDexImg('umd-img','umd-img-data')">
+            <span style="font-size:24px">🐴</span><span>이미지 추가</span>
+          </div>
+        </div>
+        <div style="flex:1">
+          <div class="form-group" style="margin-bottom:8px"><label class="form-label">이름 *</label><input type="text" id="umd-name-input"></div>
+          <div class="form-group" style="margin-bottom:0"><label class="form-label">등급</label>
+            <select id="umd-rarity">
+              <option value="SSR">SSR</option><option value="SR">SR</option><option value="R">R</option>
+            </select>
+          </div>
+        </div>
       </div>
-    </div>`}).join('');
+      <div class="form-group">
+        <label class="form-label">적성</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">잔디</span><select id="apt-turf" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">더트</span><select id="apt-dirt" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">단거리</span><select id="apt-short" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">마일</span><select id="apt-mile" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">중거리</span><select id="apt-medium" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">장거리</span><select id="apt-long" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">도주</span><select id="apt-front" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">선행</span><select id="apt-stalk" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">선입</span><select id="apt-mid" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="width:40px;color:#666">추입</span><select id="apt-back" class="apt-select" style="padding:4px 6px;border:1px solid #ddd;border-radius:6px;font-family:'Noto Sans KR',sans-serif;font-size:12px"><option value="S">S</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select></div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:10px">
+        <label class="form-label">보유 스킬</label>
+        <div id="umd-skills-list" style="margin-bottom:6px"></div>
+        <button onclick="addUmaSkill()" style="font-size:12px;padding:6px 14px;border:1.5px dashed #d0cec7;border-radius:8px;background:none;color:#aaa;cursor:pointer;font-family:'Noto Sans KR',sans-serif;width:100%">+ 스킬 추가</button>
+      </div>
+      <div class="form-group"><label class="form-label">메모</label><textarea id="umd-memo" rows="2" style="font-size:13px"></textarea></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="umd-del-btn" onclick="deleteUma()" style="color:#e55;border-color:#f5c4c4;display:none">삭제</button>
+        <button class="btn-cancel" onclick="closeModal('modal-uma-detail')">취소</button>
+        <button class="btn-primary" onclick="saveUmaDetail()">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 서포터 추가/상세 모달 -->
+  <div class="modal-overlay" id="modal-sup-detail">
+    <div class="modal" style="max-width:520px">
+      <div class="modal-title" id="spd-modal-title">서포터 카드 추가</div>
+      <div style="display:flex;gap:14px;margin-bottom:16px;align-items:flex-start">
+        <div class="detail-img-wrap" style="width:90px;height:90px">
+          <img id="spd-img" src="" style="width:100%;height:100%;object-fit:cover;border-radius:10px;border:1px solid #e8e6df;background:#f3f1ea;cursor:pointer" onclick="uploadDexImg('spd-img','spd-img-data')" onerror="this.style.background='#f3f1ea'" title="클릭하여 이미지 업로드">
+          <input type="hidden" id="spd-img-data">
+          <div id="spd-img-placeholder" style="width:90px;height:90px;background:#f3f1ea;border-radius:10px;border:1px solid #e8e6df;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:11px;color:#bbb" onclick="uploadDexImg('spd-img','spd-img-data')">
+            <span style="font-size:24px">🃏</span><span>이미지 추가</span>
+          </div>
+        </div>
+        <div style="flex:1">
+          <div class="form-group" style="margin-bottom:8px"><label class="form-label">카드 이름 *</label><input type="text" id="spd-name-input"></div>
+          <div class="form-group" style="margin-bottom:8px"><label class="form-label">등급</label>
+            <select id="spd-rarity-input">
+              <option value="SSR">SSR</option><option value="SR">SR</option><option value="R">R</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0"><label class="form-label">카드 타입</label>
+            <select id="spd-type-input">
+              <option value="speed">스피드</option><option value="stamina">스태미나</option>
+              <option value="power">파워</option><option value="guts">근성</option>
+              <option value="wit">지능</option><option value="friend">우정</option><option value="group">그룹</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">카드 성능</label><textarea id="spd-perf" rows="3" style="font-size:13px"></textarea></div>
+      <div class="form-group">
+        <label class="form-label">카드가 주는 스킬</label>
+        <div id="spd-skills-list" style="margin-bottom:6px"></div>
+        <button onclick="addSupSkill()" style="font-size:12px;padding:6px 14px;border:1.5px dashed #d0cec7;border-radius:8px;background:none;color:#aaa;cursor:pointer;font-family:'Noto Sans KR',sans-serif;width:100%">+ 스킬 추가</button>
+      </div>
+      <div class="form-group"><label class="form-label">메모</label><textarea id="spd-memo" rows="2" style="font-size:13px"></textarea></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="spd-del-btn" onclick="deleteSup()" style="color:#e55;border-color:#f5c4c4;display:none">삭제</button>
+        <button class="btn-cancel" onclick="closeModal('modal-sup-detail')">취소</button>
+        <button class="btn-primary" onclick="saveSupDetail()">저장</button>
+      </div>
+    </div>
+  </div>
+
+<footer class="footer">우마무스메 미래시 관리 사이트 · 엑셀 내장 데이터 (2026.05.31 기준)</footer>
+<script>
+const EXCEL_PICKUPS=[{"name": "(26.06.15)오르페브르+삼틀딱,스피드AA", "kind": "말딸+서폿", "gacha": true, "start": "2026-06-15", "end": "2026-07-10", "desc": ""}, {"name": "(26.06.30)그란 알레그리아+스태브라이트", "kind": "말딸", "gacha": false, "start": "2026-06-30", "end": "2026-07-10", "desc": ""}, {"name": "(26.07.10)노 리즌+셀렉트 가챠", "kind": "서폿", "gacha": false, "start": "2026-07-10", "end": "2026-07-20", "desc": ""}, {"name": "(26.07.20)댄댄시치,댄김렛+파워보드카,스피드드림저니", "kind": "서폿", "gacha": false, "start": "2026-07-20", "end": "2026-07-30", "desc": ""}, {"name": "(26.07.30)트윙클 레전드 시리우스+능택트", "kind": "서폿", "gacha": false, "start": "2026-07-30", "end": "2026-08-10", "desc": ""}, {"name": "(26.08.19)마칭리키,마칭팔코+근성트레센드,파워부에나", "kind": "말딸", "gacha": false, "start": "2026-08-19", "end": "2026-08-31", "desc": ""}, {"name": "(26.08.31)베르시나+근성스즈카", "kind": "말딸", "gacha": false, "start": "2026-08-31", "end": "2026-09-09", "desc": ""}, {"name": "(26.09.09)러브즈 온리 유+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-09-09", "end": "2026-09-18", "desc": ""}, {"name": "(26.09.18)웨딩모누,세자리오+스피드 라크,지능 데어링하트", "kind": "서폿", "gacha": false, "start": "2026-09-18", "end": "2026-10-02", "desc": ""}, {"name": "(26.10.02)크로노제네시스+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-10-02", "end": "2026-10-30", "desc": ""}, {"name": "(26.10.16)무인도 골드시티+파마모+터커 브라인", "kind": "서폿", "gacha": true, "start": "2026-10-16", "end": "2026-11-10", "desc": ""}, {"name": "(26.11.19)수크라,수봇치+능사과,스태두라", "kind": "서폿", "gacha": false, "start": "2026-11-19", "end": "2026-12-03", "desc": ""}, {"name": "(26.12.03)수비블+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2026-12-03", "end": "2026-12-13", "desc": ""}, {"name": "(26.12.13)스틸인러브+쓰굴비,근배겨", "kind": "말딸+서폿", "gacha": true, "start": "2026-12-13", "end": "2027-01-08", "desc": ""}, {"name": "(26.12.18)합창단케이에스,합창단미라코+스피드 칼스톤,지능 듀랜달", "kind": "서폿", "gacha": false, "start": "2026-12-18", "end": "2026-12-29", "desc": ""}, {"name": "(27.01.18)할보노,할마블+근성 후지,스피드 에이신v2", "kind": "서폿", "gacha": false, "start": "2027-01-18", "end": "2027-01-29", "desc": ""}, {"name": "(27.02.06)단츠,복개(복각)+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-02-06", "end": "2027-02-17", "desc": ""}, {"name": "(27.02.17)온천 트래센드+스피드테이오,키요코(친구카드)", "kind": "서폿", "gacha": true, "start": "2027-02-17", "end": "2027-03-10", "desc": ""}, {"name": "(27.03.01)온천 어큐트+파워 부르봉", "kind": "서폿", "gacha": false, "start": "2027-03-01", "end": "2027-03-10", "desc": ""}, {"name": "(27.03.10)부에나 비스타+셀렉트 가챠", "kind": "서폿", "gacha": false, "start": "2027-03-10", "end": "2027-03-19", "desc": ""}, {"name": "(27.03.19)클페스타,클저니+스태고루시,스태페노메노", "kind": "서폿", "gacha": false, "start": "2027-03-19", "end": "2027-04-01", "desc": ""}, {"name": "(27.04.01)신데구리+스태 이나리 원", "kind": "말딸", "gacha": false, "start": "2027-04-01", "end": "2027-04-16", "desc": ""}, {"name": "(27.04.11)스테이 골드+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-04-11", "end": "2027-04-29", "desc": ""}, {"name": "(27.04.16)신년이쿠노,신년로렐+스피드 동탄,파워 파인", "kind": "서폿", "gacha": false, "start": "2027-04-16", "end": "2027-04-29", "desc": ""}, {"name": "(27.05.21)발렌타이키,발렌사오어+스피드후쿠,파워유니", "kind": "말딸", "gacha": false, "start": "2027-05-21", "end": "2027-06-05", "desc": ""}, {"name": "(27.06.05)로이스 앤 로이스+셀렉트 가챠", "kind": "말딸", "gacha": false, "start": "2027-06-05", "end": "2027-06-15", "desc": ""}, {"name": "(27.06.15)아몬드아이+지능 포에버영", "kind": "말딸+서폿", "gacha": true, "start": "2027-06-15", "end": "", "desc": ""}];
+const EXCEL_JEWELS=[{"name": "「리얼 탈출 게임×말 딸 프리티 더비 『다음으로 일어나는 불행으로부터의 탈출』 공연 기념 캠페인」", "amount": 500, "date": "2026-07-09", "category": "기타 잡"}, {"name": "『BoC’z we\\n』이벤트", "amount": 500, "date": "2026-07-21", "category": "기타 잡"}, {"name": "「2300만 다운로드 돌파!」", "amount": 1500, "date": "2026-11-10", "category": "기타 잡"}, {"name": "【도전】우마튜브 채널 구독자 수 1억 명 목표로 해봤어!", "amount": 300, "date": "2026-12-13", "category": "기타 잡"}, {"name": "극장판 「좀비랜드 사가」콜라보 기념 로그인 보너스", "amount": 500, "date": "2027-02-12", "category": "기타 잡"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2026-06-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2026-06-06", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2026-06-07", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2026-06-08", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2026-06-09", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2026-06-10", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2026-06-11", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2026-06-12", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2026-06-13", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2026-06-14", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제1탄」 - 기념 미션", "amount": 500, "date": "2026-06-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2026-06-16", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2026-06-17", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2026-06-18", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2026-06-19", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2026-06-20", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2026-06-21", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2026-06-22", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2026-06-23", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2026-06-24", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2026-06-15", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 01", "amount": 150, "date": "2026-06-30", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 02", "amount": 150, "date": "2026-07-01", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 03", "amount": 150, "date": "2026-07-02", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 04", "amount": 150, "date": "2026-07-03", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 05", "amount": 150, "date": "2026-07-04", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 06", "amount": 150, "date": "2026-07-05", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 07", "amount": 150, "date": "2026-07-06", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 08", "amount": 150, "date": "2026-07-07", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 09", "amount": 150, "date": "2026-07-08", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 10", "amount": 150, "date": "2026-07-09", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 11", "amount": 150, "date": "2026-07-10", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 12", "amount": 150, "date": "2026-07-11", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 13", "amount": 150, "date": "2026-07-12", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 14", "amount": 150, "date": "2026-07-13", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 로그인 보너스 15", "amount": 150, "date": "2026-07-14", "category": "시나리오, 로그인"}, {"name": "「4th Anniversary 캠페인 제3탄」 - 기념 미션", "amount": 500, "date": "2026-06-30", "category": "시나리오, 로그인"}, {"name": "「무인도에 어서오세요 공개 기념」 로그인 보너스", "amount": 1500, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "「무인도에 어서오세요」 미션", "amount": 500, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "무인도에 어서오세요 시나리오 평가점 보상", "amount": 300, "date": "2026-10-16", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2026-12-03", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2026-12-04", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2026-12-05", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2026-12-06", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2026-12-07", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2026-12-08", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2026-12-09", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2026-12-10", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2026-12-11", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2026-12-12", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제1탄」 - 기념 미션", "amount": 500, "date": "2026-12-03", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2026-12-14", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2026-12-15", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2026-12-16", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2026-12-17", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2026-12-18", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2026-12-19", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2026-12-20", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2026-12-21", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2026-12-22", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2026-12-13", "category": "시나리오, 로그인"}, {"name": "「4.5th Anniversary 캠페인 제3탄」 - 기념 미션", "amount": 500, "date": "2026-12-29", "category": "시나리오, 로그인"}, {"name": "「극락♪ 유코마 온천향」 로그인 보너스", "amount": 1500, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "「극락♪ 유코마 온천향」 미션", "amount": 500, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "극락♪ 유코마 온천향 시나리오 평가점 보상", "amount": 300, "date": "2027-02-17", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 01", "amount": 150, "date": "2027-04-16", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 02", "amount": 150, "date": "2027-04-17", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 03", "amount": 150, "date": "2027-04-18", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 04", "amount": 150, "date": "2027-04-19", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 05", "amount": 150, "date": "2027-04-20", "category": "시나리오, 로그인"}, {"name": "연말 로그인 보너스 06", "amount": 150, "date": "2027-04-21", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 01", "amount": 1500, "date": "2027-04-22", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 02", "amount": 300, "date": "2027-04-23", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 03", "amount": 300, "date": "2027-04-24", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 04", "amount": 300, "date": "2027-04-25", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 05", "amount": 300, "date": "2027-04-26", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 06", "amount": 300, "date": "2027-04-27", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 07", "amount": 300, "date": "2027-04-28", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 08", "amount": 300, "date": "2027-04-29", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 09", "amount": 300, "date": "2027-04-30", "category": "시나리오, 로그인"}, {"name": "설날 특별 로그인 보너스 10", "amount": 300, "date": "2027-05-01", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 01", "amount": 150, "date": "2027-06-05", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 02", "amount": 150, "date": "2027-06-06", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 03", "amount": 150, "date": "2027-06-07", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 04", "amount": 150, "date": "2027-06-08", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 05", "amount": 150, "date": "2027-06-09", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 06", "amount": 150, "date": "2027-06-10", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 07", "amount": 150, "date": "2027-06-11", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 08", "amount": 150, "date": "2027-06-12", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 09", "amount": 150, "date": "2027-06-13", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제1탄」 - 카운트 다운 10", "amount": 150, "date": "2027-06-14", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 기념 쥬얼", "amount": 3000, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 01", "amount": 300, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 02", "amount": 300, "date": "2027-06-16", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 03", "amount": 300, "date": "2027-06-17", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 04", "amount": 300, "date": "2027-06-18", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 05", "amount": 300, "date": "2027-06-19", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 06", "amount": 300, "date": "2027-06-20", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 07", "amount": 300, "date": "2027-06-21", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 08", "amount": 300, "date": "2027-06-22", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 09", "amount": 300, "date": "2027-06-23", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 로그인 보너스 10", "amount": 300, "date": "2027-06-24", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제2탄」 - 기념 미션", "amount": 500, "date": "2027-06-15", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 01", "amount": 150, "date": "2027-06-30", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 02", "amount": 150, "date": "2027-07-01", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 03", "amount": 150, "date": "2027-07-02", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 04", "amount": 150, "date": "2027-07-03", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 05", "amount": 150, "date": "2027-07-04", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 06", "amount": 150, "date": "2027-07-05", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 07", "amount": 150, "date": "2027-07-06", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 08", "amount": 150, "date": "2027-07-07", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 09", "amount": 150, "date": "2027-07-08", "category": "시나리오, 로그인"}, {"name": "「5th Anniversary 캠페인 제3탄」 - 로그인 보너스 10", "amount": 150, "date": "2027-07-09", "category": "시나리오, 로그인"}, {"name": "스토리 이벤트 「Phantasmagoria ～환도～」", "amount": 2910, "date": "2026-07-20", "category": "이벤트"}, {"name": "스토리 이벤트 「주조하는, 드리미 나이트 퍼레이드」", "amount": 2910, "date": "2026-08-19", "category": "이벤트"}, {"name": "스토리 이벤트 「청수무월의 라방드・드・메르」", "amount": 2910, "date": "2026-09-18", "category": "이벤트"}, {"name": "스토리 이벤트 「서머 데이즈 『그대』 그래피티」", "amount": 2910, "date": "2026-11-19", "category": "이벤트"}, {"name": "스토리 이벤트 「이야기・마음・울려라」", "amount": 2910, "date": "2026-12-18", "category": "이벤트"}, {"name": "스토리 이벤트 「Act 0 : 각광, 닿아라 트래피즈!」", "amount": 2910, "date": "2027-01-18", "category": "이벤트"}, {"name": "스토리 이벤트 「실록!! 황금성야 24시」", "amount": 2910, "date": "2027-03-19", "category": "이벤트"}, {"name": "스토리 이벤트 「푸른 여정, 초봄 가까우니.」", "amount": 2910, "date": "2027-04-16", "category": "이벤트"}, {"name": "스토리 이벤트 「전해라 마이 하트! 밸런타인 한계 배틀」", "amount": 2910, "date": "2027-05-21", "category": "이벤트"}, {"name": "챔피언스 미팅 MILE", "amount": 1800, "date": "2026-07-19", "category": "챔미"}, {"name": "챔피언스 미팅 LONG", "amount": 1800, "date": "2026-08-17", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2026-10-15", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2026-11-18", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2027-01-16", "category": "챔미"}, {"name": "챔피언스 미팅 SPRINT", "amount": 1800, "date": "2027-02-16", "category": "챔미"}, {"name": "챔피언스 미팅 MILE", "amount": 1800, "date": "2027-04-16", "category": "챔미"}, {"name": "챔피언스 미팅 LONG", "amount": 1800, "date": "2027-05-18", "category": "챔미"}, {"name": "챔피언스 미팅 CLASSIC", "amount": 1800, "date": "2027-07-16", "category": "챔미"}, {"name": "제10회 리그 오브 히어로즈", "amount": 3250, "date": "2026-06-13", "category": "말오스"}, {"name": "제11회 리그 오브 히어로즈", "amount": 3250, "date": "2026-09-18", "category": "말오스"}, {"name": "제12회 리그 오브 히어로즈", "amount": 3250, "date": "2026-12-10", "category": "말오스"}, {"name": "제13회 리그 오브 히어로즈", "amount": 3250, "date": "2027-03-18", "category": "말오스"}, {"name": "제14회 리그 오브 히어로즈", "amount": 3250, "date": "2027-06-12", "category": "말오스"}, {"name": "제38회 레전드 레이스: 오사카 컵", "amount": 500, "date": "2026-06-03", "category": "레전드 레이스"}, {"name": "제39회 레전드 레이스 : 벚꽃상", "amount": 500, "date": "2026-06-29", "category": "레전드 레이스"}, {"name": "제40회 레전드 레이스 : 사츠키 상", "amount": 500, "date": "2026-07-30", "category": "레전드 레이스"}, {"name": "제41회 레전드 레이스:천황상(봄)", "amount": 500, "date": "2026-08-31", "category": "레전드 레이스"}, {"name": "제42회 레전드 레이스:일본더비", "amount": 500, "date": "2026-10-02", "category": "레전드 레이스"}, {"name": "제43회 레전드 레이스:타카라즈카 기념", "amount": 500, "date": "2026-10-30", "category": "레전드 레이스"}, {"name": "제44회 레전드 레이스:스트린터스 S", "amount": 500, "date": "2026-12-01", "category": "레전드 레이스"}, {"name": "제45회 레전드 레이스:추화상", "amount": 500, "date": "2026-12-29", "category": "레전드 레이스"}, {"name": "제46회 레전드 레이스:국화상", "amount": 500, "date": "2027-01-31", "category": "레전드 레이스"}, {"name": "제47회 레전드 레이스:재팬컵", "amount": 500, "date": "2027-03-01", "category": "레전드 레이스"}, {"name": "제48회 레전드 레이스:아리마 기념", "amount": 500, "date": "2027-04-01", "category": "레전드 레이스"}, {"name": "제49회 레전드 레이스:아사히배 FS", "amount": 500, "date": "2027-05-01", "category": "레전드 레이스"}, {"name": "제50회 레전드 레이스:페브러리 S", "amount": 500, "date": "2027-06-04", "category": "레전드 레이스"}, {"name": "제51회 레전드 레이스:텐노상(봄)", "amount": 500, "date": "2027-06-30", "category": "레전드 레이스"}, {"name": "「노려라! 최강팀 08」", "amount": 1900, "date": "2026-08-06", "category": "노려라! 최강팀"}, {"name": "「아그네스타키온의 인자 연구 11」", "amount": 1200, "date": "2026-06-30", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 12」", "amount": 1200, "date": "2026-08-31", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 13」", "amount": 1200, "date": "2026-10-30", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 14」", "amount": 1200, "date": "2026-12-29", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 15」", "amount": 1200, "date": "2027-01-29", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 16」", "amount": 1200, "date": "2027-03-01", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 17」", "amount": 1200, "date": "2027-04-01", "category": "타키온 인자연구"}, {"name": "「아그네스타키온의 인자 연구 18」", "amount": 1200, "date": "2027-04-29", "category": "타키온 인자연구"}];
+const SCHED={"chammi_schedule": [{"date": "2026-07-19", "name": "챔피언스 미팅 MILE"}, {"date": "2026-08-17", "name": "챔피언스 미팅 LONG"}, {"date": "2026-10-15", "name": "챔피언스 미팅 CLASSIC"}, {"date": "2026-11-18", "name": "챔피언스 미팅 CLASSIC"}, {"date": "2027-01-16", "name": "챔피언스 미팅 CLASSIC"}, {"date": "2027-02-16", "name": "챔피언스 미팅 SPRINT"}, {"date": "2027-04-16", "name": "챔피언스 미팅 MILE"}, {"date": "2027-05-18", "name": "챔피언스 미팅 LONG"}, {"date": "2027-07-16", "name": "챔피언스 미팅 CLASSIC"}], "malos_schedule": [{"date": "2026-06-13", "name": "제10회 리그 오브 히어로즈"}, {"date": "2026-09-18", "name": "제11회 리그 오브 히어로즈"}, {"date": "2026-12-10", "name": "제12회 리그 오브 히어로즈"}, {"date": "2027-03-18", "name": "제13회 리그 오브 히어로즈"}, {"date": "2027-06-12", "name": "제14회 리그 오브 히어로즈"}], "teamre_dates": ["2026-06-01", "2026-06-08", "2026-06-15", "2026-06-22", "2026-06-29", "2026-07-06", "2026-07-13", "2026-07-20", "2026-07-27", "2026-08-03", "2026-08-10", "2026-08-17", "2026-08-24", "2026-08-31", "2026-09-07", "2026-09-14", "2026-09-21", "2026-09-28", "2026-10-05", "2026-10-12", "2026-10-19", "2026-10-26", "2026-11-02", "2026-11-09", "2026-11-16", "2026-11-23", "2026-11-30", "2026-12-07", "2026-12-14", "2026-12-21", "2026-12-28", "2027-01-04", "2027-01-11", "2027-01-18", "2027-01-25", "2027-02-01", "2027-02-08", "2027-02-15", "2027-02-22", "2027-03-01", "2027-03-08", "2027-03-15", "2027-03-22", "2027-03-29", "2027-04-05", "2027-04-12", "2027-04-19", "2027-04-26", "2027-05-03", "2027-05-10", "2027-05-17", "2027-05-24", "2027-05-31", "2027-06-07", "2027-06-14", "2027-06-21", "2027-06-28", "2027-07-05", "2027-07-12", "2027-07-19", "2027-07-26", "2027-08-02", "2027-08-09", "2027-08-16", "2027-08-23", "2027-08-30", "2027-09-06", "2027-09-13", "2027-09-20", "2027-09-27", "2027-10-04", "2027-10-11", "2027-10-18", "2027-10-25", "2027-11-01", "2027-11-08", "2027-11-15", "2027-11-22", "2027-11-29", "2027-12-06", "2027-12-13", "2027-12-20", "2027-12-27", "2028-01-03", "2028-01-10", "2028-01-17", "2028-01-24", "2028-01-31", "2028-02-07", "2028-02-14", "2028-02-21", "2028-02-28", "2028-03-06", "2028-03-13", "2028-03-20", "2028-03-27", "2028-04-03", "2028-04-10", "2028-04-17", "2028-04-24", "2028-05-01", "2028-05-08", "2028-05-15", "2028-05-22", "2028-05-29", "2028-06-05", "2028-06-12", "2028-06-19", "2028-06-26", "2028-07-03", "2028-07-10", "2028-07-17", "2028-07-24", "2028-07-31", "2028-08-07", "2028-08-14", "2028-08-21", "2028-08-28", "2028-09-04", "2028-09-11", "2028-09-18", "2028-09-25", "2028-10-02", "2028-10-09", "2028-10-16", "2028-10-23", "2028-10-30", "2028-11-06", "2028-11-13", "2028-11-20", "2028-11-27", "2028-12-04", "2028-12-11", "2028-12-18", "2028-12-25", "2029-01-01", "2029-01-08", "2029-01-15", "2029-01-22", "2029-01-29", "2029-02-05", "2029-02-12", "2029-02-19", "2029-02-26", "2029-03-05", "2029-03-12", "2029-03-19", "2029-03-26", "2029-04-02", "2029-04-09", "2029-04-16", "2029-04-23", "2029-04-30", "2029-05-07", "2029-05-14", "2029-05-21", "2029-05-28", "2029-06-04", "2029-06-11", "2029-06-18", "2029-06-25", "2029-07-02", "2029-07-09", "2029-07-16", "2029-07-23", "2029-07-30", "2029-08-06", "2029-08-13", "2029-08-20", "2029-08-27", "2029-09-03", "2029-09-10", "2029-09-17", "2029-09-24", "2029-10-01", "2029-10-08", "2029-10-15", "2029-10-22", "2029-10-29", "2029-11-05", "2029-11-12", "2029-11-19", "2029-11-26", "2029-12-03", "2029-12-10", "2029-12-17", "2029-12-24", "2029-12-31", "2030-01-07", "2030-01-14", "2030-01-21", "2030-01-28", "2030-02-04", "2030-02-11", "2030-02-18", "2030-02-25", "2030-03-04", "2030-03-11", "2030-03-18", "2030-03-25", "2030-04-01", "2030-04-08", "2030-04-15", "2030-04-22", "2030-04-29", "2030-05-06", "2030-05-13", "2030-05-20", "2030-05-27", "2030-06-03", "2030-06-10", "2030-06-17", "2030-06-24", "2030-07-01", "2030-07-08", "2030-07-15", "2030-07-22", "2030-07-29", "2030-08-05", "2030-08-12", "2030-08-19", "2030-08-26", "2030-09-02", "2030-09-09", "2030-09-16", "2030-09-23", "2030-09-30", "2030-10-07", "2030-10-14", "2030-10-21", "2030-10-28", "2030-11-04", "2030-11-11", "2030-11-18", "2030-11-25", "2030-12-02", "2030-12-09", "2030-12-16", "2030-12-23", "2030-12-30", "2031-01-06", "2031-01-13", "2031-01-20", "2031-01-27", "2031-02-03", "2031-02-10", "2031-02-17", "2031-02-24", "2031-03-03", "2031-03-10", "2031-03-17", "2031-03-24", "2031-03-31", "2031-04-07", "2031-04-14", "2031-04-21", "2031-04-28", "2031-05-05", "2031-05-12", "2031-05-19", "2031-05-26", "2031-06-02", "2031-06-09", "2031-06-16", "2031-06-23", "2031-06-30", "2031-07-07", "2031-07-14", "2031-07-21", "2031-07-28", "2031-08-04", "2031-08-11", "2031-08-18", "2031-08-25", "2031-09-01", "2031-09-08", "2031-09-15", "2031-09-22", "2031-09-29", "2031-10-06", "2031-10-13", "2031-10-20", "2031-10-27", "2031-11-03", "2031-11-10", "2031-11-17", "2031-11-24", "2031-12-01", "2031-12-08", "2031-12-15", "2031-12-22", "2031-12-29", "2032-01-05", "2032-01-12", "2032-01-19", "2032-01-26", "2032-02-02", "2032-02-09", "2032-02-16", "2032-02-23", "2032-03-01", "2032-03-08", "2032-03-15", "2032-03-22", "2032-03-29", "2032-04-05", "2032-04-12", "2032-04-19", "2032-04-26", "2032-05-03", "2032-05-10", "2032-05-17", "2032-05-24", "2032-05-31", "2032-06-07", "2032-06-14", "2032-06-21", "2032-06-28", "2032-07-05", "2032-07-12", "2032-07-19", "2032-07-26", "2032-08-02", "2032-08-09", "2032-08-16", "2032-08-23", "2032-08-30", "2032-09-06", "2032-09-13", "2032-09-20", "2032-09-27", "2032-10-04", "2032-10-11", "2032-10-18", "2032-10-25", "2032-11-01", "2032-11-08", "2032-11-15", "2032-11-22", "2032-11-29", "2032-12-06", "2032-12-13", "2032-12-20", "2032-12-27", "2033-01-03", "2033-01-10", "2033-01-17", "2033-01-24", "2033-01-31", "2033-02-07", "2033-02-14", "2033-02-21", "2033-02-28", "2033-03-07", "2033-03-14", "2033-03-21", "2033-03-28", "2033-04-04", "2033-04-11", "2033-04-18", "2033-04-25", "2033-05-02", "2033-05-09", "2033-05-16", "2033-05-23", "2033-05-30", "2033-06-06", "2033-06-13", "2033-06-20", "2033-06-27", "2033-07-04", "2033-07-11", "2033-07-18", "2033-07-25", "2033-08-01", "2033-08-08", "2033-08-15", "2033-08-22", "2033-08-29", "2033-09-05", "2033-09-12", "2033-09-19", "2033-09-26", "2033-10-03", "2033-10-10", "2033-10-17", "2033-10-24", "2033-10-31", "2033-11-07", "2033-11-14", "2033-11-21", "2033-11-28", "2033-12-05", "2033-12-12", "2033-12-19", "2033-12-26", "2034-01-02", "2034-01-09", "2034-01-16", "2034-01-23", "2034-01-30", "2034-02-06", "2034-02-13", "2034-02-20", "2034-02-27", "2034-03-06", "2034-03-13", "2034-03-20", "2034-03-27", "2034-04-03", "2034-04-10", "2034-04-17", "2034-04-24", "2034-05-01", "2034-05-08", "2034-05-15", "2034-05-22", "2034-05-29", "2034-06-05", "2034-06-12", "2034-06-19", "2034-06-26", "2034-07-03", "2034-07-10", "2034-07-17", "2034-07-24"], "circle_dates": ["2026-06-01", "2026-07-01", "2026-08-01", "2026-09-01", "2026-10-01", "2026-11-01", "2026-12-01", "2027-01-01", "2027-02-01", "2027-03-01", "2027-04-01", "2027-05-01", "2027-06-01", "2027-07-01", "2027-08-01", "2027-09-01", "2027-10-01", "2027-11-01", "2027-12-01", "2028-01-01", "2028-02-01", "2028-03-01", "2028-04-01", "2028-05-01", "2028-06-01", "2028-07-01", "2028-08-01", "2028-09-01", "2028-10-01", "2028-11-01", "2028-12-01", "2029-01-01", "2029-02-01", "2029-03-01", "2029-04-01", "2029-05-01", "2029-06-01", "2029-07-01", "2029-08-01", "2029-09-01", "2029-10-01", "2029-11-01", "2029-12-01", "2030-01-01", "2030-02-01", "2030-03-01", "2030-04-01", "2030-05-01", "2030-06-01", "2030-07-01", "2030-08-01", "2030-09-01", "2030-10-01", "2030-11-01", "2030-12-01", "2031-01-01", "2031-02-01", "2031-03-01", "2031-04-01", "2031-05-01", "2031-06-01", "2031-07-01", "2031-08-01", "2031-09-01", "2031-10-01", "2031-11-01", "2031-12-01", "2032-01-01", "2032-02-01", "2032-03-01", "2032-04-01", "2032-05-01", "2032-06-01", "2032-07-01", "2032-08-01", "2032-09-01", "2032-10-01", "2032-11-01"], "daily_jewel_dates": [{"date": "2026-05-31", "amount": 50}, {"date": "2026-06-01", "amount": 50}, {"date": "2026-06-02", "amount": 50}, {"date": "2026-06-03", "amount": 50}, {"date": "2026-06-04", "amount": 550}, {"date": "2026-06-05", "amount": 50}, {"date": "2026-06-06", "amount": 50}, {"date": "2026-06-07", "amount": 50}, {"date": "2026-06-08", "amount": 50}, {"date": "2026-06-09", "amount": 50}, {"date": "2026-06-10", "amount": 50}, {"date": "2026-06-11", "amount": 50}, {"date": "2026-06-12", "amount": 50}, {"date": "2026-06-13", "amount": 50}, {"date": "2026-06-14", "amount": 50}, {"date": "2026-06-15", "amount": 50}, {"date": "2026-06-16", "amount": 50}, {"date": "2026-06-17", "amount": 50}, {"date": "2026-06-18", "amount": 50}, {"date": "2026-06-19", "amount": 50}, {"date": "2026-06-20", "amount": 50}, {"date": "2026-06-21", "amount": 50}, {"date": "2026-06-22", "amount": 50}, {"date": "2026-06-23", "amount": 50}, {"date": "2026-06-24", "amount": 50}, {"date": "2026-06-25", "amount": 50}, {"date": "2026-06-26", "amount": 50}, {"date": "2026-06-27", "amount": 50}, {"date": "2026-06-28", "amount": 50}, {"date": "2026-06-29", "amount": 50}, {"date": "2026-06-30", "amount": 50}, {"date": "2026-07-01", "amount": 50}, {"date": "2026-07-02", "amount": 50}, {"date": "2026-07-03", "amount": 50}, {"date": "2026-07-04", "amount": 550}, {"date": "2026-07-05", "amount": 50}, {"date": "2026-07-06", "amount": 50}, {"date": "2026-07-07", "amount": 50}, {"date": "2026-07-08", "amount": 50}, {"date": "2026-07-09", "amount": 50}, {"date": "2026-07-10", "amount": 50}, {"date": "2026-07-11", "amount": 50}, {"date": "2026-07-12", "amount": 50}, {"date": "2026-07-13", "amount": 50}, {"date": "2026-07-14", "amount": 50}, {"date": "2026-07-15", "amount": 50}, {"date": "2026-07-16", "amount": 50}, {"date": "2026-07-17", "amount": 50}, {"date": "2026-07-18", "amount": 50}, {"date": "2026-07-19", "amount": 50}, {"date": "2026-07-20", "amount": 50}, {"date": "2026-07-21", "amount": 50}, {"date": "2026-07-22", "amount": 50}, {"date": "2026-07-23", "amount": 50}, {"date": "2026-07-24", "amount": 50}, {"date": "2026-07-25", "amount": 50}, {"date": "2026-07-26", "amount": 50}, {"date": "2026-07-27", "amount": 50}, {"date": "2026-07-28", "amount": 50}, {"date": "2026-07-29", "amount": 50}, {"date": "2026-07-30", "amount": 50}, {"date": "2026-07-31", "amount": 50}, {"date": "2026-08-01", "amount": 50}, {"date": "2026-08-02", "amount": 50}, {"date": "2026-08-03", "amount": 550}, {"date": "2026-08-04", "amount": 50}, {"date": "2026-08-05", "amount": 50}, {"date": "2026-08-06", "amount": 50}, {"date": "2026-08-07", "amount": 50}, {"date": "2026-08-08", "amount": 50}, {"date": "2026-08-09", "amount": 50}, {"date": "2026-08-10", "amount": 50}, {"date": "2026-08-11", "amount": 50}, {"date": "2026-08-12", "amount": 50}, {"date": "2026-08-13", "amount": 50}, {"date": "2026-08-14", "amount": 50}, {"date": "2026-08-15", "amount": 50}, {"date": "2026-08-16", "amount": 50}, {"date": "2026-08-17", "amount": 50}, {"date": "2026-08-18", "amount": 50}, {"date": "2026-08-19", "amount": 50}, {"date": "2026-08-20", "amount": 50}, {"date": "2026-08-21", "amount": 50}, {"date": "2026-08-22", "amount": 50}, {"date": "2026-08-23", "amount": 50}, {"date": "2026-08-24", "amount": 50}, {"date": "2026-08-25", "amount": 50}, {"date": "2026-08-26", "amount": 50}, {"date": "2026-08-27", "amount": 50}, {"date": "2026-08-28", "amount": 50}, {"date": "2026-08-29", "amount": 50}, {"date": "2026-08-30", "amount": 50}, {"date": "2026-08-31", "amount": 50}, {"date": "2026-09-01", "amount": 50}, {"date": "2026-09-02", "amount": 550}, {"date": "2026-09-03", "amount": 50}, {"date": "2026-09-04", "amount": 50}, {"date": "2026-09-05", "amount": 50}, {"date": "2026-09-06", "amount": 50}, {"date": "2026-09-07", "amount": 50}, {"date": "2026-09-08", "amount": 50}, {"date": "2026-09-09", "amount": 50}, {"date": "2026-09-10", "amount": 50}, {"date": "2026-09-11", "amount": 50}, {"date": "2026-09-12", "amount": 50}, {"date": "2026-09-13", "amount": 50}, {"date": "2026-09-14", "amount": 50}, {"date": "2026-09-15", "amount": 50}, {"date": "2026-09-16", "amount": 50}, {"date": "2026-09-17", "amount": 50}, {"date": "2026-09-18", "amount": 50}, {"date": "2026-09-19", "amount": 50}, {"date": "2026-09-20", "amount": 50}, {"date": "2026-09-21", "amount": 50}, {"date": "2026-09-22", "amount": 50}, {"date": "2026-09-23", "amount": 50}, {"date": "2026-09-24", "amount": 50}, {"date": "2026-09-25", "amount": 50}, {"date": "2026-09-26", "amount": 50}, {"date": "2026-09-27", "amount": 50}, {"date": "2026-09-28", "amount": 50}, {"date": "2026-09-29", "amount": 50}, {"date": "2026-09-30", "amount": 50}, {"date": "2026-10-01", "amount": 50}, {"date": "2026-10-02", "amount": 550}, {"date": "2026-10-03", "amount": 50}, {"date": "2026-10-04", "amount": 50}, {"date": "2026-10-05", "amount": 50}, {"date": "2026-10-06", "amount": 50}, {"date": "2026-10-07", "amount": 50}, {"date": "2026-10-08", "amount": 50}, {"date": "2026-10-09", "amount": 50}, {"date": "2026-10-10", "amount": 50}, {"date": "2026-10-11", "amount": 50}, {"date": "2026-10-12", "amount": 50}, {"date": "2026-10-13", "amount": 50}, {"date": "2026-10-14", "amount": 50}, {"date": "2026-10-15", "amount": 50}, {"date": "2026-10-16", "amount": 50}, {"date": "2026-10-17", "amount": 50}, {"date": "2026-10-18", "amount": 50}, {"date": "2026-10-19", "amount": 50}, {"date": "2026-10-20", "amount": 50}, {"date": "2026-10-21", "amount": 50}, {"date": "2026-10-22", "amount": 50}, {"date": "2026-10-23", "amount": 50}, {"date": "2026-10-24", "amount": 50}, {"date": "2026-10-25", "amount": 50}, {"date": "2026-10-26", "amount": 50}, {"date": "2026-10-27", "amount": 50}, {"date": "2026-10-28", "amount": 50}, {"date": "2026-10-29", "amount": 50}, {"date": "2026-10-30", "amount": 50}, {"date": "2026-10-31", "amount": 50}, {"date": "2026-11-01", "amount": 550}, {"date": "2026-11-02", "amount": 50}, {"date": "2026-11-03", "amount": 50}, {"date": "2026-11-04", "amount": 50}, {"date": "2026-11-05", "amount": 50}, {"date": "2026-11-06", "amount": 50}, {"date": "2026-11-07", "amount": 50}, {"date": "2026-11-08", "amount": 50}, {"date": "2026-11-09", "amount": 50}, {"date": "2026-11-10", "amount": 50}, {"date": "2026-11-11", "amount": 50}, {"date": "2026-11-12", "amount": 50}, {"date": "2026-11-13", "amount": 50}, {"date": "2026-11-14", "amount": 50}, {"date": "2026-11-15", "amount": 50}, {"date": "2026-11-16", "amount": 50}, {"date": "2026-11-17", "amount": 50}, {"date": "2026-11-18", "amount": 50}, {"date": "2026-11-19", "amount": 50}, {"date": "2026-11-20", "amount": 50}, {"date": "2026-11-21", "amount": 50}, {"date": "2026-11-22", "amount": 50}, {"date": "2026-11-23", "amount": 50}, {"date": "2026-11-24", "amount": 50}, {"date": "2026-11-25", "amount": 50}, {"date": "2026-11-26", "amount": 50}, {"date": "2026-11-27", "amount": 50}, {"date": "2026-11-28", "amount": 50}, {"date": "2026-11-29", "amount": 50}, {"date": "2026-11-30", "amount": 50}, {"date": "2026-12-01", "amount": 550}, {"date": "2026-12-02", "amount": 50}, {"date": "2026-12-03", "amount": 50}, {"date": "2026-12-04", "amount": 50}, {"date": "2026-12-05", "amount": 50}, {"date": "2026-12-06", "amount": 50}, {"date": "2026-12-07", "amount": 50}, {"date": "2026-12-08", "amount": 50}, {"date": "2026-12-09", "amount": 50}, {"date": "2026-12-10", "amount": 50}, {"date": "2026-12-11", "amount": 50}, {"date": "2026-12-12", "amount": 50}, {"date": "2026-12-13", "amount": 50}, {"date": "2026-12-14", "amount": 50}, {"date": "2026-12-15", "amount": 50}, {"date": "2026-12-16", "amount": 50}, {"date": "2026-12-17", "amount": 50}, {"date": "2026-12-18", "amount": 50}, {"date": "2026-12-19", "amount": 50}, {"date": "2026-12-20", "amount": 50}, {"date": "2026-12-21", "amount": 50}, {"date": "2026-12-22", "amount": 50}, {"date": "2026-12-23", "amount": 50}, {"date": "2026-12-24", "amount": 50}, {"date": "2026-12-25", "amount": 50}, {"date": "2026-12-26", "amount": 50}, {"date": "2026-12-27", "amount": 50}, {"date": "2026-12-28", "amount": 50}, {"date": "2026-12-29", "amount": 50}, {"date": "2026-12-30", "amount": 50}, {"date": "2026-12-31", "amount": 550}, {"date": "2027-01-01", "amount": 50}, {"date": "2027-01-02", "amount": 50}, {"date": "2027-01-03", "amount": 50}, {"date": "2027-01-04", "amount": 50}, {"date": "2027-01-05", "amount": 50}, {"date": "2027-01-06", "amount": 50}, {"date": "2027-01-07", "amount": 50}, {"date": "2027-01-08", "amount": 50}, {"date": "2027-01-09", "amount": 50}, {"date": "2027-01-10", "amount": 50}, {"date": "2027-01-11", "amount": 50}, {"date": "2027-01-12", "amount": 50}, {"date": "2027-01-13", "amount": 50}, {"date": "2027-01-14", "amount": 50}, {"date": "2027-01-15", "amount": 50}, {"date": "2027-01-16", "amount": 50}, {"date": "2027-01-17", "amount": 50}, {"date": "2027-01-18", "amount": 50}, {"date": "2027-01-19", "amount": 50}, {"date": "2027-01-20", "amount": 50}, {"date": "2027-01-21", "amount": 50}, {"date": "2027-01-22", "amount": 50}, {"date": "2027-01-23", "amount": 50}, {"date": "2027-01-24", "amount": 50}, {"date": "2027-01-25", "amount": 50}, {"date": "2027-01-26", "amount": 50}, {"date": "2027-01-27", "amount": 50}, {"date": "2027-01-28", "amount": 50}, {"date": "2027-01-29", "amount": 50}, {"date": "2027-01-30", "amount": 550}, {"date": "2027-01-31", "amount": 50}, {"date": "2027-02-01", "amount": 50}, {"date": "2027-02-02", "amount": 50}, {"date": "2027-02-03", "amount": 50}, {"date": "2027-02-04", "amount": 50}, {"date": "2027-02-05", "amount": 50}, {"date": "2027-02-06", "amount": 50}, {"date": "2027-02-07", "amount": 50}, {"date": "2027-02-08", "amount": 50}, {"date": "2027-02-09", "amount": 50}, {"date": "2027-02-10", "amount": 50}, {"date": "2027-02-11", "amount": 50}, {"date": "2027-02-12", "amount": 50}, {"date": "2027-02-13", "amount": 50}, {"date": "2027-02-14", "amount": 50}, {"date": "2027-02-15", "amount": 50}, {"date": "2027-02-16", "amount": 50}, {"date": "2027-02-17", "amount": 50}, {"date": "2027-02-18", "amount": 50}, {"date": "2027-02-19", "amount": 50}, {"date": "2027-02-20", "amount": 50}, {"date": "2027-02-21", "amount": 50}, {"date": "2027-02-22", "amount": 50}, {"date": "2027-02-23", "amount": 50}, {"date": "2027-02-24", "amount": 50}, {"date": "2027-02-25", "amount": 50}, {"date": "2027-02-26", "amount": 50}, {"date": "2027-02-27", "amount": 50}, {"date": "2027-02-28", "amount": 50}, {"date": "2027-03-01", "amount": 550}, {"date": "2027-03-02", "amount": 50}, {"date": "2027-03-03", "amount": 50}, {"date": "2027-03-04", "amount": 50}, {"date": "2027-03-05", "amount": 50}, {"date": "2027-03-06", "amount": 50}, {"date": "2027-03-07", "amount": 50}, {"date": "2027-03-08", "amount": 50}, {"date": "2027-03-09", "amount": 50}, {"date": "2027-03-10", "amount": 50}, {"date": "2027-03-11", "amount": 50}, {"date": "2027-03-12", "amount": 50}, {"date": "2027-03-13", "amount": 50}, {"date": "2027-03-14", "amount": 50}, {"date": "2027-03-15", "amount": 50}, {"date": "2027-03-16", "amount": 50}, {"date": "2027-03-17", "amount": 50}, {"date": "2027-03-18", "amount": 50}, {"date": "2027-03-19", "amount": 50}, {"date": "2027-03-20", "amount": 50}, {"date": "2027-03-21", "amount": 50}, {"date": "2027-03-22", "amount": 50}, {"date": "2027-03-23", "amount": 50}, {"date": "2027-03-24", "amount": 50}, {"date": "2027-03-25", "amount": 50}, {"date": "2027-03-26", "amount": 50}, {"date": "2027-03-27", "amount": 50}, {"date": "2027-03-28", "amount": 50}, {"date": "2027-03-29", "amount": 50}, {"date": "2027-03-30", "amount": 50}, {"date": "2027-03-31", "amount": 550}, {"date": "2027-04-01", "amount": 50}, {"date": "2027-04-02", "amount": 50}, {"date": "2027-04-03", "amount": 50}, {"date": "2027-04-04", "amount": 50}, {"date": "2027-04-05", "amount": 50}, {"date": "2027-04-06", "amount": 50}, {"date": "2027-04-07", "amount": 50}, {"date": "2027-04-08", "amount": 50}, {"date": "2027-04-09", "amount": 50}, {"date": "2027-04-10", "amount": 50}, {"date": "2027-04-11", "amount": 50}, {"date": "2027-04-12", "amount": 50}, {"date": "2027-04-13", "amount": 50}, {"date": "2027-04-14", "amount": 50}, {"date": "2027-04-15", "amount": 50}, {"date": "2027-04-16", "amount": 50}, {"date": "2027-04-17", "amount": 50}, {"date": "2027-04-18", "amount": 50}, {"date": "2027-04-19", "amount": 50}, {"date": "2027-04-20", "amount": 50}, {"date": "2027-04-21", "amount": 50}, {"date": "2027-04-22", "amount": 50}, {"date": "2027-04-23", "amount": 50}, {"date": "2027-04-24", "amount": 50}, {"date": "2027-04-25", "amount": 50}, {"date": "2027-04-26", "amount": 50}, {"date": "2027-04-27", "amount": 50}, {"date": "2027-04-28", "amount": 50}, {"date": "2027-04-29", "amount": 50}, {"date": "2027-04-30", "amount": 550}, {"date": "2027-05-01", "amount": 50}, {"date": "2027-05-02", "amount": 50}, {"date": "2027-05-03", "amount": 50}, {"date": "2027-05-04", "amount": 50}, {"date": "2027-05-05", "amount": 50}, {"date": "2027-05-06", "amount": 50}, {"date": "2027-05-07", "amount": 50}, {"date": "2027-05-08", "amount": 50}, {"date": "2027-05-09", "amount": 50}, {"date": "2027-05-10", "amount": 50}, {"date": "2027-05-11", "amount": 50}, {"date": "2027-05-12", "amount": 50}, {"date": "2027-05-13", "amount": 50}, {"date": "2027-05-14", "amount": 50}, {"date": "2027-05-15", "amount": 50}, {"date": "2027-05-16", "amount": 50}, {"date": "2027-05-17", "amount": 50}, {"date": "2027-05-18", "amount": 50}, {"date": "2027-05-19", "amount": 50}, {"date": "2027-05-20", "amount": 50}, {"date": "2027-05-21", "amount": 50}, {"date": "2027-05-22", "amount": 50}, {"date": "2027-05-23", "amount": 50}, {"date": "2027-05-24", "amount": 50}, {"date": "2027-05-25", "amount": 50}, {"date": "2027-05-26", "amount": 50}, {"date": "2027-05-27", "amount": 50}, {"date": "2027-05-28", "amount": 50}, {"date": "2027-05-29", "amount": 50}, {"date": "2027-05-30", "amount": 550}, {"date": "2027-05-31", "amount": 50}, {"date": "2027-06-01", "amount": 50}, {"date": "2027-06-02", "amount": 50}, {"date": "2027-06-03", "amount": 50}, {"date": "2027-06-04", "amount": 50}, {"date": "2027-06-05", "amount": 50}, {"date": "2027-06-06", "amount": 50}, {"date": "2027-06-07", "amount": 50}, {"date": "2027-06-08", "amount": 50}, {"date": "2027-06-09", "amount": 50}, {"date": "2027-06-10", "amount": 50}, {"date": "2027-06-11", "amount": 50}, {"date": "2027-06-12", "amount": 50}, {"date": "2027-06-13", "amount": 50}, {"date": "2027-06-14", "amount": 50}, {"date": "2027-06-15", "amount": 50}, {"date": "2027-06-16", "amount": 50}, {"date": "2027-06-17", "amount": 50}, {"date": "2027-06-18", "amount": 50}, {"date": "2027-06-19", "amount": 50}, {"date": "2027-06-20", "amount": 50}, {"date": "2027-06-21", "amount": 50}, {"date": "2027-06-22", "amount": 50}, {"date": "2027-06-23", "amount": 50}, {"date": "2027-06-24", "amount": 50}, {"date": "2027-06-25", "amount": 50}, {"date": "2027-06-26", "amount": 50}, {"date": "2027-06-27", "amount": 50}, {"date": "2027-06-28", "amount": 50}, {"date": "2027-06-29", "amount": 550}, {"date": "2027-06-30", "amount": 50}, {"date": "2027-07-01", "amount": 50}, {"date": "2027-07-02", "amount": 50}, {"date": "2027-07-03", "amount": 50}, {"date": "2027-07-04", "amount": 50}, {"date": "2027-07-05", "amount": 50}, {"date": "2027-07-06", "amount": 50}, {"date": "2027-07-07", "amount": 50}, {"date": "2027-07-08", "amount": 50}, {"date": "2027-07-09", "amount": 50}, {"date": "2027-07-10", "amount": 50}, {"date": "2027-07-11", "amount": 50}, {"date": "2027-07-12", "amount": 50}, {"date": "2027-07-13", "amount": 50}, {"date": "2027-07-14", "amount": 50}, {"date": "2027-07-15", "amount": 50}, {"date": "2027-07-16", "amount": 50}, {"date": "2027-07-17", "amount": 50}, {"date": "2027-07-18", "amount": 50}, {"date": "2027-07-19", "amount": 50}, {"date": "2027-07-20", "amount": 50}, {"date": "2027-07-21", "amount": 50}, {"date": "2027-07-22", "amount": 50}, {"date": "2027-07-23", "amount": 50}, {"date": "2027-07-24", "amount": 50}, {"date": "2027-07-25", "amount": 50}, {"date": "2027-07-26", "amount": 50}, {"date": "2027-07-27", "amount": 50}, {"date": "2027-07-28", "amount": 50}, {"date": "2027-07-29", "amount": 550}, {"date": "2027-07-30", "amount": 50}, {"date": "2027-07-31", "amount": 50}, {"date": "2027-08-01", "amount": 50}, {"date": "2027-08-02", "amount": 50}, {"date": "2027-08-03", "amount": 50}, {"date": "2027-08-04", "amount": 50}, {"date": "2027-08-05", "amount": 50}, {"date": "2027-08-06", "amount": 50}, {"date": "2027-08-07", "amount": 50}, {"date": "2027-08-08", "amount": 50}, {"date": "2027-08-09", "amount": 50}, {"date": "2027-08-10", "amount": 50}, {"date": "2027-08-11", "amount": 50}, {"date": "2027-08-12", "amount": 50}, {"date": "2027-08-13", "amount": 50}, {"date": "2027-08-14", "amount": 50}, {"date": "2027-08-15", "amount": 50}, {"date": "2027-08-16", "amount": 50}, {"date": "2027-08-17", "amount": 50}, {"date": "2027-08-18", "amount": 50}, {"date": "2027-08-19", "amount": 50}, {"date": "2027-08-20", "amount": 50}, {"date": "2027-08-21", "amount": 50}, {"date": "2027-08-22", "amount": 50}, {"date": "2027-08-23", "amount": 50}, {"date": "2027-08-24", "amount": 50}, {"date": "2027-08-25", "amount": 50}, {"date": "2027-08-26", "amount": 50}, {"date": "2027-08-27", "amount": 50}, {"date": "2027-08-28", "amount": 550}, {"date": "2027-08-29", "amount": 50}, {"date": "2027-08-30", "amount": 50}, {"date": "2027-08-31", "amount": 50}, {"date": "2027-09-01", "amount": 50}, {"date": "2027-09-02", "amount": 50}, {"date": "2027-09-03", "amount": 50}, {"date": "2027-09-04", "amount": 50}, {"date": "2027-09-05", "amount": 50}, {"date": "2027-09-06", "amount": 50}, {"date": "2027-09-07", "amount": 50}, {"date": "2027-09-08", "amount": 50}, {"date": "2027-09-09", "amount": 50}, {"date": "2027-09-10", "amount": 50}, {"date": "2027-09-11", "amount": 50}, {"date": "2027-09-12", "amount": 50}, {"date": "2027-09-13", "amount": 50}, {"date": "2027-09-14", "amount": 50}, {"date": "2027-09-15", "amount": 50}, {"date": "2027-09-16", "amount": 50}, {"date": "2027-09-17", "amount": 50}, {"date": "2027-09-18", "amount": 50}, {"date": "2027-09-19", "amount": 50}, {"date": "2027-09-20", "amount": 50}, {"date": "2027-09-21", "amount": 50}, {"date": "2027-09-22", "amount": 50}, {"date": "2027-09-23", "amount": 50}, {"date": "2027-09-24", "amount": 50}, {"date": "2027-09-25", "amount": 50}, {"date": "2027-09-26", "amount": 50}, {"date": "2027-09-27", "amount": 550}, {"date": "2027-09-28", "amount": 50}, {"date": "2027-09-29", "amount": 50}, {"date": "2027-09-30", "amount": 50}, {"date": "2027-10-01", "amount": 50}, {"date": "2027-10-02", "amount": 50}, {"date": "2027-10-03", "amount": 50}, {"date": "2027-10-04", "amount": 50}, {"date": "2027-10-05", "amount": 50}, {"date": "2027-10-06", "amount": 50}, {"date": "2027-10-07", "amount": 50}, {"date": "2027-10-08", "amount": 50}, {"date": "2027-10-09", "amount": 50}, {"date": "2027-10-10", "amount": 50}, {"date": "2027-10-11", "amount": 50}, {"date": "2027-10-12", "amount": 50}, {"date": "2027-10-13", "amount": 50}, {"date": "2027-10-14", "amount": 50}, {"date": "2027-10-15", "amount": 50}, {"date": "2027-10-16", "amount": 50}, {"date": "2027-10-17", "amount": 50}, {"date": "2027-10-18", "amount": 50}, {"date": "2027-10-19", "amount": 50}, {"date": "2027-10-20", "amount": 50}, {"date": "2027-10-21", "amount": 50}, {"date": "2027-10-22", "amount": 50}, {"date": "2027-10-23", "amount": 50}, {"date": "2027-10-24", "amount": 50}, {"date": "2027-10-25", "amount": 50}, {"date": "2027-10-26", "amount": 50}, {"date": "2027-10-27", "amount": 550}, {"date": "2027-10-28", "amount": 50}, {"date": "2027-10-29", "amount": 50}, {"date": "2027-10-30", "amount": 50}, {"date": "2027-10-31", "amount": 50}, {"date": "2027-11-01", "amount": 50}, {"date": "2027-11-02", "amount": 50}, {"date": "2027-11-03", "amount": 50}, {"date": "2027-11-04", "amount": 50}, {"date": "2027-11-05", "amount": 50}, {"date": "2027-11-06", "amount": 50}, {"date": "2027-11-07", "amount": 50}, {"date": "2027-11-08", "amount": 50}, {"date": "2027-11-09", "amount": 50}, {"date": "2027-11-10", "amount": 50}, {"date": "2027-11-11", "amount": 50}, {"date": "2027-11-12", "amount": 50}, {"date": "2027-11-13", "amount": 50}, {"date": "2027-11-14", "amount": 50}, {"date": "2027-11-15", "amount": 50}, {"date": "2027-11-16", "amount": 50}, {"date": "2027-11-17", "amount": 50}, {"date": "2027-11-18", "amount": 50}, {"date": "2027-11-19", "amount": 50}, {"date": "2027-11-20", "amount": 50}, {"date": "2027-11-21", "amount": 50}, {"date": "2027-11-22", "amount": 50}, {"date": "2027-11-23", "amount": 50}, {"date": "2027-11-24", "amount": 50}, {"date": "2027-11-25", "amount": 50}, {"date": "2027-11-26", "amount": 550}, {"date": "2027-11-27", "amount": 50}, {"date": "2027-11-28", "amount": 50}, {"date": "2027-11-29", "amount": 50}, {"date": "2027-11-30", "amount": 50}, {"date": "2027-12-01", "amount": 50}, {"date": "2027-12-02", "amount": 50}, {"date": "2027-12-03", "amount": 50}, {"date": "2027-12-04", "amount": 50}, {"date": "2027-12-05", "amount": 50}, {"date": "2027-12-06", "amount": 50}, {"date": "2027-12-07", "amount": 50}, {"date": "2027-12-08", "amount": 50}, {"date": "2027-12-09", "amount": 50}, {"date": "2027-12-10", "amount": 50}, {"date": "2027-12-11", "amount": 50}, {"date": "2027-12-12", "amount": 50}, {"date": "2027-12-13", "amount": 50}, {"date": "2027-12-14", "amount": 50}, {"date": "2027-12-15", "amount": 50}, {"date": "2027-12-16", "amount": 50}, {"date": "2027-12-17", "amount": 50}, {"date": "2027-12-18", "amount": 50}, {"date": "2027-12-19", "amount": 50}, {"date": "2027-12-20", "amount": 50}, {"date": "2027-12-21", "amount": 50}, {"date": "2027-12-22", "amount": 50}, {"date": "2027-12-23", "amount": 50}, {"date": "2027-12-24", "amount": 50}, {"date": "2027-12-25", "amount": 50}, {"date": "2027-12-26", "amount": 550}, {"date": "2027-12-27", "amount": 50}, {"date": "2027-12-28", "amount": 50}, {"date": "2027-12-29", "amount": 50}, {"date": "2027-12-30", "amount": 50}, {"date": "2027-12-31", "amount": 50}, {"date": "2028-01-01", "amount": 50}, {"date": "2028-01-02", "amount": 50}, {"date": "2028-01-03", "amount": 50}, {"date": "2028-01-04", "amount": 50}, {"date": "2028-01-05", "amount": 50}, {"date": "2028-01-06", "amount": 50}, {"date": "2028-01-07", "amount": 50}, {"date": "2028-01-08", "amount": 50}, {"date": "2028-01-09", "amount": 50}, {"date": "2028-01-10", "amount": 50}, {"date": "2028-01-11", "amount": 50}, {"date": "2028-01-12", "amount": 50}, {"date": "2028-01-13", "amount": 50}, {"date": "2028-01-14", "amount": 50}, {"date": "2028-01-15", "amount": 50}, {"date": "2028-01-16", "amount": 50}, {"date": "2028-01-17", "amount": 50}, {"date": "2028-01-18", "amount": 50}, {"date": "2028-01-19", "amount": 50}, {"date": "2028-01-20", "amount": 50}, {"date": "2028-01-21", "amount": 50}, {"date": "2028-01-22", "amount": 50}, {"date": "2028-01-23", "amount": 50}, {"date": "2028-01-24", "amount": 50}, {"date": "2028-01-25", "amount": 550}, {"date": "2028-01-26", "amount": 50}, {"date": "2028-01-27", "amount": 50}, {"date": "2028-01-28", "amount": 50}, {"date": "2028-01-29", "amount": 50}, {"date": "2028-01-30", "amount": 50}, {"date": "2028-01-31", "amount": 50}, {"date": "2028-02-01", "amount": 50}, {"date": "2028-02-02", "amount": 50}, {"date": "2028-02-03", "amount": 50}, {"date": "2028-02-04", "amount": 50}, {"date": "2028-02-05", "amount": 50}, {"date": "2028-02-06", "amount": 50}, {"date": "2028-02-07", "amount": 50}, {"date": "2028-02-08", "amount": 50}, {"date": "2028-02-09", "amount": 50}, {"date": "2028-02-10", "amount": 50}, {"date": "2028-02-11", "amount": 50}, {"date": "2028-02-12", "amount": 50}, {"date": "2028-02-13", "amount": 50}, {"date": "2028-02-14", "amount": 50}, {"date": "2028-02-15", "amount": 50}, {"date": "2028-02-16", "amount": 50}, {"date": "2028-02-17", "amount": 50}, {"date": "2028-02-18", "amount": 50}, {"date": "2028-02-19", "amount": 50}, {"date": "2028-02-20", "amount": 50}, {"date": "2028-02-21", "amount": 50}, {"date": "2028-02-22", "amount": 50}, {"date": "2028-02-23", "amount": 50}, {"date": "2028-02-24", "amount": 550}, {"date": "2028-02-25", "amount": 50}, {"date": "2028-02-26", "amount": 50}, {"date": "2028-02-27", "amount": 50}, {"date": "2028-02-28", "amount": 50}, {"date": "2028-02-29", "amount": 50}, {"date": "2028-03-01", "amount": 50}, {"date": "2028-03-02", "amount": 50}, {"date": "2028-03-03", "amount": 50}, {"date": "2028-03-04", "amount": 50}, {"date": "2028-03-05", "amount": 50}, {"date": "2028-03-06", "amount": 50}, {"date": "2028-03-07", "amount": 50}, {"date": "2028-03-08", "amount": 50}, {"date": "2028-03-09", "amount": 50}, {"date": "2028-03-10", "amount": 50}, {"date": "2028-03-11", "amount": 50}, {"date": "2028-03-12", "amount": 50}, {"date": "2028-03-13", "amount": 50}, {"date": "2028-03-14", "amount": 50}, {"date": "2028-03-15", "amount": 50}, {"date": "2028-03-16", "amount": 50}, {"date": "2028-03-17", "amount": 50}, {"date": "2028-03-18", "amount": 50}, {"date": "2028-03-19", "amount": 50}, {"date": "2028-03-20", "amount": 50}, {"date": "2028-03-21", "amount": 50}, {"date": "2028-03-22", "amount": 50}, {"date": "2028-03-23", "amount": 50}, {"date": "2028-03-24", "amount": 50}, {"date": "2028-03-25", "amount": 550}, {"date": "2028-03-26", "amount": 50}, {"date": "2028-03-27", "amount": 50}, {"date": "2028-03-28", "amount": 50}, {"date": "2028-03-29", "amount": 50}, {"date": "2028-03-30", "amount": 50}, {"date": "2028-03-31", "amount": 50}, {"date": "2028-04-01", "amount": 50}, {"date": "2028-04-02", "amount": 50}, {"date": "2028-04-03", "amount": 50}, {"date": "2028-04-04", "amount": 50}, {"date": "2028-04-05", "amount": 50}, {"date": "2028-04-06", "amount": 50}, {"date": "2028-04-07", "amount": 50}, {"date": "2028-04-08", "amount": 50}, {"date": "2028-04-09", "amount": 50}, {"date": "2028-04-10", "amount": 50}, {"date": "2028-04-11", "amount": 50}, {"date": "2028-04-12", "amount": 50}, {"date": "2028-04-13", "amount": 50}, {"date": "2028-04-14", "amount": 50}, {"date": "2028-04-15", "amount": 50}, {"date": "2028-04-16", "amount": 50}, {"date": "2028-04-17", "amount": 50}, {"date": "2028-04-18", "amount": 50}, {"date": "2028-04-19", "amount": 50}, {"date": "2028-04-20", "amount": 50}, {"date": "2028-04-21", "amount": 50}, {"date": "2028-04-22", "amount": 50}, {"date": "2028-04-23", "amount": 50}, {"date": "2028-04-24", "amount": 550}, {"date": "2028-04-25", "amount": 50}, {"date": "2028-04-26", "amount": 50}, {"date": "2028-04-27", "amount": 50}, {"date": "2028-04-28", "amount": 50}, {"date": "2028-04-29", "amount": 50}, {"date": "2028-04-30", "amount": 50}, {"date": "2028-05-01", "amount": 50}, {"date": "2028-05-02", "amount": 50}], "training_pass_dates": [{"date": "2026-06-15", "amount": 1850}, {"date": "2026-07-15", "amount": 1850}, {"date": "2026-08-13", "amount": 1850}, {"date": "2026-09-15", "amount": 1850}, {"date": "2026-10-15", "amount": 1850}, {"date": "2026-11-13", "amount": 1850}, {"date": "2026-12-15", "amount": 1850}, {"date": "2027-01-15", "amount": 1850}, {"date": "2027-02-13", "amount": 1850}, {"date": "2027-03-15", "amount": 1850}, {"date": "2027-04-15", "amount": 1850}, {"date": "2027-05-15", "amount": 1850}, {"date": "2027-06-15", "amount": 1850}, {"date": "2027-07-15", "amount": 1850}, {"date": "2027-08-15", "amount": 1850}, {"date": "2027-09-15", "amount": 1850}, {"date": "2027-10-15", "amount": 1850}, {"date": "2027-11-15", "amount": 1850}, {"date": "2027-12-15", "amount": 1850}, {"date": "2028-01-15", "amount": 1850}, {"date": "2028-02-15", "amount": 1850}, {"date": "2028-03-15", "amount": 1850}, {"date": "2028-04-15", "amount": 1850}, {"date": "2028-05-15", "amount": 1850}, {"date": "2028-06-15", "amount": 1850}, {"date": "2028-07-15", "amount": 1850}, {"date": "2028-08-15", "amount": 1850}, {"date": "2028-09-15", "amount": 1850}, {"date": "2028-10-15", "amount": 1850}, {"date": "2028-11-15", "amount": 1850}, {"date": "2028-12-15", "amount": 1850}, {"date": "2029-01-15", "amount": 1850}, {"date": "2029-02-15", "amount": 1850}, {"date": "2029-03-15", "amount": 1850}, {"date": "2029-04-15", "amount": 1850}, {"date": "2029-05-15", "amount": 1850}, {"date": "2029-06-15", "amount": 1850}, {"date": "2029-07-15", "amount": 1850}, {"date": "2029-08-15", "amount": 1850}, {"date": "2029-09-15", "amount": 1850}, {"date": "2029-10-15", "amount": 1850}, {"date": "2029-11-15", "amount": 1850}, {"date": "2029-12-15", "amount": 1850}, {"date": "2030-01-15", "amount": 1850}, {"date": "2030-02-15", "amount": 1850}, {"date": "2030-03-15", "amount": 1850}, {"date": "2030-04-15", "amount": 1850}, {"date": "2030-05-15", "amount": 1850}, {"date": "2030-06-15", "amount": 1850}, {"date": "2030-07-15", "amount": 1850}, {"date": "2030-08-15", "amount": 1850}, {"date": "2030-09-15", "amount": 1850}, {"date": "2030-10-15", "amount": 1850}], "chammi_rewards": {"그레이드 A결 1위": 3000, "그레이드 A결 2위": 2400, "그레이드 A결 3위": 1800, "그레이드 B결 1위": 1800, "그레이드 B결 2위": 1500, "그레이드 B결 3위": 1200, "오픈 A결 1위": 1500, "오픈 A결 2위": 1350, "오픈 A결 3위": 1200, "오픈 B결 1위": 1200, "오픈 B결 2위": 1050, "오픈 B결 3위": 900}, "malos_rewards": {"플레티넘 4": 3750, "플레티넘 3": 3250, "플레티넘 2": 2750, "플레티넘 1": 2250}, "teamre_rewards": {"CLASS 6": 250, "CLASS 5": 150}, "circle_rewards": {"SS": 3000, "S+": 2400, "S": 2100, "A+": 1800, "A": 1500, "B+": 1200, "B": 900, "C+": 600, "C": 300, "D+": 150}, "select_pkgs": [{"date": "2026-06-15", "name": "4주년 기념 3성 선택권(3만원)", "amount": 1500}, {"date": "2026-06-15", "name": "4주년 기념 3성 선택권(10만원)", "amount": 5000}, {"date": "2026-06-15", "name": "4주년 기념 SSR 선택권(3만원)", "amount": 1500}, {"date": "2026-06-15", "name": "4주년 기념 SSR 선택권(10만원)", "amount": 5000}, {"date": "2026-12-13", "name": "4.5주년 기념 3성 선택권(3만원)", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 3성 선택권(10만원)", "amount": 5000}, {"date": "2026-12-13", "name": "4.5주년 기념 SSR 선택권(3만원)", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 SSR 선택권(10만원)", "amount": 5000}], "black_pkgs": [{"date": "2026-06-15", "name": "4주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-06-15", "name": "4주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-06-15", "name": "4주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-06-30", "name": "4주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-06-30", "name": "4주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-06-30", "name": "4주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-06-30", "name": "4주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-10-16", "name": "무인도 7500 쥬얼", "amount": 7500}, {"date": "2026-10-16", "name": "무인도 7500 쥬얼", "amount": 7500}, {"date": "2026-10-16", "name": "무인도 1500 쥬얼", "amount": 1500}, {"date": "2026-10-16", "name": "무인도 1500 쥬얼", "amount": 1500}, {"date": "2026-10-16", "name": "무인도 1500 쥬얼", "amount": 1500}, {"date": "2026-10-16", "name": "무인도 1500 쥬얼", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-12-13", "name": "4.5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-12-13", "name": "4.5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2026-12-13", "name": "4.5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2026-12-13", "name": "4.5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-02-17", "name": "온천 7500 쥬얼", "amount": 7500}, {"date": "2027-02-17", "name": "온천 7500 쥬얼", "amount": 7500}, {"date": "2027-02-17", "name": "온천 1500 쥬얼", "amount": 1500}, {"date": "2027-02-17", "name": "온천 1500 쥬얼", "amount": 1500}, {"date": "2027-02-17", "name": "온천 1500 쥬얼", "amount": 1500}, {"date": "2027-02-17", "name": "온천 1500 쥬얼", "amount": 1500}, {"date": "2027-04-16", "name": "신년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-04-16", "name": "신년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-04-16", "name": "신년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-04-16", "name": "신년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-04-16", "name": "신년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-04-16", "name": "신년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-04-16", "name": "신년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-06-15", "name": "5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-06-15", "name": "5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-06-15", "name": "5주년 기념 7500 쥬얼", "amount": 7500}, {"date": "2027-06-30", "name": "5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-06-30", "name": "5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-06-30", "name": "5주년 기념 1500 쥬얼", "amount": 1500}, {"date": "2027-06-30", "name": "5주년 기념 1500 쥬얼", "amount": 1500}]};
+
+let extraPickups = JSON.parse(localStorage.getItem('uma_extra_pickups')||'[]');
+let extraJewels  = JSON.parse(localStorage.getItem('uma_extra_jewels')||'[]');
+let pvps         = JSON.parse(localStorage.getItem('uma_pvps')||'[]');
+let plans        = JSON.parse(localStorage.getItem('uma_plans')||'{}');
+const pkgState   = JSON.parse(localStorage.getItem('uma_pkg')||'{"daily":false,"pass":false,"select":false,"black":false}');
+
+let pickups = [...EXCEL_PICKUPS, ...extraPickups];
+let jewels  = [...EXCEL_JEWELS,  ...extraJewels];
+let activeFilter = 'all';
+let openPanelKey = null;
+
+function save() {
+  localStorage.setItem('uma_extra_pickups', JSON.stringify(extraPickups));
+  localStorage.setItem('uma_extra_jewels',  JSON.stringify(extraJewels));
+  localStorage.setItem('uma_pvps',          JSON.stringify(pvps));
+  localStorage.setItem('uma_plans',         JSON.stringify(plans));
+  localStorage.setItem('uma_pkg',           JSON.stringify(pkgState));
 }
 
-// 쥬얼
-function addJewel(){
-  const name=document.getElementById('j-name').value.trim();
-  const amount=parseInt(document.getElementById('j-amount').value)||0;
-  const start=document.getElementById('j-start').value;
-  const end=document.getElementById('j-end').value;
-  if(!name||!amount){alert('이름과 수량은 필수입니다');return}
-  jewels.push({name,amount,start,end});save();
-  renderJewels();closeModal('modal-jewel');
-  ['j-name','j-amount','j-start','j-end'].forEach(id=>document.getElementById(id).value='');
+function showTab(t, btn) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + t).classList.add('active');
 }
-function removeJewel(i){jewels.splice(i,1);save();renderJewels()}
-function renderJewels(){
-  const el=document.getElementById('jewel-events');
-  const empty=document.getElementById('jewel-empty');
-  const total=jewels.reduce((a,j)=>a+j.amount,0);
-  document.getElementById('jewel-total').textContent=total.toLocaleString();
-  document.getElementById('jewel-gacha').textContent=`= ${Math.floor(total/150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
-  if(jewels.length===0){el.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  el.innerHTML=jewels.map((j,i)=>{
-    const periodStr=j.start&&j.end?`${j.start.replace(/-/g,'.')}~${j.end.replace(/-/g,'.')}`:''
-    return`<div class="jewel-event-card">
-      <button class="jewel-event-delete" onclick="removeJewel(${i})">✕</button>
-      <div class="jewel-event-num">${j.amount.toLocaleString()}</div>
-      <div class="jewel-event-label">${j.name}</div>
-      ${periodStr?`<div class="jewel-event-period">${periodStr}</div>`:''}
-    </div>`}).join('');
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+function getStatus(s, e) { const n = new Date(), a = new Date(s), b = new Date(e); if (n < a) return 'upcoming'; if (n > b) return 'ended'; return 'active'; }
+function statusText(s) { return { active: '진행 중', upcoming: '예정', ended: '종료' }[s]; }
+function daysLeft(e) { return Math.max(0, Math.ceil((new Date(e) - new Date()) / 86400000)); }
+
+function previewImg(input) {
+  const file = input.files[0]; if (!file) return;
+  const r = new FileReader();
+  r.onload = e => {
+    const area = document.getElementById('p-img-area');
+    area.querySelector('span').style.display = 'none';
+    area.querySelector('div').style.display = 'none';
+    const img = area.querySelector('img'); img.src = e.target.result; img.style.display = 'block';
+    document.getElementById('p-img-data').value = e.target.result;
+  }; r.readAsDataURL(file);
 }
 
-// PVP
-function addPvp(){
-  const name=document.getElementById('v-name').value.trim();
-  const start=document.getElementById('v-start').value;
-  const end=document.getElementById('v-end').value;
-  const tierS=document.getElementById('v-tier-s').value.trim();
-  const tierA=document.getElementById('v-tier-a').value.trim();
-  const supports=['s1','s2','s3','s4','s5','s6'].map(id=>document.getElementById(id).value.trim());
-  if(!name||!start||!end){alert('이름과 기간은 필수입니다');return}
-  pvps.push({name,start,end,tierS,tierA,supports});save();
-  renderPvps();closeModal('modal-pvp');
-  ['v-name','v-start','v-end','v-tier-s','v-tier-a','s1','s2','s3','s4','s5','s6'].forEach(id=>document.getElementById(id).value='');
+// ── 픽업 ───────────────────────────────────────────
+function getPlan(key) {
+  if (!plans[key]) plans[key] = { gacha: false, jewel: 0, freePulls: 0, pullType: 'both', img: '' };
+  if (!plans[key].img) plans[key].img = '';
+  return plans[key];
 }
-function removePvp(i){pvps.splice(i,1);save();renderPvps()}
-function renderPvps(){
-  const el=document.getElementById('pvp-list');
-  const empty=document.getElementById('pvp-empty');
-  if(pvps.length===0){el.innerHTML='';empty.style.display='block';return}
+
+function uploadPickupImg(key) {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = 'image/*';
+  input.onchange = e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      getPlan(key).img = ev.target.result;
+      save(); renderPickups();
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function removePickupImg(key, e) {
+  e.stopPropagation();
+  getPlan(key).img = '';
+  save(); renderPickups();
+}
+function toggleCard(key, e) {
+  if (e) e.stopPropagation();
+  openPanelKey = openPanelKey === key ? null : key;
+  renderPickups();
+  if (openPanelKey !== null) setTimeout(() => { const el = document.getElementById('card-' + openPanelKey); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+}
+function setGacha(key, val, e) { e.stopPropagation(); getPlan(key).gacha = val; save(); renderPickups(); }
+function setPullType(key, type, e) { e.stopPropagation(); getPlan(key).pullType = type; save(); renderPickups(); }
+function setJewel(key, val, e) {
+  e.stopPropagation(); getPlan(key).jewel = parseInt(val) || 0; save(); updatePlanBar();
+  const el = document.getElementById('summary-' + key); if (el) updateSummaryEl(key, el);
+}
+function setFreePulls(key, val, e) {
+  e.stopPropagation(); getPlan(key).freePulls = parseInt(val) || 0; save(); updatePlanBar();
+  const el = document.getElementById('summary-' + key); if (el) updateSummaryEl(key, el);
+}
+function updateSummaryEl(key, el) {
+  const p = getPlan(key);
+  if (!p.gacha) { el.innerHTML = '<span style="color:#bbb">뽑지 않을 픽업입니다.</span>'; return; }
+  const pulls = Math.floor((p.jewel || 0) / 150) + (p.freePulls || 0);
+  const tl = { both: '말딸+서폿 모두', char: '말딸만', support: '서폿만' }[p.pullType || 'both'];
+  el.innerHTML = `뽑기 유형: <b>${tl}</b><br>쥬얼 <b>${(p.jewel || 0).toLocaleString()}</b> → <b>${Math.floor((p.jewel || 0) / 150)}</b>회 + 무료연 <b>${p.freePulls || 0}</b>회 = 총 <b>${pulls}</b>회`;
+}
+function updatePlanBar() {
+  let cnt = 0, tJ = 0, tF = 0;
+  pickups.forEach((p, i) => { const pl = plans[i]; if (pl && pl.gacha) { cnt++; tJ += pl.jewel || 0; tF += pl.freePulls || 0; } });
+  const bar = document.getElementById('plan-bar');
+  if (cnt > 0) {
+    bar.classList.add('show');
+    document.getElementById('plan-count').textContent = cnt;
+    document.getElementById('plan-jewel').textContent = tJ.toLocaleString();
+    document.getElementById('plan-free').textContent = tF;
+    document.getElementById('plan-pulls').textContent = Math.floor(tJ / 150) + tF;
+  } else bar.classList.remove('show');
+}
+function renderPickups() {
+  const g = document.getElementById('pickup-grid');
+  const sorted = pickups.map((p, i) => {
+    const ie = i >= EXCEL_PICKUPS.length;
+    return { ...p, _i: i, _extra: ie, _extraIdx: ie ? i - EXCEL_PICKUPS.length : i };
+  }).sort((a, b) => a.start.localeCompare(b.start));
+
+  g.innerHTML = sorted.map(p => {
+    const key = p._i, st = getStatus(p.start, p.end), sc = { active: 's-active', upcoming: 's-upcoming', ended: 's-ended' }[st], dl = daysLeft(p.end);
+    const plan = getPlan(key), isOpen = openPanelKey === key;
+    const displayImg = plan.img || p.img || '';
+    const imgH = displayImg
+      ? `<div class="pickup-img"><img src="${displayImg}" alt="${p.name}"></div>`
+      : '<div class="pickup-img"><span style="font-size:24px">📷</span><span>이미지 없음</span></div>';
+    let hintText, hintColor;
+    if (plan.gacha) {
+      const pulls = Math.floor((plan.jewel || 0) / 150) + (plan.freePulls || 0);
+      const tl = { both: '말딸+서폿', char: '말딸만', support: '서폿만' }[plan.pullType || 'both'];
+      hintText = `✓ 뽑을 예정 · ${tl} · ${pulls}회`; hintColor = '#1a7a45';
+    } else { hintText = '클릭하여 뽑기 계획 설정 ▾'; hintColor = '#bbb'; }
+    const typeOpts = [{ v: 'both', l: '말딸+서폿' }, { v: 'char', l: '말딸만' }, { v: 'support', l: '서폿만' }];
+    const panelHTML = `<div class="pickup-panel${isOpen ? ' open' : ''}" id="panel-${key}" onclick="event.stopPropagation()">
+      <div class="panel-title">뽑기 계획 설정</div>
+      <div class="pickup-img-upload">
+        <button class="img-upload-btn${plan.img ? ' has-img' : ''}" onclick="uploadPickupImg(${key});event.stopPropagation()">
+          ${plan.img ? '🖼️ 이미지 변경' : '📷 이미지 업로드'}
+        </button>
+        ${plan.img ? `<button onclick="removePickupImg(${key},event)" style="font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif">✕ 삭제</button>` : ''}
+        
+      </div>
+      <div class="panel-row"><span class="panel-label">뽑을 예정</span><div class="toggle-group">
+        <button class="toggle-btn pink${plan.gacha ? ' on' : ''}" onclick="setGacha(${key},true,event)">뽑는다</button>
+        <button class="toggle-btn${!plan.gacha ? ' on' : ''}" onclick="setGacha(${key},false,event)">안뽑는다</button>
+      </div></div>
+      ${plan.gacha ? `<div class="panel-row"><span class="panel-label">뽑기 유형</span><div class="toggle-group">
+        ${typeOpts.map(o => `<button class="toggle-btn${(plan.pullType || 'both') === o.v ? ' on' : ''}" onclick="setPullType(${key},'${o.v}',event)">${o.l}</button>`).join('')}
+      </div></div>
+      <div class="panel-row"><span class="panel-label">사용 쥬얼</span><input class="panel-input" type="number" placeholder="예: 30000" min="0" step="150" value="${plan.jewel || ''}" oninput="setJewel(${key},this.value,event)" onclick="event.stopPropagation()"></div>
+      <div class="panel-row"><span class="panel-label">무료연 수</span><input class="panel-input" type="number" placeholder="예: 30" min="0" value="${plan.freePulls || ''}" oninput="setFreePulls(${key},this.value,event)" onclick="event.stopPropagation()"></div>
+      <div class="panel-summary" id="summary-${key}"></div>`
+      : '<div style="font-size:12px;color:#bbb;padding:2px 0">뽑기 예정으로 설정하면 상세 옵션이 나타납니다.</div>'}
+      <button onclick="removePickup(${p._extraIdx},${p._extra},event)" style="font-size:11px;color:#ddd;background:none;border:none;cursor:pointer;margin-top:12px;font-family:'Noto Sans KR',sans-serif">✕ 이 픽업 삭제</button>
+    </div>`;
+    return `<div class="pickup-card${plan.gacha ? ' selected' : ''}" id="card-${key}" onclick="toggleCard(${key},event)">
+      ${plan.gacha ? '<div class="selected-badge">✓ 뽑을 예정</div>' : ''}
+      ${imgH}
+      <div class="pickup-body">
+        <span class="status-badge ${sc}">${statusText(st)}${st === 'active' ? ' · D-' + dl : ''}</span>
+        <div class="pickup-name">${p.name}</div>
+        <div class="pickup-period">📅 ${p.start.replace(/-/g, '.')} ~ ${p.end.replace(/-/g, '.')}</div>
+        <span class="pickup-kind-tag">${p.kind || ''}</span>
+        <div class="pickup-hint" style="color:${hintColor}">${hintText}</div>
+      </div>
+      ${panelHTML}
+    </div>`;
+  }).join('');
+  sorted.forEach(p => { const el = document.getElementById('summary-' + p._i); if (el) updateSummaryEl(p._i, el); });
+  updatePlanBar();
+}
+function addPickup() {
+  const name = document.getElementById('p-name').value.trim();
+  const start = document.getElementById('p-start').value;
+  const end = document.getElementById('p-end').value;
+  if (!name || !start || !end) { alert('이름과 기간을 입력해 주세요'); return; }
+  extraPickups.push({ name, kind: document.getElementById('p-kind').value, start, end, desc: document.getElementById('p-desc').value.trim(), img: document.getElementById('p-img-data').value });
+  pickups = [...EXCEL_PICKUPS, ...extraPickups]; save(); renderPickups(); closeModal('modal-pickup');
+  ['p-name', 'p-start', 'p-end', 'p-desc', 'p-img-data'].forEach(id => document.getElementById(id).value = '');
+  const a = document.getElementById('p-img-area'); a.querySelector('span').style.display = ''; a.querySelector('div').style.display = ''; a.querySelector('img').style.display = 'none'; a.querySelector('img').src = '';
+}
+function removePickup(idx, isExtra, e) {
+  e.stopPropagation();
+  if (!confirm('이 픽업을 삭제할까요?')) return;
+  if (isExtra) extraPickups.splice(idx, 1); else EXCEL_PICKUPS.splice(idx, 1);
+  pickups = [...EXCEL_PICKUPS, ...extraPickups]; openPanelKey = null; save(); renderPickups();
+}
+
+// ── 쥬얼 계산기 ────────────────────────────────────
+function togglePkg(k) {
+  pkgState[k] = !pkgState[k];
+  const el = document.getElementById('pkg-' + k);
+  el.classList.toggle('on', pkgState[k]);
+  el.querySelector('.pkg-status').textContent = pkgState[k] ? '✓ 구매' : '미구매';
+  save(); calcJewels();
+}
+function initPkgUI() {
+  ['daily', 'pass', 'select', 'black'].forEach(k => {
+    const el = document.getElementById('pkg-' + k); if (!el) return;
+    el.classList.toggle('on', pkgState[k]);
+    el.querySelector('.pkg-status').textContent = pkgState[k] ? '✓ 구매' : '미구매';
+  });
+}
+function inRange(d, s, e) { return d >= s && d <= e; }
+function calcJewels() {
+  const start = document.getElementById('calc-start').value;
+  const end   = document.getElementById('calc-end').value;
+  if (!start || !end || start > end) { document.getElementById('calc-result').style.display = 'none'; return; }
+  const circleJewel = parseInt(document.getElementById('circle-rank').value) || 0;
+  const teamreJewel = parseInt(document.getElementById('teamre-rank').value) || 0;
+  const chammiJewel = parseInt(document.getElementById('chammi-rank').value) || 0;
+  const malosJewel  = parseInt(document.getElementById('malos-rank').value)  || 0;
+  const circleDates = SCHED.circle_dates.filter(d => inRange(d, start, end));
+  const teamreDates = SCHED.teamre_dates.filter(d => inRange(d, start, end));
+  const chammiDates = SCHED.chammi_schedule.filter(x => inRange(x.date, start, end));
+  const malosDates  = SCHED.malos_schedule.filter(x => inRange(x.date, start, end));
+  const circleTotal = circleDates.length * circleJewel;
+  const teamreTotal = teamreDates.length * teamreJewel;
+  const chammiTotal = chammiDates.length * chammiJewel;
+  const malosTotal  = malosDates.length  * malosJewel;
+  const dailyArr = pkgState.daily ? SCHED.daily_jewel_dates.filter(x => inRange(x.date, start, end)) : [];
+  const dailyTotal = dailyArr.reduce((a, d) => a + d.amount, 0);
+  const passArr  = pkgState.pass  ? SCHED.training_pass_dates.filter(x => inRange(x.date, start, end)) : [];
+  const passTotal  = passArr.reduce((a, d) => a + d.amount, 0);
+  const selectArr   = pkgState.select ? SCHED.select_pkgs.filter(x => inRange(x.date, start, end)) : [];
+  const selectTotal = selectArr.reduce((a, x) => a + x.amount, 0);
+  const blackArr    = pkgState.black  ? SCHED.black_pkgs.filter(x => inRange(x.date, start, end))  : [];
+  const blackTotal  = blackArr.reduce((a, x) => a + x.amount, 0);
+  const today2 = new Date().toISOString().split('T')[0];
+  const excelTotal = jewels.filter(j => inRange(j.date, start, end) && j.date >= today2).reduce((a, j) => a + j.amount, 0);
+  const items = [
+    { label: '서클 보상',     num: circleDates.length + '회', total: circleTotal },
+    { label: '팀레 보상',     num: teamreDates.length + '회', total: teamreTotal },
+    { label: '챔피언스 미팅', num: chammiDates.length + '회', total: chammiTotal },
+    { label: '말오스',        num: malosDates.length  + '회', total: malosTotal  },
+    { label: '데일리 쥬얼팩', num: dailyArr.length + '일',    total: dailyTotal  },
+    { label: '트레이닝 패스', num: passArr.length  + '회',    total: passTotal   },
+    { label: '선택권 패키지', num: selectArr.length + '개', total: selectTotal },
+    { label: '흑우팩',        num: blackArr.length  + '개', total: blackTotal  },
+    { label: '이벤트/기타',   num: '',                         total: excelTotal  },
+  ].filter(x => x.total > 0);
+  const grand = items.reduce((a, x) => a + x.total, 0);
+  const days  = Math.ceil((new Date(end) - new Date(start)) / 86400000) + 1;
+  document.getElementById('calc-result').style.display = 'block';
+  document.getElementById('result-period').textContent = `${start.replace(/-/g, '.')} ~ ${end.replace(/-/g, '.')} (${days}일간)`;
+  document.getElementById('result-grid').innerHTML = items.map(x =>
+    `<div class="result-item"><div class="result-item-num">${x.total.toLocaleString()}</div><div class="result-item-label">${x.label}${x.num ? ' · ' + x.num : ''}</div></div>`
+  ).join('');
+  document.getElementById('result-total').textContent = grand.toLocaleString();
+  document.getElementById('result-pulls').textContent = `= ${Math.floor(grand / 150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
+}
+
+// ── 쥬얼 목록 ──────────────────────────────────────
+function addJewelManual() {
+  const name   = document.getElementById('j-name').value.trim();
+  const amount = parseInt(document.getElementById('j-amount').value) || 0;
+  const date   = document.getElementById('j-date').value || new Date().toISOString().split('T')[0];
+  if (!name || !amount) { alert('이름과 수량을 입력해 주세요'); return; }
+  extraJewels.push({ name, amount, date, category: document.getElementById('j-cat').value });
+  jewels = [...EXCEL_JEWELS, ...extraJewels]; save(); renderJewels(); closeModal('modal-jewel');
+  ['j-name', 'j-amount', 'j-date'].forEach(id => document.getElementById(id).value = '');
+}
+function setFilter(cat) { activeFilter = cat; renderJewels(); }
+function renderJewels() {
+  const today  = new Date().toISOString().split('T')[0];
+  const future = jewels.filter(j => j.date >= today);
+  const filtered = activeFilter === 'all' ? future : future.filter(j => j.category === activeFilter);
+  const total  = future.reduce((a, j) => a + j.amount, 0);
+  document.getElementById('jewel-total').textContent = total.toLocaleString();
+  document.getElementById('jewel-gacha').textContent = `= ${Math.floor(total / 150).toLocaleString()}회 뽑기 (150쥬얼/회)`;
+  const cats = {}; future.forEach(j => { cats[j.category] = (cats[j.category] || 0) + j.amount; });
+  document.getElementById('jewel-summary').innerHTML = Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([k, v]) =>
+    `<div class="jewel-cat-card"><div class="jewel-cat-num">${v.toLocaleString()}</div><div class="jewel-cat-label">${k}</div></div>`).join('');
+  document.getElementById('jewel-filters').innerHTML = ['all', ...Object.keys(cats)].map(c =>
+    `<button class="filter-btn${activeFilter === c ? ' active' : ''}" onclick="setFilter('${c}')">${c === 'all' ? '전체' : c}</button>`).join('');
+  const sorted = filtered.slice().sort((a, b) => a.date.localeCompare(b.date));
+  document.getElementById('jewel-count').textContent = sorted.length + '개';
+  document.getElementById('jewel-list').innerHTML = sorted.map(j =>
+    `<div class="jewel-row"><span class="jewel-row-date">${j.date.replace(/-/g, '.')}</span><span class="jewel-row-name">${j.name}</span><span class="jewel-row-cat">${j.category || '기타'}</span><span class="jewel-row-amount">+${j.amount.toLocaleString()}</span></div>`
+  ).join('');
+}
+
+// ── PVP ────────────────────────────────────────────
+let pvpCharDraft = [];
+let editingPvpIdx = null; // null=추가, number=수정
+
+function openPvpModal() {
+  editingPvpIdx = null;
+  pvpCharDraft = [];
+  renderPvpCharList();
+  ['v-name','v-start','v-end','v-desc'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('pvp-modal-title').textContent = '⚔️ PVP 이벤트 추가';
+  document.getElementById('pvp-modal-btn').textContent = '추가하기';
+  openModal('modal-pvp');
+}
+
+function openPvpEditModal(pi) {
+  editingPvpIdx = pi;
+  const p = pvps[pi];
+  pvpCharDraft = (p.chars||[]).map(c=>({...c, supports:[...c.supports]}));
+  document.getElementById('v-name').value  = p.name  || '';
+  document.getElementById('v-start').value = p.start || '';
+  document.getElementById('v-end').value   = p.end   || '';
+  document.getElementById('v-desc').value  = p.desc  || '';
+  document.getElementById('pvp-modal-title').textContent = '⚔️ PVP 이벤트 수정';
+  document.getElementById('pvp-modal-btn').textContent = '저장하기';
+  renderPvpCharList();
+  openModal('modal-pvp');
+}
+
+function closePvpModal() { closeModal('modal-pvp'); }
+
+function addPvpChar() {
+  pvpCharDraft.push({ name:'', tier:'S', role:'', supports:['','','','','',''], img:'' });
+  renderPvpCharList();
+}
+
+function removePvpChar(idx) {
+  pvpCharDraft.splice(idx,1);
+  renderPvpCharList();
+}
+
+function uploadPvpCharImg(idx) {
+  const input=document.createElement('input');
+  input.type='file'; input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const r=new FileReader();
+    r.onload=ev=>{ pvpCharDraft[idx].img=ev.target.result; renderPvpCharList(); };
+    r.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function uploadPvpSavedCharImg(pi, ci) {
+  const input=document.createElement('input');
+  input.type='file'; input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const r=new FileReader();
+    r.onload=ev=>{ pvps[pi].chars[ci].img=ev.target.result; save(); renderPvps(); };
+    r.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function renderPvpCharList() {
+  const el=document.getElementById('pvp-char-list');
+  if(!el) return;
+  if(pvpCharDraft.length===0){ el.innerHTML=''; return; }
+  el.innerHTML=pvpCharDraft.map((c,i)=>`
+    <div class="pvp-char-row">
+      <div class="pvp-char-header">
+        <select class="pvp-tier-select" onchange="pvpCharDraft[${i}].tier=this.value">
+          <option${c.tier==='S'?' selected':''}>S</option>
+          <option${c.tier==='A'?' selected':''}>A</option>
+          <option${c.tier==='B'?' selected':''}>B</option>
+        </select>
+        <select class="pvp-role-select" onchange="pvpCharDraft[${i}].role=this.value">
+          <option value=""${!c.role?' selected':''}>각질</option>
+          <option${c.role==='대도주'?' selected':''}>대도주</option>
+          <option${c.role==='도주'?' selected':''}>도주</option>
+          <option${c.role==='선행'?' selected':''}>선행</option>
+          <option${c.role==='선입'?' selected':''}>선입</option>
+          <option${c.role==='추입'?' selected':''}>추입</option>
+        </select>
+        <input class="pvp-char-name-input" type="text" value="${c.name}"
+          oninput="pvpCharDraft[${i}].name=this.value">
+        <button class="pvp-char-del" onclick="removePvpChar(${i})">✕</button>
+      </div>
+      <div class="pvp-char-img-row">
+        <div class="pvp-char-thumb">${c.img?`<img src="${c.img}">`:'📷'}</div>
+        <button class="pvp-char-img-btn" onclick="uploadPvpCharImg(${i})">${c.img?'이미지 변경':'이미지 업로드'}</button>
+        ${c.img?`<button class="pvp-char-img-btn" onclick="pvpCharDraft[${i}].img='';renderPvpCharList()" style="color:#bbb">삭제</button>`:''}
+      </div>
+      <div style="font-size:11px;color:#aaa;margin-bottom:6px">서포터 편성</div>
+      <div class="pvp-support-grid">
+        ${['슬롯1','슬롯2','슬롯3','슬롯4','슬롯5','렌탈'].map((label,si)=>`
+          <div>
+            <div class="pvp-support-label">${label}</div>
+            <input class="pvp-support-input${si===5?' rental':''}" type="text"
+              value="${c.supports[si]||''}"
+              oninput="pvpCharDraft[${i}].supports[${si}]=this.value">
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function savePvp() {
+  const name  = document.getElementById('v-name').value.trim();
+  const start = document.getElementById('v-start').value;
+  const end   = document.getElementById('v-end').value;
+  const desc  = document.getElementById('v-desc').value.trim();
+  if(!name||!start||!end){ alert('이름과 기간을 입력해 주세요'); return; }
+  const chars = pvpCharDraft.filter(c=>c.name.trim()).map(c=>({...c, name:c.name.trim(), supports:[...c.supports]}));
+  if(editingPvpIdx !== null) {
+    pvps[editingPvpIdx] = { ...pvps[editingPvpIdx], name, start, end, desc, chars };
+  } else {
+    pvps.push({ name, start, end, desc, chars });
+  }
+  save(); renderPvps(); closeModal('modal-pvp');
+}
+
+function removePvp(i) { pvps.splice(i,1); save(); renderPvps(); }
+
+let openPvpChar = {};
+const TIER_COLORS = { S:{bg:'#ff7f7f'}, A:{bg:'#ffbf7f'}, B:{bg:'#ffdf7f'} };
+
+function togglePvpChar(pi, ci) {
+  openPvpChar[pi] = openPvpChar[pi]===ci ? null : ci;
+  renderPvps();
+}
+
+function renderPvps() {
+  const el=document.getElementById('pvp-list'), empty=document.getElementById('pvp-empty');
+  if(pvps.length===0){ el.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
-  el.innerHTML=pvps.map((p,i)=>{
+  el.innerHTML=pvps.map((p,pi)=>{
     const st=getStatus(p.start,p.end);
+    const bc={active:'pvp-live',upcoming:'pvp-upcoming',ended:'pvp-ended'}[st];
     const dl=daysLeft(p.end);
-    const badgeClass={'active':'pvp-live','upcoming':'pvp-upcoming','ended':'pvp-ended'}[st];
-    const sPills=(p.tierS||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-s">S ${c.trim()}</span>`).join('');
-    const aPills=(p.tierA||'').split(',').filter(x=>x.trim()).map(c=>`<span class="tier-pill tier-a">A ${c.trim()}</span>`).join('');
-    const slotCards=p.supports.map((s,idx)=>{
-      const isRental=idx===5;
-      return`<div class="support-slot${isRental?' rental':''}">
-        ${isRental?'<div class="rental-tag">렌탈</div>':''}
-        <div class="support-slot-num">슬롯 ${idx+1}</div>
-        <div class="support-slot-name">${s||'—'}</div>
-      </div>`}).join('');
-    return`<div class="pvp-card">
+    const chars=p.chars||[];
+    const activeCi=openPvpChar[pi]??null;
+    const tierCls={S:'tier-s',A:'tier-a',B:'tier-b'};
+
+    const tiers=['S','A','B'];
+    const tierRows=tiers.map(tier=>{
+      const tc=chars.filter(c=>c.tier===tier);
+      if(!tc.length) return '';
+      return `<div class="tierlist-row">
+        <div class="tierlist-label tl-${tier.toLowerCase()}">${tier}</div>
+        <div class="tierlist-chars">${tc.map(c=>{
+          const ci=chars.indexOf(c);
+          const isActive=activeCi===ci;
+          const imgEl=c.img
+            ?`<div class="tl-char-img"><img src="${c.img}" alt="${c.name}"></div>`
+            :`<div class="tl-char-img" onclick="event.stopPropagation();uploadPvpSavedCharImg(${pi},${ci})" style="cursor:pointer">📷</div>`;
+          return `<div class="tl-char${isActive?' active':''}" onclick="togglePvpChar(${pi},${ci})">
+            ${imgEl}
+            <div class="tl-char-name">${c.name}</div>
+            ${c.role?`<div class="tl-char-role">${c.role}</div>`:''}
+          </div>`;
+        }).join('')}</div>
+      </div>`;
+    }).filter(Boolean).join('');
+
+    let supportHTML='';
+    if(activeCi!==null && chars[activeCi]){
+      const c=chars[activeCi];
+      const slots=c.supports.map((s,si)=>{
+        const r=si===5;
+        return `<div class="support-slot${r?' rental':''}">
+          
+          <div class="support-slot-num">슬롯 ${si+1}</div>
+          <div class="support-slot-name">${s||'—'}</div>
+        </div>`;
+      }).join('');
+      supportHTML=`<div class="pvp-support-panel open">
+        <div class="sec-label">${c.tier}티어 · ${c.name}${c.role?' · '+c.role:''}</div>
+        <div class="support-grid">${slots}</div>
+      </div>`;
+    }
+
+    return `<div class="pvp-card" style="cursor:default">
       <div class="pvp-header">
         <div>
           <div class="pvp-name">${p.name}</div>
           <div class="pvp-period">📅 ${p.start.replace(/-/g,'.')} ~ ${p.end.replace(/-/g,'.')}${st==='active'?' · D-'+dl:''}</div>
         </div>
-        <span class="pvp-badge ${badgeClass}">${statusText(st)}</span>
+        <div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+          <span class="pvp-badge ${bc}">${statusText(st)}</span>
+          <button onclick="openPvpEditModal(${pi})" style="font-size:11px;color:#888;background:none;border:1px solid #ddd;border-radius:6px;cursor:pointer;padding:4px 10px;font-family:'Noto Sans KR',sans-serif">수정</button>
+          <button onclick="removePvp(${pi})" style="font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif">✕</button>
+        </div>
       </div>
-      ${sPills||aPills?`<div class="section-label">티어 픽</div><div class="tier-row">${sPills}${aPills}</div>`:''}
-      <div class="section-label">서포터 편성</div>
-      <div class="support-grid">${slotCards}</div>
-      <button class="card-delete" onclick="removePvp(${i})" style="margin-top:12px">✕ 삭제</button>
-    </div>`}).join('');
+      ${p.desc?`<div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:10px;padding:10px 12px;background:#fafaf8;border-radius:8px">${p.desc}</div>`:''}
+      ${tierRows?`<div class="sec-label">티어 픽</div>${tierRows}`:''}
+      ${supportHTML}
+    </div>`;
+  }).join('');
 }
 
-// 초기 렌더
-renderPickups();renderJewels();renderPvps();
+// ── 초기화 ─────────────────────────────────────────
+const todayStr = new Date().toISOString().split('T')[0];
+document.getElementById('calc-start').value = todayStr;
+const d3m = new Date(); d3m.setMonth(d3m.getMonth() + 3);
+document.getElementById('calc-end').value = d3m.toISOString().split('T')[0];
+initPkgUI();
+calcJewels();
+renderPickups(); renderJewels(); renderPvps();
+
+// ── 도감 공통 ────────────────────────────────────────────
+const SUP_TYPE_LABEL = {
+  speed:'스피드', stamina:'스태미나', power:'파워',
+  guts:'근성', wit:'지능', friend:'우정', group:'그룹'
+};
+const SUP_TYPE_CSS = {
+  speed:'stype-speed', stamina:'stype-stamina', power:'stype-power',
+  guts:'stype-guts', wit:'stype-wit', friend:'stype-friend', group:'stype-group'
+};
+const SUP_TYPE_ICON = {
+  speed:'💙', stamina:'💚', power:'🧡', guts:'❤️', wit:'💜', friend:'💛', group:'🩶'
+};
+const APT_KEYS = ['turf','dirt','short','mile','medium','long','front','stalk','mid','back'];
+const APT_LABELS = {turf:'잔디',dirt:'더트',short:'단거리',mile:'마일',medium:'중거리',long:'장거리',front:'도주',stalk:'선행',mid:'선입',back:'추입'};
+
+// localStorage: 'uma_dex_chars' → [{id,name,rarity,img,apt,skills,memo}, ...]
+//               'uma_dex_sups'  → [{id,name,rarity,type,img,perf,skills,memo}, ...]
+let dexChars = JSON.parse(localStorage.getItem('uma_dex_chars')||'[]');
+let dexSups  = JSON.parse(localStorage.getItem('uma_dex_sups') ||'[]');
+let dexCharFiltered = [...dexChars];
+let dexSupFiltered  = [...dexSups];
+let supTypeFilter   = 'all';
+let currentDexCharId = null;
+let currentDexSupId  = null;
+let _umaDetailData  = null;
+let _supDetailData  = null;
+
+function saveDex() {
+  localStorage.setItem('uma_dex_chars', JSON.stringify(dexChars));
+  localStorage.setItem('uma_dex_sups',  JSON.stringify(dexSups));
+}
+
+// 탭 열 때 렌더
+const _dexShowTab = showTab;
+showTab = function(t, btn) {
+  _dexShowTab(t, btn);
+  if (t === 'uma')     { renderUmaGrid();    renderSupTypeFilters(); }
+  if (t === 'support') { renderSupGrid();    renderSupTypeFilters(); }
+};
+
+// 이미지 업로드 공통
+function uploadDexImg(imgId, dataId) {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = 'image/*';
+  input.onchange = e => {
+    const file = e.target.files[0]; if (!file) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      const imgEl = document.getElementById(imgId);
+      const ph    = document.getElementById(imgId.replace('-img','-img-placeholder'));
+      if (imgEl) { imgEl.src = ev.target.result; imgEl.style.display = 'block'; }
+      if (ph)    ph.style.display = 'none';
+      const dataEl = document.getElementById(dataId);
+      if (dataEl) dataEl.value = ev.target.result;
+    };
+    r.readAsDataURL(file);
+  };
+  input.click();
+}
+
+// ── 우마무스메 도감 ────────────────────────────────────────
+function openAddUmaModal() {
+  currentDexCharId = null;
+  document.getElementById('umd-modal-title').textContent = '🐴 우마무스메 추가';
+  document.getElementById('umd-del-btn').style.display = 'none';
+  document.getElementById('umd-name-input').value = '';
+  document.getElementById('umd-rarity').value = 'SSR';
+  document.getElementById('umd-memo').value = '';
+  document.getElementById('umd-img').src = '';
+  document.getElementById('umd-img').style.display = 'none';
+  document.getElementById('umd-img-placeholder').style.display = 'flex';
+  document.getElementById('umd-img-data').value = '';
+  APT_KEYS.forEach(k => { document.getElementById('apt-'+k).value = 'A'; });
+  _umaDetailData = { skills:[] };
+  renderUmaSkills();
+  openModal('modal-uma-detail');
+}
+
+function openEditUmaModal(id) {
+  const c = dexChars.find(x => x.id === id);
+  if (!c) return;
+  currentDexCharId = id;
+  document.getElementById('umd-modal-title').textContent = '🐴 우마무스메 수정';
+  document.getElementById('umd-del-btn').style.display = '';
+  document.getElementById('umd-name-input').value = c.name || '';
+  document.getElementById('umd-rarity').value = c.rarity || 'SSR';
+  document.getElementById('umd-memo').value = c.memo || '';
+  document.getElementById('umd-img-data').value = c.img || '';
+  const imgEl = document.getElementById('umd-img');
+  const ph    = document.getElementById('umd-img-placeholder');
+  if (c.img) { imgEl.src = c.img; imgEl.style.display = 'block'; ph.style.display = 'none'; }
+  else       { imgEl.src = ''; imgEl.style.display = 'none'; ph.style.display = 'flex'; }
+  APT_KEYS.forEach(k => { document.getElementById('apt-'+k).value = (c.apt && c.apt[k]) || 'A'; });
+  _umaDetailData = JSON.parse(JSON.stringify({skills: c.skills||[]}));
+  renderUmaSkills();
+  openModal('modal-uma-detail');
+}
+
+function deleteUma() {
+  if (!currentDexCharId || !confirm('삭제할까요?')) return;
+  dexChars = dexChars.filter(c => c.id !== currentDexCharId);
+  saveDex(); closeModal('modal-uma-detail'); renderUmaGrid();
+}
+
+function saveUmaDetail() {
+  const name = document.getElementById('umd-name-input').value.trim();
+  if (!name) { alert('이름을 입력해 주세요'); return; }
+  const apt = {};
+  APT_KEYS.forEach(k => { apt[k] = document.getElementById('apt-'+k).value; });
+  const data = {
+    name,
+    rarity: document.getElementById('umd-rarity').value,
+    img: document.getElementById('umd-img-data').value,
+    apt,
+    skills: _umaDetailData.skills || [],
+    memo: document.getElementById('umd-memo').value
+  };
+  if (currentDexCharId) {
+    const idx = dexChars.findIndex(c => c.id === currentDexCharId);
+    if (idx >= 0) dexChars[idx] = {...dexChars[idx], ...data};
+  } else {
+    data.id = Date.now();
+    dexChars.push(data);
+  }
+  saveDex(); closeModal('modal-uma-detail'); filterUma(document.getElementById('uma-search').value);
+}
+
+function renderUmaSkills() {
+  const el = document.getElementById('umd-skills-list');
+  el.innerHTML = (_umaDetailData.skills||[]).map((s,i) => `
+    <div class="skill-row">
+      <input class="skill-name-input" type="text" value="${s.name||''}" oninput="_umaDetailData.skills[${i}].name=this.value">
+      <textarea class="skill-desc-input" oninput="_umaDetailData.skills[${i}].desc=this.value">${s.desc||''}</textarea>
+      <button class="skill-del-btn" onclick="_umaDetailData.skills.splice(${i},1);renderUmaSkills()">✕</button>
+    </div>`).join('');
+}
+function addUmaSkill() { _umaDetailData.skills.push({name:'',desc:''}); renderUmaSkills(); }
+
+function filterUma(q) {
+  const kw = q.trim().toLowerCase();
+  dexCharFiltered = kw ? dexChars.filter(c => (c.name||'').toLowerCase().includes(kw)) : [...dexChars];
+  renderUmaGrid();
+}
+
+function renderUmaGrid() {
+  const g = document.getElementById('uma-grid');
+  const empty = document.getElementById('uma-empty');
+  document.getElementById('uma-count').textContent = dexCharFiltered.length + '마리';
+  if (dexChars.length === 0) { g.innerHTML = ''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  g.innerHTML = dexCharFiltered.map(c => {
+    const rarityColor = c.rarity==='SSR'?'#f59e0b':c.rarity==='SR'?'#8b5cf6':'#6b7280';
+    const imgHTML = c.img
+      ? `<img class="dex-card-img" src="${c.img}" alt="${c.name}">`
+      : `<div class="dex-card-placeholder">🐴</div>`;
+    const aptHighlight = c.apt
+      ? Object.entries(c.apt).filter(([,v])=>v==='S'||v==='A').map(([k,v])=>`<span class="apt-${v}">${APT_LABELS[k]||k}${v}</span>`).join(' ')
+      : '';
+    return `<div class="dex-card" onclick="openEditUmaModal(${c.id})">
+      <div class="dex-card-inner">
+        ${imgHTML}
+        <div class="dex-rarity-badge" style="background:${rarityColor}aa">${c.rarity||'SSR'}</div>
+      </div>
+      <div class="dex-card-name">${c.name}</div>
+      ${aptHighlight?`<div style="font-size:9px;margin-top:2px">${aptHighlight}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ── 서포터 카드 도감 ──────────────────────────────────────
+function openAddSupModal() {
+  currentDexSupId = null;
+  document.getElementById('spd-modal-title').textContent = '🃏 서포터 카드 추가';
+  document.getElementById('spd-del-btn').style.display = 'none';
+  document.getElementById('spd-name-input').value = '';
+  document.getElementById('spd-rarity-input').value = 'SSR';
+  document.getElementById('spd-type-input').value = 'speed';
+  document.getElementById('spd-perf').value = '';
+  document.getElementById('spd-memo').value = '';
+  document.getElementById('spd-img').src = '';
+  document.getElementById('spd-img').style.display = 'none';
+  document.getElementById('spd-img-placeholder').style.display = 'flex';
+  document.getElementById('spd-img-data').value = '';
+  _supDetailData = { skills:[] };
+  renderSupSkills();
+  openModal('modal-sup-detail');
+}
+
+function openEditSupModal(id) {
+  const s = dexSups.find(x => x.id === id);
+  if (!s) return;
+  currentDexSupId = id;
+  document.getElementById('spd-modal-title').textContent = '🃏 서포터 카드 수정';
+  document.getElementById('spd-del-btn').style.display = '';
+  document.getElementById('spd-name-input').value = s.name || '';
+  document.getElementById('spd-rarity-input').value = s.rarity || 'SSR';
+  document.getElementById('spd-type-input').value = s.type || 'speed';
+  document.getElementById('spd-perf').value = s.perf || '';
+  document.getElementById('spd-memo').value = s.memo || '';
+  document.getElementById('spd-img-data').value = s.img || '';
+  const imgEl = document.getElementById('spd-img');
+  const ph    = document.getElementById('spd-img-placeholder');
+  if (s.img) { imgEl.src = s.img; imgEl.style.display = 'block'; ph.style.display = 'none'; }
+  else       { imgEl.src = ''; imgEl.style.display = 'none'; ph.style.display = 'flex'; }
+  _supDetailData = JSON.parse(JSON.stringify({skills: s.skills||[]}));
+  renderSupSkills();
+  openModal('modal-sup-detail');
+}
+
+function deleteSup() {
+  if (!currentDexSupId || !confirm('삭제할까요?')) return;
+  dexSups = dexSups.filter(s => s.id !== currentDexSupId);
+  saveDex(); closeModal('modal-sup-detail'); renderSupGrid();
+}
+
+function saveSupDetail() {
+  const name = document.getElementById('spd-name-input').value.trim();
+  if (!name) { alert('카드 이름을 입력해 주세요'); return; }
+  const data = {
+    name,
+    rarity: document.getElementById('spd-rarity-input').value,
+    type:   document.getElementById('spd-type-input').value,
+    img:    document.getElementById('spd-img-data').value,
+    perf:   document.getElementById('spd-perf').value,
+    skills: _supDetailData.skills || [],
+    memo:   document.getElementById('spd-memo').value
+  };
+  if (currentDexSupId) {
+    const idx = dexSups.findIndex(s => s.id === currentDexSupId);
+    if (idx >= 0) dexSups[idx] = {...dexSups[idx], ...data};
+  } else {
+    data.id = Date.now();
+    dexSups.push(data);
+  }
+  saveDex(); closeModal('modal-sup-detail'); filterSupport(document.getElementById('sup-search').value);
+}
+
+function renderSupSkills() {
+  const el = document.getElementById('spd-skills-list');
+  el.innerHTML = (_supDetailData.skills||[]).map((s,i) => `
+    <div class="skill-row">
+      <input class="skill-name-input" type="text" value="${s.name||''}" oninput="_supDetailData.skills[${i}].name=this.value">
+      <textarea class="skill-desc-input" oninput="_supDetailData.skills[${i}].desc=this.value">${s.desc||''}</textarea>
+      <button class="skill-del-btn" onclick="_supDetailData.skills.splice(${i},1);renderSupSkills()">✕</button>
+    </div>`).join('');
+}
+function addSupSkill() { _supDetailData.skills.push({name:'',desc:''}); renderSupSkills(); }
+
+function renderSupTypeFilters() {
+  const el = document.getElementById('sup-type-filters');
+  if (!el) return;
+  const types = ['all', ...Object.keys(SUP_TYPE_LABEL)];
+  el.innerHTML = types.map(t =>
+    `<button class="dex-type-btn${supTypeFilter===t?' on':''}" onclick="setSupType('${t}')">
+      ${t==='all'?'전체':(SUP_TYPE_ICON[t]||'')+' '+(SUP_TYPE_LABEL[t]||t)}
+    </button>`
+  ).join('');
+}
+
+function setSupType(t) {
+  supTypeFilter = t;
+  filterSupport(document.getElementById('sup-search').value);
+  renderSupTypeFilters();
+}
+
+function filterSupport(q) {
+  const kw = q.trim().toLowerCase();
+  dexSupFiltered = dexSups.filter(s => {
+    const matchType = supTypeFilter === 'all' || s.type === supTypeFilter;
+    const matchName = !kw || (s.name||'').toLowerCase().includes(kw);
+    return matchType && matchName;
+  });
+  renderSupGrid();
+}
+
+function renderSupGrid() {
+  const g = document.getElementById('sup-grid');
+  if (!g) return;
+  const empty = document.getElementById('sup-empty');
+  document.getElementById('sup-count').textContent = dexSupFiltered.length + '장';
+  if (dexSups.length === 0) { g.innerHTML = ''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  g.innerHTML = dexSupFiltered.map(s => {
+    const typeCss  = SUP_TYPE_CSS[s.type]  || '';
+    const typeIcon = SUP_TYPE_ICON[s.type] || '?';
+    const tiCss    = 'ti-'+(s.type||'group');
+    const rarityColor = s.rarity==='SSR'?'#f59e0b':s.rarity==='SR'?'#8b5cf6':'#6b7280';
+    const imgHTML = s.img
+      ? `<img class="dex-card-img" src="${s.img}" alt="${s.name}">`
+      : `<div class="dex-card-placeholder">🃏</div>`;
+    return `<div class="dex-card" onclick="openEditSupModal(${s.id})">
+      <div class="dex-card-inner">
+        ${imgHTML}
+        <div class="dex-rarity-badge" style="background:${rarityColor}bb">${s.rarity||'SSR'}</div>
+        <div class="dex-type-icon ${tiCss}">${typeIcon}</div>
+      </div>
+      <div class="dex-card-name">${s.name}</div>
+      <div style="font-size:10px;margin-top:2px"><span class="stype-badge ${typeCss}">${SUP_TYPE_LABEL[s.type]||''}</span></div>
+    </div>`;
+  }).join('');
+}
+
 </script>
 </body>
 </html>
